@@ -1,0 +1,41 @@
+uhq-radio :: SAM Integration
+
+==[ The Scripts ]==
+
+This directory contains a number of scripts which have been used and implemented with SpacialAudio's SAM Broadcaster product.
+
+These scripts assume that some sort of clockwheel uses and runs the queue.  In the case of a station autoplayer or jukebox, a clockwheel which updates the queue must be used.  AutoDJ does not provide the ability to run a clean handoff to users on a multi-DJ site.  The crossfaders and deck controls the script uses does not work well with the overriding features of AutoDJ.
+
+Each script assumes that the first encoder is always used.  If your station runs multiple enoders, or something which is not the first encoder, then you must go and modify the scripts to your station's liking and requirements.
+
+The scripts were developed in SAM3 and SAM4 and should work with minimal involvement.  Please be aware that you will need to modify the scripts to point to your website!
+
+Theroretically, any radio automation system which can handle requests and post responses can work with the module.  However, I haven't found anything else that can.
+
+--[ ap_event_skip.pal ]--
+
+This script runs on the autoplayer and will skip to the next track upon request.  Good for when the autoplayer puts on a more or less annoying tune, or in the event something the playlist really shouldn't have gotten there.  This script should be set to auto run.
+
+--[ ap_event_start.pal ]--
+
+This script runs on the autoplayer and will start up the player from a dead silence.  This script sets the queue size, loads a station ID, and gets the encoder started before firing up the decks.  This script should be set to auto run.
+
+--[ ap_event_stop.pal ]--
+
+This script will clear out the queue, set its size to 0, and wait for the current track to finish.  Then it will disconnect and send out a handoff "go" operation.  This script should be set to auto run.
+
+--[ handoff_start.pal ]--
+
+This script is meant for the remote DJs.  This handles both handoff request verification and handoff startup.  This script should only be started before a handoff request.
+
+--[ handoff_stop.pal ]--
+
+This script waits for the queue to empty, then it counts out the final song, shuts down the encoders, decks, and sends out a handoff "go" operation.
+
+--[ ecu-txt.pal ]--
+
+This script waits for each song to be played, and then waits a couple seconds before calling out for the cache update.  The slight delay is to make sure the metadata updates in-stream have had more than enough chance to be processed by the server before we grab a cache for it.
+
+--[ ecu-pop.pal ]--
+
+This script is meant for use during external cache updates, and calls out to the server every minute to update all the mounts which have population requirements.

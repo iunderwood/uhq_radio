@@ -1,0 +1,8 @@
+// ecu-txt.pal
+//
+// Call out to update listener count information every minute.  Usually run on the master player only.
+
+PAL.Loop := true;
+
+PAL.WaitForTime('XX:XX:00');
+WebToFile('c:\ecu-pop.txt','http://your.xoops.site/modules/uhq_radio/ecu.php?update=pop&updatepw=changeme');

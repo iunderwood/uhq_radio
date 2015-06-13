@@ -1,0 +1,42 @@
+<{if $error}><error><{$error}></error>
+<uhqradio>
+	<status>0</status>
+</uhqradio>
+<{elseif $data.icecast==1}>
+	
+<icestats>
+  <listeners><{$data.listeners}></listeners>
+  <server_id>UHQ Radio</server_id>
+  <sources><{$data.sources}></sources>
+<{if $data.channel}><{foreach item=list from=$data.channel}>
+  <source mount="/channel-<{$list.chid}>.ogg">
+    <listeners><{$list.population}></listeners>
+  </source>
+<{/foreach}><{/if}>
+</icestats>
+
+<{else}>
+<uhqradio>
+	<channel>
+	<{if $data.channel.chan_name}><name><{$data.channel.chan_name}></name><{/if}>
+	<{if $data.channel.chan_tag}><tag><{$data.channel.chan_tag}></tag><{/if}>
+	<{if $data.channel.chan_web}><web><{$data.channel.chan_web}></web><{/if}>
+	<{if $data.channel.status}><status><{$data.channel.status}></status><{/if}>
+	</channel>
+	<onair>
+	<{if $data.onair.djid}><djid><{$data.onair.djid}></djid><{/if}>
+	<{if $data.onair.djname}><djname><{$data.onair.djname}></djname><{/if}>
+	<{if $data.onair.showname}><showname><{$data.onair.showname}></showname><{/if}>
+	<{if $data.onair.artist}><artist><{$data.onair.artist}></artist><{/if}>
+	<{if $data.onair.title}><title><{$data.onair.title}></title><{/if}>
+	<{if isset($data.saminfo.xalbum)}>
+		<{if $data.saminfo.xalbum}><album><{$data.saminfo.xalbum}></album><{/if}>
+	<{/if}>
+	<{if isset($data.saminfo.picture)}>
+		<{if $data.saminfo.picture}><albumcover><{$data.baseurl}>/<{$data.onair.djid}>/<{$data.saminfo.picture}></albumcover><{/if}>
+	<{/if}>
+	<{if isset($data.onair.listeners)}><listeners><{$data.onair.listeners}></listeners><{/if}>
+	</onair>
+</uhqradio>
+<{/if}>
+

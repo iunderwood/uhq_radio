@@ -1,0 +1,55 @@
+// Function References
+
+include/forms.php
+=================
+Requires: include/modoptions.php
+
+function uhqradio_airform ($title, $target, $formdata=null, $op=null)
+function uhqradio_del_airform ($formdata)
+function uhqradio_airform_insertquery ($sane_REQUEST)
+function uhqradio_airform_updatequery ($sane_REQUEST)
+
+function uhqradio_mountform ($title, $target, $formdata=null, $op=null)
+function uhqradio_mountform_del ($formdata)
+function uhqradio_mountform_insertquery ($sane_REQUEST)
+function uhqradio_mountform_updatequery ($sane_REQUEST)
+
+function uhqradio_channelform ($title, $target, $formdata=null, $op=null)
+function uhqradio_channelform_del ($formdata)
+function uhqradio_channelform_insertquery ($sane_REQUEST)
+function uhqradio_channelform_updatequery ($sane_REQUEST)
+
+function uhqradio_mapform ($title, $target, $formdata=null, $op=null)
+function uhqradio_mapform_insertquery ($sane_REQUEST)
+
+include/functions.php
+=====================
+
+
+include/modoptions.php
+======================
+* No dependencies.
+
+function uhqradio_updatepw($password=null) 	// This function returns true if a submitted password matches the configured update PW.
+function uhqradio_statspw($password=null)	// This function returns true if a submitted password matches the configured update PW.
+function uhqradio_samint()					// This function returns true if SAM Broadcaster integration is enabled.
+function uhqradio_savelh()					// This function returns true if we're going to save listener history.
+function uhqradio_savesh()					// This function returns true if we're going to save song history.
+function uhqradio_fbapikey()				// This function returns the Facebook API Key, if defined.  Otherwise, returns false.
+function uhqradio_fbsecret()				// This function returns the Facebook Secret Key, if defined.  Otherwise, returns false.
+
+include/rawdata.php
+===================
+* No dependencies.
+
+function uhqradio_data_lhistory($id,$type,$minutes=15)		// Return raw data for a mountpoint, channel, or mountpoints  w/ a channel, for the last $minutes.
+function uhqradio_data_shistory($chid,$limit=10,$type='S')	// Return the song history for a channel, with an optional type.
+
+include/sambc.php
+=================
+* No dependencies.
+
+function uhqradio_sam_opendb($djid,$host)		// Connect to the DB given a remote DJ, given ID and IP.  Returns MySQL resource if connect and DB are successful.
+function uhqradio_sam_closedb($samdb)			// Close a connection to a given resource.
+function uhqradio_sam_upcoming($samdb,$limit)	// Query and return upcoming track list, to an optional limit.  Returns SAM array.
+function uhqradio_sam_nowplaying($samdb)		// Returns the last song in the history of SAM, generally the "now playing" track.

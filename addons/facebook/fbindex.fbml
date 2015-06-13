@@ -1,0 +1,59 @@
+<style type="text/css">
+.some_div table {
+ margin-left:20px;
+ margin-top:17px;
+ text-align:center;  
+}
+.some_div th.name_heading {
+ color:#333333;
+ font-size:11px;
+ font-weight:bold;
+}
+.some_div table th {
+ border-color:#C7CFE0;
+ border-bottom:1px solid #E2E6EF;
+ margin:0;
+ padding:3px;
+ color:#777777;
+ font-size:9px;
+}
+.some_div td {
+ border-bottom:1px solid #E2E6EF;
+ margin:0;
+ padding:3px;
+ color:#555555;
+ font-size:11px;
+}
+.some_div td.action_text {
+ width:230px;
+}
+</style>
+<{if $status.error}>
+  <{$status.error}>
+<{else}>
+  <h3>Now Playing on <{$status.onair.djname}>'s <{$status.onair.showname}>:</h3>
+  <p><{$status.onair.artist}> - <{$status.onair.title}></p>
+  <p>Listeners: <b><{$status.onair.listeners}></b></p>
+<{/if}>
+<hr>
+<{if $shistory}>
+  <h3><{$smarty.const._FB_UHQRADIO_SHIST_HDR1}><{$shistory.count}><{$smarty.const._FB_UHQRADIO_SHIST_HDR2}></h3>
+  <div class="some_div">
+  <table>
+	<tr>
+	  <th><{$smarty.const._FB_UHQRADIO_SHIST_ARTIST}></th>
+	  <th><{$smarty.const._FB_UHQRADIO_SHIST_TITLE}></th>
+	  <th><{$smarty.const._FB_UHQRADIO_SHIST_ALBUM}></th>
+	  <th><{$smarty.const._FB_UHQRADIO_SHIST_YEAR}></th>
+	</tr>
+    <{foreach item=list from=$shistory.history}>
+      <tr>
+	    <td><{if $list.artist}><{$list.artist}><{else}>-<{/if}></td>
+	    <td><{if $list.track}><{$list.track}><{else}>-<{/if}></td>
+		<td><{if $list.album}><{$list.album}><{else}>-<{/if}></td>
+		<td><{if $list.albumyear}><{$list.albumyear}><{else}>-<{/if}></td>
+	  </tr>
+    <{/foreach}>
+  </table>
+  </div>
+<{/if}>

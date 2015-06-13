@@ -1,0 +1,305 @@
+uhq-radio :: changelog
+
+==[ To-Do List ]==
+
+Adds:
+* Definitions and whatnot for creating dynamic playlists.  (i.e. load-balancing like servers, etc.)
+* Definitions and whatnot for creating show profiles.  Fairly similar to DJ Profiles.
+* Detect and install .htaccess redirect required for using a single set of IceCast counters.
+* Real documentation.  There's too much going on in too many text files.  Even more things are undocumented.
+* Do something funky w/ the request policy.  Make it more flexible on a group basis. (i.e. site admins have unlimited requests)
+* Detect and use UHQ_IceAuth to pass through stream logins in dynamic playlists.
+
+Changes:
+* Blocks: Status, change non-AJAX processing to use the AJAX routines to process.
+* Module: Add Shoutcast 1.x source integration.  This requires parsing the HTML output, which is going to suck, but is required for SAM integration to work with a Shoutcast source.
+* Module: Handoff feature should probably be rewritten.  This does not support multiple channels.
+* Module: Find a way to allow anonymous users to make requests. Usually being denied.
+* Module: Update admin templates.
+* Module: Fix all errors and views w/ a base installation (i.e. no airstaff, mount points, channels, etc.)
+
+Notes:
+* IceCast Counter ... needs documentation and repair.
+* Sub-menu items don't have a way to determine which channel to use by default, so I'm defaulting this to "1".  I need to figure out how to detect the proper channel if a website ends up hosting more than one station.  I don't know of anyone doing this yet, so it's in the notes bucket.  With this, also make blocks which use a channel be able to autodetect.  This will require multisite in order to take proper advantage of the capability.
+
+==[ Enhancement To-Do List ]==
+
+* Blocks: Coming Up, Allow header, separator, and trailer to have HTML elements in them.
+* Blocks: On-Air, allow image width to be settable.
+* Module: DJ Test PopUp, Take it from functional to pretty via AJAX.
+
+==[ version 0.20 ]====[ TBD ]==
+
+
+
+==[ version 0.14 ]====[ Not Released ]==
+
+* Module, reporting for TuneIn.com!
+* Module, tons of presentation cleanups.  Fresh installs showed a lot of holes.
+* Module, submenus are somewhat dynamic.  If there's no integration enabled, most of the menus will not appear.
+
+==[ version 0.13 ]====[ Not Released ]==
+
+Adds:
+* Module, new request engine (NRE).  Index page is now a browse by album/browse by artist selection.
+* Module, global $uhqradio_request, set to true if both the DJ accepts requests and the user has sufficient permission.
+* Module, submenu, added item for song history.  Item count is set in module options.
+* Module, submenu, added item for top requests showing all-time and last month.  Item count is set in module options.
+* Module option, list length for song history.
+* Module option, list length for top request lists.
+* Module option, groups allowed to make requests.
+* Module, add check for UHQ-IceAuth.  We don't use this yet, but we will.
+* Module, FB Plugin, it doesn't really do too much right now, but that will likely change.  There are no docs for it.
+* Module, function checks in index.
+
+Changes:
+* DB, uhqradio_shistory, added requestor varchar(32) to hold the site username of the requestor.
+* Module, fixed all the problems with international characters in artist/album/song fields, or so I think.
+* Module, submenu, changed PHP file for DJ Profiles.
+* Module, submenu, changed "Playlist" to "Track Search" and renamed the associated PHP file.  NRE is default for finding things now.
+* Module, submenu, tracklist, updated list display to use formatted rows.
+* Module, pop_request, website username is now being saved to the remote player DB.
+* Module, admin, index now template driven!
+
+Notes:
+* Anonymous requests are no longer allowed.  I'll look at how to add this capability in, but it's nowhere near a priority.  Lots of false requests have been coming into my own station from crawlers, and they needed to be squashed.
+* If you choose to use all the features of this module with a shared hosting provider, you may bump into your provider's resource limitations.  This thing is starting to do a fair amount of work now.
+* I am gainfully employed again, so work on this module will now be a bit slower.
+
+==[ version 0.12 ]====[ 2010.12.20 ]==
+
+Adds:
+* Blocks, Status, album cover added to the output.  Toggleable option.  (AJAX only)
+* Module, index.php, Now displays the top 20 requests of all-time.
+
+Changes:
+* Blocks, On-Air, Primarily changed the design to be a side block, limiting the image width to the same as the album art.
+* Blocks, Status, cleaned up the formatting on the template side.  Fixed a bug on the php side.  Changed some XML encodings.
+* Blocks, Status, changed some declarations in the event of missing data because IE will actually print out "null" when it should be blank.
+* Blocks, Upcoming, cleaned up the template.  Returns blank on error, unless reporting is enabled.
+* Module, DJ Profile, profile pictures are now stored locally.
+* Module, External Cache, added a validation so text updates are only processed from the streaming host, as far as history goes.
+* Module, External Cache, diagnostic output is now direct text.  The template engine created a lot of unnecessary overhead.
+* Module, Playlist, list length now stored in a cookie.
+* Module. Refreshed the module logo with something much more badass.
+
+==[ version 0.11 ]====[ 2010.08.24 ]==
+
+Adds:
+* Extras: Sample update scripts ecu-pop.pal, and ecu-txt.pal for SAM Broadcaster Integration.
+* Module: Playlist Submenu, users can now navigate and search through a DJs playlist.
+* Module: DJ Test PopUp, meant to hook into the DJ panel and is capable of testing DJ input parameters.
+* Module: Request PopUp, handles sending requests out to the current DJ and reporting on the status.
+* Module: Song Info PopUp, Provides song information from the current DJ's database.
+* Module Option: Facebook API Key, for the optional FB plugin.
+* Module Option: Facebook Secret, for the optional FB plugin.
+* Module Option: Playlist Category, limits the display of a DJs tracks to a defined category, or blank for all tracks.
+* Module Option: Album URL, base URL for all album art.
+
+Changes:
+* Blocks: Coming Up, added block option defaults.
+* Blocks: DJ Panel, Removed SAM check for DJs.  Added a "Test Connectivity" link instead.
+* Blocks: On-Air, If a DJ is not found in the database, hide block or throw an error based on the module option.
+* Blocks: Status, fixed "Display Tune In Link" option.  Now disables graphic if this option is disabled.
+* Blocks: Status, updated some of the display logic if a tune-in graphic is not installed.  Minor cleanup.
+* Blocks: Upcoming, fixed where the "requested" flag needs to go in the template.
+* Module: Corrected a condition where a primary Icecast mountpoint can be detected, but should use the failover mountpoint anyway.
+
+Notes:
+* Sorry for missing the last release.  Real life came in and I lost track of time.
+* With the exception of the Facebook keys, all the rest of the changes support the initial round of SAM integration.
+* It's hard to believe this module has now spent over two years in development.  How time flies!
+
+==[ version 0.10 ]====[ 2010.05.11 ]====[ Not Released ]==
+
+Adds:
+* Block: Listener History, displays listener history as a list/graph/blank w/ an optional summary for a specific interval.
+* Block: Song History, displays song history for x songs for a given channel.
+* Class: pChart, required for statisic graphs not yet implemented.
+* DB: uhqradio_lhistory, storage for listener history on a per-mountpoint basis.
+* DB: uhqradio_shistory, storage for song history on a per-channel basis.
+* Module: LoudCity song reporting!  LoudCity GUIDs need to be added on a per-channel basis.  Requires ECU & Song History to be enabled.
+* Moudle Option: Save Listener History, option to turn on global listener count history for each mountpoint.  Default is off.
+* Module Option: Save Song History, option to turn on global song history for each mountpoint.  Default is off.
+
+Changes:
+* Admin: mountpoints.php, code modifications to support deleting mountpoint info from uhqradio_lhistory, if desired.
+* Blocks: Coming Up, small fix to return blank block if SAM Integration is disabled.
+* Blocks: Coming Up, options for list header, separator, and trailer.  This can't take HTML at this time.
+* Blocks: Coming Up, display station IDs that are coming up.
+* Module: Lots of changes to how information is gathered for parts of the module.  Largely to reduce code duplication.
+* Module: Moving a bunch of functions around into specific files, lined up by function type.
+* Module: djprofile.php, if no profile is specified, return a list of profiles to choose from.  Added page to Radio Submenu.
+* Module: djprofile.php, updated form for likes to use a textarea.  This renders apostrophies appropriately.
+* Module: ecu.php, modified script to process history recording, if enabled.
+* Module: index.php, added last 10 songs to radio index.
+* Module: xml_status.php, moved status processing to the rawdata.php file, allowing for some code reuse.
+* Template: uhqradio_status.html, added "Loading ..." so that the info box doesn't appear empty or broken.
+
+Notes:
+* I'm working on some add-on capabilities, currently developing a FB app.
+
+==[ version 0.09 ]====[ 2010.04.04 ]==
+
+Fixes:
+* Admin: Mountpoints, fixed a sanity check which did not clear Icecast mount info from non-Icecast mountpoints.
+* Admin: Dynamic path changes to show icons under XOOPS 2.4 EXM/Oxygen.
+* Language: Typo fixes in modinfo.php.
+
+Changes:
+* Admin: Airstaff, form elements to support SAM integration if enabled.
+* Blocks: DJ Panel, SAM information except UN/PW will show up in the DJ Panel.
+* Blocks: DJ Panel, if SAM integration is enabled, it will test a user's remote connectivity.
+* DB: uhqradio_airstaff, additional tables for remote database access and the remote SAM port.
+* Module: Found a few constants which were defined twice.  No real biggie.
+* Module: xml_status.php, add error strings to language definitions.
+* Module: xml_status.php, now supports an icecast-like output for listener counts.
+
+Adds:
+* Blocks: Coming Up, the first fruits of SAM integration which displays which artists are coming up.
+* Module: StreamerP2P support!  SP2P mounts are used for counters only, as there is no song info in the XML.
+* Module: External cache updates (ECU).  Regular XML refreshes can called by an external timing source or cron.
+* Module Option: SAM Integration, module-wide option to toggle SAM Broadcaster integration and forms.
+* Mpdule Option: Stats PW, module-wide option to password-protect the full channel listener count.
+
+Notes:
+* The start of SAM Broadcaster integration is here!
+* Integration requires an IceCast text mountpoint.  This is because IceCast is the only server which includes the source's IP address in its XML file.
+* Sorry about the huge gap in time between updates ... life happens.
+
+==[ version 0.08 ]====[ 2009.08.14 ]==
+
+Fixes:
+* Module: xml_stats.php, Output file wasn't following fallback mount points if available.
+
+Adds:
+* Extras: ajax_updates.txt, documenting how to use xml_status.php to populate an external web page.
+
+Changes:
+* Blocks: DJ Panel, DJ ID now links to the DJ profile page.
+* Blocks: On-Air, Error reporing now optional.  The block will not appear w/ reporting off and errors present.
+* Blocks: Radio Status, AJAX update is now an option!
+
+Notes:
+* Quick release for the minor changes and getting the AJAX stuff out.
+
+==[ version 0.07 ]====[ 2009.08.10 ]==
+
+Adds:
+* Admin: Mountpoint management to add/edit/delete mountpoints used by the module.
+* Admin: Channel management to add/edit/delete specific channels.
+* Admin: "Mappings" which link channels to mountpoints to determine listener count.
+* Blocks: On-Air, station defined, displays the DJ information & show name in a separate block.
+* DB: uhqradio_mountpoints, table which contains the list of icecast/shoutcast servers that hold station infos.
+* DB: uhqradio_channels, table which contains a list of unique programs.
+* DB: uhqradio_countmap, table which describes a many-to-many relationship between mountpoints and channels.
+* Module: xml_status.php, XML output of Radio Status information, given a channel ID.
+
+Changes:
+* Admin: Airstaff page is now template driven.
+* Blocks: DJ Panel, corrections to resolve some debug errors.
+* Blocks: Radio Status, largely rewritten.  Now requires a configured station.
+* Forms: Airstaff Form, requests are defined on a set of radio buttons to eliminate a specific XOOPS error.
+* Readme.txt: Lots of changes, to cover the new features!
+
+Fixes:
+* Blocks: Radio Status, possible bug where the song titles weren't getting split properly where Shoutcast is involved.
+
+Notes:
+* Updating to this version will reset all Radio Status options to their defaults.
+* You will need to clear your template cache if you want to see the listener count in the status block.
+* UHQ-Radio has been in development for one full year!
+
+==[ version 0.06 ]====[ 2009.07.25 ]==
+
+Adds:
+* Admin: Airstaff management to add/edit/delete DJs based on a DJ ID.
+* Admin: Place holders for Mountpoints, Channels & Stations, Playlists.
+* Admin: EXM-compatible icons from the Crystal Project.
+* Blocks: DJ Panel, displays summary info to a defined DJ only.
+* Blocks: DJ List, displays a columned list of all air staff w/ link to profile viewer.
+* DB: uhqradio_airstaff - table which links embedded DJ information w/ a site user.
+* Module: djprofile.php, displays DJ profiles!  DJs can edit most profile data.  Message code stored in the DB, made display-ready using the text sanitizer!  I have no idea why all modules don't do this.
+* Module: sanity.php, important sanitizing of POST data.
+* Language: form.php, contains language constants for all forms.
+
+Changes:
+* Install/Update: Make module visible by default since we'll have some information soon.
+* Install/Update: Grant registered user access to the module.  They'll need it to view DJ Profiles and stuff.
+* Language: Typo fixes in modinfo.php.
+
+Fixes:
+* Admin: Fixed admin menu and headers.  Button bars are now showing properly!
+
+==[ version 0.05 ]====[ 2009.07.11 ]==
+
+Adds:
+* Admin: Headers that don't require the frameworks library ... from Zoullou.  This will be built on in upcoming versions.
+* Blocks: Handoff Block, provides a permission-based interface to request, surrender, and take handoffs.
+* Blocks: Radio Status, new option to use a "listen now" button, as opposed to the text link.
+* Module: handoff.php handles responses from the handoff block.
+* DB: uhqradio_handoffs - table which supports the automatic handoff function.
+
+Changes:
+* Blocks: Control Block: Added controls for Stop Now (Eject Symbol) and Restart Track (Rew Symbol).
+* Readme: SAM Integration documentation put into the extras/ folder.
+
+==[ version 0.04 ]====[ 2009.02.12 ]====[ Not Released ]==
+
+Fixes:
+* Module: Fixed an error in XML processing which didn't properly truncate output.  This fixed an IE rendering issue.
+
+Adds:
+* Blocks: Control Block, provides a permission-based interface to control a station autoplayer remotely.
+* Module: control.php handles responses from the control block.
+* License: GNU GPL v2 license is now included w/ the module archive.
+
+Changes:
+* Readme: Lots of changes ... but better documentation is good, right?
+
+Notes:
+* Readme: Notes on implementing start/stop/skip w/ SAM Broadcaster.
+
+==[ version 0.03 ]====[ 2009.02.01 ]==
+
+Fixes:
+* Blocks: Fixed output in conditions where there is no <artist> in IceCast XML, and no " - " in the title to split with.  Now, title-only output is assumed w/o a delimiter.
+* Blocks: Default values are now set properly.
+
+Adds:
+* Module: Adds ability to cache XML files w/ module-wide configurable timeout.
+
+Changes:
+* Blocks: Option to supress offline error messages.  This can always be turned on for troubleshooting.
+* Blocks: Option to display listener count.  Not in use here at the moment.
+* Module: Rename directory to uhq_radio.  Better PHP form this way.
+* Module: Update module name to "UHQ_Radio".
+* Module: Update logo for XOOPS 2.3 compliance!
+
+Notes:
+* UHQ-RadioBasic release originally based off v0.02.
+* UHQ-RadioBasic module fixes from v1.01 and 1.02 incorporated.
+
+==[ version 0.02 ]====[ 2008.08.14 ]==
+
+Adds:
+
+* Option to display the show name, w/ start-of and end-of name delimiters.
+* Graphic On-Air button.
+  Sample buttons generated on ButtonGenerator.com
+* Put all error conditions into language definitions.
+* Process combined titles to split out artist/song by first instance of " - ".
+* Tune-In links, with targets to _top, _blank, or a pop-up of specified size.
+
+Changes:
+
+* Grab XML files w/ a function instead.  Code is better, and we'll need it later.
+* Extract XML elements w/ a function, based on start / end tags.
+* Support combined titles for Ogg streams.
+
+==[ version 0.01 ]====[ 2008.08.10 ]==
+
+* Initial relase.
+
+Notes:
+* Logo elements from Shoutcast/Icecast.

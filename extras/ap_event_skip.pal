@@ -1,0 +1,16 @@
+// AutoPlayer Control Script :: Skip
+//
+// Fade to next song in queue.
+
+var activeDeck : TPlayer;
+
+PAL.Loop := true;
+
+PAL.WaitForEvent('AP-Skip');
+
+// Only fade if the first encoder is running.
+
+if (Encoders[0].Started) then begin
+  activeDeck := ActivePlayer;
+  activeDeck.FadeToNext;
+end;

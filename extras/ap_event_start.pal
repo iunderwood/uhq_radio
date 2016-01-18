@@ -1,0 +1,29 @@
+// AutoPlayer Control Script :: Start
+//
+// Start encoders on-command.
+
+var topliner : TSongInfo;
+
+PAL.Loop := true;
+
+PAL.WaitForEvent('AP-Start');
+
+// Up the queue to a size suitable for the current clockwheel.
+
+PlaylistRules.MinQueueSize := 2;
+
+if not (Encoders[0].Started) then begin
+
+  // Load a Station ID.
+  topliner := CAT['Station IDs (All)'].ChooseSong(smRandom,NoRules);
+
+  Encoders[0].Start;
+  while (Encoders[0].status <> 'Encoding') do PAL.WaitForTime('+00:00:01');
+
+  if (ActivePlayer = nil) then begin
+    DeckA.QueueSong(topliner);
+    DeckA.Play;
+  end;
+end;
+
+Encoders.SongChange (ActivePlayer.GetSongInfo);

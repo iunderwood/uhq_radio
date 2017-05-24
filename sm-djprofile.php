@@ -11,7 +11,7 @@ require_once (XOOPS_ROOT_PATH.'/modules/uhq_radio/include/rawdata.php');
 
 $sane_REQUEST = uhqradio_dosanity();
 
-$myts =& MyTextsanitizer::getInstance();
+$myts = MyTextsanitizer::getInstance();
 
 if ( isset($_REQUEST['op']) ) {
 	$op = $_REQUEST['op'];

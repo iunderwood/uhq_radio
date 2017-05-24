@@ -540,7 +540,7 @@ function uhqradio_updatelh() {
 function uhqradio_updatesh($chid) {
 	global $xoopsDB;
 
-	$myts =& MyTextsanitizer::getInstance();
+	$myts = MyTextsanitizer::getInstance();
 
 	// Get timestamp
 	$query = "SELECT now()";

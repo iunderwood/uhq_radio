@@ -27,7 +27,7 @@ include_once XOOPS_ROOT_PATH."/class/uploader.php";
 function uhqradio_airform ($title, $target, $formdata=null, $op=null) {
 
 	// Draw Form
-	$form = new XoopsThemeForm($title,'airform',$target, 'post');
+	$form = new XoopsThemeForm($title,'airform',$target, 'post', true);
 	
 	if ($op == 'edit') {
 		// DJ Identifiers can't be changed once created.
@@ -89,7 +89,7 @@ function uhqradio_del_airform ($formdata) {
 	$title = _FM_UHQRADIO_DELETE." ".$formdata['djid'];
 	
 	// Draw Form
-	$form = new XoopsThemeForm($title,'del_airform','airstaff.php','post');
+	$form = new XoopsThemeForm($title,'del_airform','airstaff.php','post', true);
 	
 	$form -> addElement(new XoopsFormHidden("op","delete") );
 	$form -> addElement(new XoopsFormHidden("verify","1") );
@@ -194,7 +194,7 @@ function uhqradio_airform_updatequery ($sane_REQUEST) {
 
 function uhqradio_mountform ($title, $target, $formdata=null, $op=null) {
 	
-	$form = new XoopsThemeForm($title,'mountform',$target, 'post');
+	$form = new XoopsThemeForm($title,'mountform',$target, 'post', true);
 
 	// Set some defaults if the form is blank.
 	if ($formdata == null) {
@@ -278,7 +278,7 @@ function uhqradio_mountform_del ($formdata) {
 	echo _FM_UHQRADIO_MOUNT_DELWARN;
 	
 	// Draw Form
-	$form = new XoopsThemeForm($title,'del_mountform','mountpoints.php','post');
+	$form = new XoopsThemeForm($title,'del_mountform','mountpoints.php','post', true);
 	
 	$form_c = new XoopsFormCheckbox(_FM_UHQRADIO_FORM_DELHD,'delhd','none');
 	$form_c -> addOption(1,_FM_UHQRADIO_FORM_RD);
@@ -369,7 +369,7 @@ function uhqradio_channelform ($title, $target, $formdata=null, $op=null) {
 	
 	global $xoopsDB;
 	
-	$form = new XoopsThemeForm($title,'channelform',$target, 'post');
+	$form = new XoopsThemeForm($title,'channelform',$target, 'post', true);
 
 	// Set some defaults if the form is blank.
 	
@@ -488,7 +488,7 @@ function uhqradio_channelform_del ($formdata) {
 	echo _FM_UHQRADIO_CHANNEL_DELWARN;
 	
 	// Draw Form
-	$form = new XoopsThemeForm($title,'del_chanform','channels.php','post');
+	$form = new XoopsThemeForm($title,'del_chanform','channels.php','post', true);
 	
 	$form -> addElement(new XoopsFormHidden("op","delete") );
 	$form -> addElement(new XoopsFormHidden("verify","1") );
@@ -567,7 +567,7 @@ function uhqradio_mapform ($title, $target, $formdata=null, $op=null) {
 	
 	global $xoopsDB;
 	
-	$form = new XoopsThemeForm($title,'mapform',$target, 'post');
+	$form = new XoopsThemeForm($title,'mapform',$target, 'post', true);
 
 	// Selection of counter info
 	

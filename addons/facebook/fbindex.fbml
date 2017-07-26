@@ -40,19 +40,19 @@
   <h3><{$smarty.const._FB_UHQRADIO_SHIST_HDR1}><{$shistory.count}><{$smarty.const._FB_UHQRADIO_SHIST_HDR2}></h3>
   <div class="some_div">
   <table>
-	<tr>
-	  <th><{$smarty.const._FB_UHQRADIO_SHIST_ARTIST}></th>
-	  <th><{$smarty.const._FB_UHQRADIO_SHIST_TITLE}></th>
-	  <th><{$smarty.const._FB_UHQRADIO_SHIST_ALBUM}></th>
-	  <th><{$smarty.const._FB_UHQRADIO_SHIST_YEAR}></th>
-	</tr>
+    <tr>
+      <th><{$smarty.const._FB_UHQRADIO_SHIST_ARTIST}></th>
+      <th><{$smarty.const._FB_UHQRADIO_SHIST_TITLE}></th>
+      <th><{$smarty.const._FB_UHQRADIO_SHIST_ALBUM}></th>
+      <th><{$smarty.const._FB_UHQRADIO_SHIST_YEAR}></th>
+    </tr>
     <{foreach item=list from=$shistory.history}>
       <tr>
-	    <td><{if $list.artist}><{$list.artist}><{else}>-<{/if}></td>
-	    <td><{if $list.track}><{$list.track}><{else}>-<{/if}></td>
-		<td><{if $list.album}><{$list.album}><{else}>-<{/if}></td>
-		<td><{if $list.albumyear}><{$list.albumyear}><{else}>-<{/if}></td>
-	  </tr>
+        <td><{if $list.artist}><{$list.artist}><{else}>-<{/if}></td>
+        <td><{if $list.track}><{$list.track}><{else}>-<{/if}></td>
+        <td><{if $list.album}><{$list.album}><{else}>-<{/if}></td>
+        <td><{if $list.albumyear}><{$list.albumyear}><{else}>-<{/if}></td>
+      </tr>
     <{/foreach}>
   </table>
   </div>

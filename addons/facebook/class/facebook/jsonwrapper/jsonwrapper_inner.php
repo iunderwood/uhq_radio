@@ -1,7 +1,11 @@
 <?php
 
-require_once 'JSON/JSON.php';
+require_once __DIR__ . '/JSON/JSON.php';
 
+/**
+ * @param $arg
+ * @return mixed
+ */
 function json_encode($arg)
 {
     global $services_json;
@@ -12,6 +16,10 @@ function json_encode($arg)
     return $services_json->encode($arg);
 }
 
+/**
+ * @param $arg
+ * @return mixed
+ */
 function json_decode($arg)
 {
     global $services_json;

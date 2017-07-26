@@ -1,37 +1,29 @@
 <?php
-include "../../../mainfile.php";
-include XOOPS_ROOT_PATH . "/include/cp_header.php";
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
-include XOOPS_ROOT_PATH . "/modules/uhq_radio/admin/functions.inc.php";
-include XOOPS_ROOT_PATH . "/modules/uhq_radio/admin/header.php";
+/**
+ * @copyright    XOOPS Project (https://xoops.org)
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @package
+ * @since
+ * @author       XOOPS Development Team
+ */
 
-include XOOPS_ROOT_PATH . "/modules/uhq_radio/include/functions.php";
-
-
-require_once XOOPS_ROOT_PATH . '/class/template.php';
-if (!isset($xoopsTpl)) {
-	$xoopsTpl = new XoopsTpl();
-}
-$xoopsTpl->xoops_setCaching(0);
-
+require_once __DIR__ . '/admin_header.php';
+// Display Admin header
 xoops_cp_header();
-adminMenu(0);
 
-// Template Page
+$adminObject = \Xmf\Module\Admin::getInstance();
 
-$data['summary'][1]['count'] = uhqradio_summarycount("A");
-$data['summary'][2]['count'] = uhqradio_summarycount("M");
-$data['summary'][3]['count'] = uhqradio_summarycount("C"); 
+$adminObject->displayNavigation(basename(__FILE__));
+$adminObject->displayIndex();
 
-$data['modules'][1]['module'] = _AM_UHQRADIO_MODULE_ICEAUTH;
-$data['modules'][1]['installed'] = uhqradio_iceauthcheck();
-
-$data['test'][1]['test'] = _AM_UHQRADIO_TEST_CURL;
-$data['test'][1]['result'] = function_exists('curl_init');
-
-$xoopsTpl->assign('data',$data);
-$xoopsTpl->display("db:admin/uhqradio_admin_index.html");
-
-xoops_cp_footer();
-
-?>
+require_once __DIR__ . '/admin_footer.php';

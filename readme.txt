@@ -80,7 +80,7 @@ There's only one module-wide preference to set for now:
 
 * XML Cache Time (10)
   This feature controls the amount of time each XML file retrieved from a streaming server is to stay fresh.
-  
+
   This is to limit the number of queries made against a streamhost at any given time, which is important on a busy site, but also beneficial when pulling statistics from multiple IceCast mountpoints which have the same source.
 
 * Use External Cache (No)
@@ -114,34 +114,34 @@ Configuration options:
 
 * Server IP/FQDN
   This is the IP address or the fully-qualified domain name of your streaming server.
-  
+
 * Server Port
   This is the TCP port which the server runs on and will get the XML file from.
-  
+
 * Server Type
   Icecast and Shoutcast are the only server types currently supported.  StreamerP2P does not provide any title information, so this mountpoint can only be used for listener counts.
-  
+
 * Icecast Mount
   This is the mountpoint on Icecast servers where the information is located.
 
 * Icecast Fallback
   If the main mountpoint is not found, this mountpoint will be used as an information source instead.
-  
+
 * Statistics username
   This is the username which is used to access the XML statistic information.  Shoutcast mountpoints will always use "admin" as the username.  StreamerP2P does not use this field.
 
 * Statistics password
   This is the password which is used to access the XML statistic information.
-  
+
 * Codec
   This allows you to select the codec that you're using.  Currently cosmetic.
 
 * Bitrate
   This allows you to define the bitrate of the stream.  Currently cosmetic.
-  
+
 * Maximum Listeners
   This allows you to set a maximum listener count for the mount point.  Currently unused.
-  
+
 * Listener Variance
   This allows you to deduct a number from the listener count.  For example, if your main mountpoint has two relays which hang off of it, the variance would be two.
 
@@ -163,7 +163,7 @@ Configuration Options:
 
 * Channel Name
   This is simply the name of the channel.
-  
+
 * Channel Tagline
   This is the channel's tagline.
 
@@ -175,12 +175,12 @@ Configuration Options:
 
 * Text Source Mountpoint
   This is a list of all mount points which have suitable text flagged.  This is where the particular channel will get all its text information.
-  
+
   DJ Info:
-  
+
 * Parse DJ Info
   This option allows you to process DJ IDs or not.
-  
+
 * SOL/Start Delimiter
   DJ Information will begin either at the start of the line, or after a defined starting delimiter.
 
@@ -284,13 +284,13 @@ Block Options:
 
 * Show Offline Errors?
   Select Yes to display why the block has determined offline status.  Usually good to set to "no" in a production site.  Errors confuse listeners.
-  
+
 * Use Tune-In Graphic?
   Select Yes to display a graphic link instead of a text "Tune in: Click Here" link.
 
 * Use AJAX?
   Select Yes to have this block dynamically refresh with the latest information once per minute.
-  
+
 --[ Radio Control ]--
 
 Starting in version 0.04, the option was added to give remote start/stop and skip track capability to a station autoplayer or jukebox.  This is done by using calling out a URL to a remote system, presumably your autoplayer.  A command is deemed successful if there is an HTTP response from the autoplayer.  No further checks are performed at this time.
@@ -359,10 +359,10 @@ Block options:
 
 * # of columns
   Depending on the placement of the block, a number of columns can be beneficial.  This allows you to set that number.
-  
+
 * Font Size
   The size of the font will be largely determined by the theme your site uses.  However, this field can override the theme setting to make the font bigger or smaller, depending on your desires.
-  
+
 --[ On-Air ]--
 
 This block presents the photo of the DJ profile on air for a given station, along with the DJ name and show name.
@@ -371,7 +371,7 @@ Block options:
 
 * Select a channel
   Choose the channel which will be associated with this block.
-  
+
 ==[ Module Pages ]==
 
 There are a couple of other pages which support module functions:

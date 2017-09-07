@@ -50,7 +50,7 @@ class facebook
     public $user;
     public $profile_user;
     public $canvas_user;
-    public $ext_perms = array();
+    public $ext_perms = [];
     protected $base_domain;
 
     /*
@@ -141,7 +141,7 @@ class facebook
             $this->profile_user = isset($this->fb_params['profile_user']) ? $this->fb_params['profile_user'] : null;
             $this->canvas_user  = isset($this->fb_params['canvas_user']) ? $this->fb_params['canvas_user'] : null;
             $this->base_domain  = isset($this->fb_params['base_domain']) ? $this->fb_params['base_domain'] : null;
-            $this->ext_perms    = isset($this->fb_params['ext_perms']) ? explode(',', $this->fb_params['ext_perms']) : array();
+            $this->ext_perms    = isset($this->fb_params['ext_perms']) ? explode(',', $this->fb_params['ext_perms']) : [];
 
             if (isset($this->fb_params['session_key'])) {
                 $session_key = $this->fb_params['session_key'];
@@ -274,7 +274,7 @@ class facebook
     public function clear_cookie_state()
     {
         if (!$this->in_fb_canvas() && isset($_COOKIE[$this->api_key . '_user'])) {
-            $cookies = array('user', 'session_key', 'expires', 'ss');
+            $cookies = ['user', 'session_key', 'expires', 'ss'];
             foreach ($cookies as $name) {
                 setcookie($this->api_key . '_' . $name, false, time() - 3600, '', $this->base_domain);
                 unset($_COOKIE[$this->api_key . '_' . $name]);
@@ -409,7 +409,7 @@ class facebook
     public function get_add_url($next = null)
     {
         $page   = self::get_facebook_url() . '/add.php';
-        $params = array('api_key' => $this->api_key);
+        $params = ['api_key' => $this->api_key];
 
         if ($next) {
             $params['next'] = $next;
@@ -427,11 +427,11 @@ class facebook
     public function get_login_url($next, $canvas, $req_perms = '')
     {
         $page   = self::get_facebook_url() . '/login.php';
-        $params = array(
+        $params = [
             'api_key'   => $this->api_key,
             'v'         => '1.0',
             'req_perms' => $req_perms
-        );
+        ];
 
         if ($next) {
             $params['next'] = $next;
@@ -450,10 +450,10 @@ class facebook
     public function get_logout_url($next)
     {
         $page   = self::get_facebook_url() . '/logout.php';
-        $params = array(
+        $params = [
             'app_key'     => $this->api_key,
             'session_key' => $this->api_client->session_key
-        );
+        ];
 
         if ($next) {
             $params['connect_next'] = 1;
@@ -489,7 +489,7 @@ class facebook
      */
     public function set_cookies($user, $session_key, $expires = null, $session_secret = null)
     {
-        $cookies                = array();
+        $cookies                = [];
         $cookies['user']        = $user;
         $cookies['session_key'] = $session_key;
         if ($expires != null) {
@@ -563,9 +563,9 @@ class facebook
     {
         $prefix     = $namespace . '_';
         $prefix_len = strlen($prefix);
-        $fb_params  = array();
+        $fb_params  = [];
         if (empty($params)) {
-            return array();
+            return [];
         }
 
         foreach ($params as $name => $val) {
@@ -579,13 +579,13 @@ class facebook
         // validate that the request hasn't expired. this is most likely
         // for params that come from $_COOKIE
         if ($timeout && (!isset($fb_params['time']) || time() - $fb_params['time'] > $timeout)) {
-            return array();
+            return [];
         }
 
         // validate that the params match the signature
         $signature = isset($params[$namespace]) ? $params[$namespace] : null;
         if (!$signature || (!$this->verify_signature($fb_params, $signature))) {
-            return array();
+            return [];
         }
 
         return $fb_params;
@@ -693,11 +693,11 @@ class facebook
      */
     public function encode_validationError($summary, $message)
     {
-        return json_encode(array(
+        return json_encode([
                                'errorCode'    => FACEBOOK_API_VALIDATION_ERROR,
                                'errorTitle'   => $summary,
                                'errorMessage' => $message
-                           ));
+                           ]);
     }
 
     /**
@@ -707,13 +707,13 @@ class facebook
      */
     public function encode_multiFeedStory($feed, $next)
     {
-        return json_encode(array(
+        return json_encode([
                                'method'  => 'multiFeedStory',
-                               'content' => array(
+                               'content' => [
                                    'next' => $next,
                                    'feed' => $feed
-                               )
-                           ));
+                               ]
+                           ]);
     }
 
     /**
@@ -723,13 +723,13 @@ class facebook
      */
     public function encode_feedStory($feed, $next)
     {
-        return json_encode(array(
+        return json_encode([
                                'method'  => 'feedStory',
-                               'content' => array(
+                               'content' => [
                                    'next' => $next,
                                    'feed' => $feed
-                               )
-                           ));
+                               ]
+                           ]);
     }
 
     /**
@@ -750,9 +750,9 @@ class facebook
      */
     public function create_templatizedFeedStory(
         $title_template,
-        $title_data = array(),
+        $title_data = [],
         $body_template = '',
-        $body_data = array(),
+        $body_data = [],
         $body_general = null,
         $image_1 = null,
         $image_1_link = null,
@@ -763,7 +763,7 @@ class facebook
         $image_4 = null,
         $image_4_link = null
     ) {
-        return array(
+        return [
             'title_template' => $title_template,
             'title_data'     => $title_data,
             'body_template'  => $body_template,
@@ -777,6 +777,6 @@ class facebook
             'image_3_link'   => $image_3_link,
             'image_4'        => $image_4,
             'image_4_link'   => $image_4_link
-        );
+        ];
     }
 }

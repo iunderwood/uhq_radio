@@ -517,7 +517,7 @@ function uhqradio_dj_onair($chid)
 {
     global $xoopsDB;
 
-    $onair = array();
+    $onair = [];
 
     // Load Channel
 
@@ -874,7 +874,7 @@ function uhqradio_updatesh($chid)
  */
 function uhqradio_aznum_array($urlcomponent)
 {
-    $az = array();
+    $az = [];
 
     $az[0]['letter'] = '0-9';
     $az[0]['link']   = $urlcomponent . '=0';

@@ -22,7 +22,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 
 // Song Information Data
 
-$data = array();
+$data = [];
 
 /**
  * @param $songid
@@ -33,7 +33,7 @@ function uhqradio_playlist_dosonginfo($songid)
     global $xoopsDB;
     global $samdb;
 
-    $block = array();
+    $block = [];
 
     // Return a blank block if SAM Integration isn't enabled.
     if (uhqradio_samint() === false) {

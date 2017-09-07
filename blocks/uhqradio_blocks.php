@@ -13,7 +13,7 @@ require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sambc.php';
 function b_uhqradio_status_show($options)
 {
     global $xoopsDB;
-    $block = array();
+    $block = [];
 
     // Locate Channel Info
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels') . " WHERE chid = '" . $options[0] . '\'';
@@ -361,7 +361,7 @@ function b_uhqradio_status_edit($options)
  */
 function b_uhqradio_control_show($options)
 {
-    $block = array();
+    $block = [];
 
     if ($options[0]) {
         $block['start'] = '1';
@@ -433,7 +433,7 @@ function b_uhqradio_handoff_show($options)
     global $xoopsDB;
     global $xoopsUser;
 
-    $block = array();
+    $block = [];
 
     // Check DB & Status for handoff.
 
@@ -594,7 +594,7 @@ function b_uhqradio_djlist_show($options)
 {
     global $xoopsDB;
 
-    $block = array();
+    $block = [];
 
     $block = uhqradio_data_djlist();
 

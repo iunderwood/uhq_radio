@@ -7,7 +7,7 @@
  */
 function uhqradio_dosanity()
 {
-    $sanerequest = array();
+    $sanerequest = [];
     $myts        = MyTextSanitizer::getInstance();
 
     // Airstaff Variables

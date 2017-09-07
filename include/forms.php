@@ -119,7 +119,7 @@ function uhqradio_airform_insertquery($sane_REQUEST)
     global $xoopsDB;
 
     // If the upload is good, save the file and save link info.
-    $allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
+    $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
     $uploader          = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/modules/uhq_radio/images/profile', $allowed_mimetypes, 512000);
     if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
         $uploader->setPrefix('djpic-' . $sane_REQUEST['djid'] . '-');
@@ -166,7 +166,7 @@ function uhqradio_airform_updatequery($sane_REQUEST)
     $urlpic = null;
 
     // If the upload is good, save the file and save link info.
-    $allowed_mimetypes = array('image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png');
+    $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
     $uploader          = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/modules/uhq_radio/images/profile', $allowed_mimetypes, 512000);
     if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
         $uploader->setPrefix('djpic-' . $sane_REQUEST['djid'] . '-');

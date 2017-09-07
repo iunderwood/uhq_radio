@@ -19,8 +19,10 @@ define('_FM_UHQRADIO_PROFILE_PIC', 'Upload Profile Picture');
 define('_FM_UHQRADIO_PROFILE_CURPIC', 'Current Picture');
 define('_FM_UHQRADIO_PROFILE_EDITPIC', 'Change Profile Picture');
 
-define('_FM_UHQRADIO_SAMDB_HDR',
-       '<h3>SAM Broadcaster Integration</h3><p>This section contains the information needed to access your MySQL database and coordiate requests w/ SAM.</p><p>The default ports are 3306 for SQL and 1221 for SAM.  Please forward a unique port number to these ports through your firewall or gateway router.</p>');
+define(
+    '_FM_UHQRADIO_SAMDB_HDR',
+       '<h3>SAM Broadcaster Integration</h3><p>This section contains the information needed to access your MySQL database and coordiate requests w/ SAM.</p><p>The default ports are 3306 for SQL and 1221 for SAM.  Please forward a unique port number to these ports through your firewall or gateway router.</p>'
+);
 
 define('_FM_UHQRADIO_SAMDB_HTTP', 'HTTP Port: ');
 define('_FM_UHQRADIO_SAMDB_SQLP', 'SQL Port: ');

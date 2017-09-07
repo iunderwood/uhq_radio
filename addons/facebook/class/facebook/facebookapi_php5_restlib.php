@@ -177,7 +177,7 @@ class FacebookRestClient
             throw new FacebookRestClientException($description, $code);
         }
 
-        $this->batch_queue                = array();
+        $this->batch_queue                = [];
         $this->pending_batch              = true;
         $this->pending_batch_is_read_only = true;
     }
@@ -216,7 +216,7 @@ class FacebookRestClient
     private function execute_server_side_batch($read_only)
     {
         $item_count  = count($this->batch_queue);
-        $method_feed = array();
+        $method_feed = [];
         foreach ($this->batch_queue as $batch_item) {
             $method = $batch_item['m'];
             $params = $batch_item['p'];
@@ -226,11 +226,11 @@ class FacebookRestClient
 
         $serial_only = ($this->batch_mode == FacebookRestClient::BATCH_MODE_SERIAL_ONLY);
 
-        $params = array(
+        $params = [
             'method_feed' => json_encode($method_feed),
             'serial_only' => $serial_only,
             'format'      => $this->format
-        );
+        ];
         $result = $this->call_method('facebook.batch.run', $params, $read_only);
 
         if (is_array($result) && isset($result['error_code'])) {
@@ -294,11 +294,11 @@ class FacebookRestClient
         $application_api_key = null,
         $application_canvas_name = null
     ) {
-        return $this->call_method('facebook.application.getPublicInfo', array(
+        return $this->call_method('facebook.application.getPublicInfo', [
             'application_id'          => $application_id,
             'application_api_key'     => $application_api_key,
             'application_canvas_name' => $application_canvas_name
-        ));
+        ]);
     }
 
     /**
@@ -332,11 +332,11 @@ class FacebookRestClient
     public function auth_getSession($auth_token, $generate_session_secret = false, $host_url = null)
     {
         if (!$this->pending_batch()) {
-            $result            = $this->call_method('facebook.auth.getSession', array(
+            $result            = $this->call_method('facebook.auth.getSession', [
                 'auth_token'              => $auth_token,
                 'generate_session_secret' => $generate_session_secret,
                 'host_url'                => $host_url
-            ));
+            ]);
             $this->session_key = $result['session_key'];
 
             if (!empty($result['secret']) && !$generate_session_secret) {
@@ -385,7 +385,7 @@ class FacebookRestClient
      */
     public function auth_revokeExtendedPermission($perm, $uid = null)
     {
-        return $this->call_method('facebook.auth.revokeExtendedPermission', array('perm' => $perm, 'uid' => $uid));
+        return $this->call_method('facebook.auth.revokeExtendedPermission', ['perm' => $perm, 'uid' => $uid]);
     }
 
     /**
@@ -402,7 +402,7 @@ class FacebookRestClient
      */
     public function auth_revokeAuthorization($uid = null)
     {
-        return $this->call_method('facebook.auth.revokeAuthorization', array('uid' => $uid));
+        return $this->call_method('facebook.auth.revokeAuthorization', ['uid' => $uid]);
     }
 
     /**
@@ -414,7 +414,7 @@ class FacebookRestClient
      */
     public function auth_getAppPublicKey($target_app_key)
     {
-        return $this->call_method('facebook.auth.getAppPublicKey', array('target_app_key' => $target_app_key));
+        return $this->call_method('facebook.auth.getAppPublicKey', ['target_app_key' => $target_app_key]);
     }
 
     /**
@@ -426,7 +426,7 @@ class FacebookRestClient
      */
     public function auth_getSignedPublicSessionData()
     {
-        return $this->call_method('facebook.auth.getSignedPublicSessionData', array());
+        return $this->call_method('facebook.auth.getSignedPublicSessionData', []);
     }
 
     /**
@@ -436,7 +436,7 @@ class FacebookRestClient
      */
     public function connect_getUnconnectedFriendsCount()
     {
-        return $this->call_method('facebook.connect.getUnconnectedFriendsCount', array());
+        return $this->call_method('facebook.connect.getUnconnectedFriendsCount', []);
     }
 
     /**
@@ -468,7 +468,7 @@ class FacebookRestClient
      */
     public function connect_registerUsers($accounts)
     {
-        return $this->call_method('facebook.connect.registerUsers', array('accounts' => $accounts));
+        return $this->call_method('facebook.connect.registerUsers', ['accounts' => $accounts]);
     }
 
     /**
@@ -482,7 +482,7 @@ class FacebookRestClient
      */
     public function connect_unregisterUsers($email_hashes)
     {
-        return $this->call_method('facebook.connect.unregisterUsers', array('email_hashes' => $email_hashes));
+        return $this->call_method('facebook.connect.unregisterUsers', ['email_hashes' => $email_hashes]);
     }
 
     /**
@@ -509,13 +509,13 @@ class FacebookRestClient
      */
     public function &events_get($uid = null, $eids = null, $start_time = null, $end_time = null, $rsvp_status = null)
     {
-        return $this->call_method('facebook.events.get', array(
+        return $this->call_method('facebook.events.get', [
             'uid'         => $uid,
             'eids'        => $eids,
             'start_time'  => $start_time,
             'end_time'    => $end_time,
             'rsvp_status' => $rsvp_status
-        ));
+        ]);
     }
 
     /**
@@ -528,7 +528,7 @@ class FacebookRestClient
      */
     public function &events_getMembers($eid)
     {
-        return $this->call_method('facebook.events.getMembers', array('eid' => $eid));
+        return $this->call_method('facebook.events.getMembers', ['eid' => $eid]);
     }
 
     /**
@@ -541,10 +541,10 @@ class FacebookRestClient
      */
     public function &events_rsvp($eid, $rsvp_status)
     {
-        return $this->call_method('facebook.events.rsvp', array(
+        return $this->call_method('facebook.events.rsvp', [
             'eid'         => $eid,
             'rsvp_status' => $rsvp_status
-        ));
+        ]);
     }
 
     /**
@@ -558,10 +558,10 @@ class FacebookRestClient
      */
     public function &events_cancel($eid, $cancel_message = '')
     {
-        return $this->call_method('facebook.events.cancel', array(
+        return $this->call_method('facebook.events.cancel', [
             'eid'            => $eid,
             'cancel_message' => $cancel_message
-        ));
+        ]);
     }
 
     /**
@@ -576,9 +576,9 @@ class FacebookRestClient
     public function events_create($event_info, $file = null)
     {
         if ($file) {
-            return $this->call_upload_method('facebook.events.create', array('event_info' => $event_info), $file, $this->photo_server_addr);
+            return $this->call_upload_method('facebook.events.create', ['event_info' => $event_info], $file, $this->photo_server_addr);
         } else {
-            return $this->call_method('facebook.events.create', array('event_info' => $event_info));
+            return $this->call_method('facebook.events.create', ['event_info' => $event_info]);
         }
     }
 
@@ -599,11 +599,11 @@ class FacebookRestClient
      */
     public function events_invite($eid, $uids, $personal_message)
     {
-        return $this->call_method('facebook.events.invite', array(
+        return $this->call_method('facebook.events.invite', [
             'eid'              => $eid,
             'uids'             => $uids,
             'personal_message' => $personal_message
-        ));
+        ]);
     }
 
     /**
@@ -618,12 +618,12 @@ class FacebookRestClient
     public function events_edit($eid, $event_info, $file = null)
     {
         if ($file) {
-            return $this->call_upload_method('facebook.events.edit', array('eid' => $eid, 'event_info' => $event_info), $file, $this->photo_server_addr);
+            return $this->call_upload_method('facebook.events.edit', ['eid' => $eid, 'event_info' => $event_info], $file, $this->photo_server_addr);
         } else {
-            return $this->call_method('facebook.events.edit', array(
+            return $this->call_method('facebook.events.edit', [
                 'eid'        => $eid,
                 'event_info' => $event_info
-            ));
+            ]);
         }
     }
 
@@ -638,7 +638,7 @@ class FacebookRestClient
      */
     public function &fbml_refreshImgSrc($url)
     {
-        return $this->call_method('facebook.fbml.refreshImgSrc', array('url' => $url));
+        return $this->call_method('facebook.fbml.refreshImgSrc', ['url' => $url]);
     }
 
     /**
@@ -652,7 +652,7 @@ class FacebookRestClient
      */
     public function &fbml_refreshRefUrl($url)
     {
-        return $this->call_method('facebook.fbml.refreshRefUrl', array('url' => $url));
+        return $this->call_method('facebook.fbml.refreshRefUrl', ['url' => $url]);
     }
 
     /**
@@ -669,7 +669,7 @@ class FacebookRestClient
      */
     public function &fbml_setRefHandle($handle, $fbml)
     {
-        return $this->call_method('facebook.fbml.setRefHandle', array('handle' => $handle, 'fbml' => $fbml));
+        return $this->call_method('facebook.fbml.setRefHandle', ['handle' => $handle, 'fbml' => $fbml]);
     }
 
     /**
@@ -696,7 +696,7 @@ class FacebookRestClient
     {
         $tags = json_encode($tags);
 
-        return $this->call_method('facebook.fbml.registerCustomTags', array('tags' => $tags));
+        return $this->call_method('facebook.fbml.registerCustomTags', ['tags' => $tags]);
     }
 
     /**
@@ -713,7 +713,7 @@ class FacebookRestClient
      */
     public function &fbml_getCustomTags($app_id = null)
     {
-        return $this->call_method('facebook.fbml.getCustomTags', array('app_id' => $app_id));
+        return $this->call_method('facebook.fbml.getCustomTags', ['app_id' => $app_id]);
     }
 
     /**
@@ -730,7 +730,7 @@ class FacebookRestClient
      */
     public function &fbml_deleteCustomTags($tag_names = null)
     {
-        return $this->call_method('facebook.fbml.deleteCustomTags', array('tag_names' => json_encode($tag_names)));
+        return $this->call_method('facebook.fbml.deleteCustomTags', ['tag_names' => json_encode($tag_names)]);
     }
 
     /**
@@ -754,10 +754,10 @@ class FacebookRestClient
      */
     public function &intl_getTranslations($locale = 'en_US', $all = false)
     {
-        return $this->call_method('facebook.intl.getTranslations', array(
+        return $this->call_method('facebook.intl.getTranslations', [
             'locale' => $locale,
             'all'    => $all
-        ));
+        ]);
     }
 
     /**
@@ -771,7 +771,7 @@ class FacebookRestClient
      */
     public function &intl_uploadNativeStrings($native_strings)
     {
-        return $this->call_method('facebook.intl.uploadNativeStrings', array('native_strings' => json_encode($native_strings)));
+        return $this->call_method('facebook.intl.uploadNativeStrings', ['native_strings' => json_encode($native_strings)]);
     }
 
     /**
@@ -817,7 +817,7 @@ class FacebookRestClient
         $target_ids = '',
         $page_actor_id = null
     ) {
-        return $this->call_method('facebook.feed.publishTemplatizedAction', array(
+        return $this->call_method('facebook.feed.publishTemplatizedAction', [
             'title_template' => $title_template,
             'title_data'     => $title_data,
             'body_template'  => $body_template,
@@ -833,7 +833,7 @@ class FacebookRestClient
             'image_4_link'   => $image_4_link,
             'target_ids'     => $target_ids,
             'page_actor_id'  => $page_actor_id
-        ));
+        ]);
     }
 
     /**
@@ -850,9 +850,9 @@ class FacebookRestClient
      */
     public function &feed_registerTemplateBundle(
         $one_line_story_templates,
-        $short_story_templates = array(),
+        $short_story_templates = [],
         $full_story_template = null,
-        $action_links = array()
+        $action_links = []
     ) {
         $one_line_story_templates = json_encode($one_line_story_templates);
 
@@ -868,12 +868,12 @@ class FacebookRestClient
             $action_links = json_encode($action_links);
         }
 
-        return $this->call_method('facebook.feed.registerTemplateBundle', array(
+        return $this->call_method('facebook.feed.registerTemplateBundle', [
             'one_line_story_templates' => $one_line_story_templates,
             'short_story_templates'    => $short_story_templates,
             'full_story_template'      => $full_story_template,
             'action_links'             => $action_links
-        ));
+        ]);
     }
 
     /**
@@ -884,7 +884,7 @@ class FacebookRestClient
      */
     public function &feed_getRegisteredTemplateBundles()
     {
-        return $this->call_method('facebook.feed.getRegisteredTemplateBundles', array());
+        return $this->call_method('facebook.feed.getRegisteredTemplateBundles', []);
     }
 
     /**
@@ -897,7 +897,7 @@ class FacebookRestClient
      */
     public function &feed_getRegisteredTemplateBundleByID($template_bundle_id)
     {
-        return $this->call_method('facebook.feed.getRegisteredTemplateBundleByID', array('template_bundle_id' => $template_bundle_id));
+        return $this->call_method('facebook.feed.getRegisteredTemplateBundleByID', ['template_bundle_id' => $template_bundle_id]);
     }
 
     /**
@@ -909,7 +909,7 @@ class FacebookRestClient
      */
     public function &feed_deactivateTemplateBundleByID($template_bundle_id)
     {
-        return $this->call_method('facebook.feed.deactivateTemplateBundleByID', array('template_bundle_id' => $template_bundle_id));
+        return $this->call_method('facebook.feed.deactivateTemplateBundleByID', ['template_bundle_id' => $template_bundle_id]);
     }
 
     const STORY_SIZE_ONE_LINE = 1;
@@ -954,14 +954,14 @@ class FacebookRestClient
             $target_ids = trim($target_ids, '[]'); // we don't want square brackets
         }
 
-        return $this->call_method('facebook.feed.publishUserAction', array(
+        return $this->call_method('facebook.feed.publishUserAction', [
             'template_bundle_id' => $template_bundle_id,
             'template_data'      => $template_data,
             'target_ids'         => $target_ids,
             'body_general'       => $body_general,
             'story_size'         => $story_size,
             'user_message'       => $user_message
-        ));
+        ]);
     }
 
     /**
@@ -978,13 +978,13 @@ class FacebookRestClient
      */
     public function stream_publish($message, $attachment = null, $action_links = null, $target_id = null, $uid = null)
     {
-        return $this->call_method('facebook.stream.publish', array(
+        return $this->call_method('facebook.stream.publish', [
             'message'      => $message,
             'attachment'   => $attachment,
             'action_links' => $action_links,
             'target_id'    => $target_id,
             'uid'          => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -997,10 +997,10 @@ class FacebookRestClient
      */
     public function stream_remove($post_id, $uid = null)
     {
-        return $this->call_method('facebook.stream.remove', array(
+        return $this->call_method('facebook.stream.remove', [
             'post_id' => $post_id,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -1013,11 +1013,11 @@ class FacebookRestClient
      */
     public function stream_addComment($post_id, $comment, $uid = null)
     {
-        return $this->call_method('facebook.stream.addComment', array(
+        return $this->call_method('facebook.stream.addComment', [
             'post_id' => $post_id,
             'comment' => $comment,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -1029,10 +1029,10 @@ class FacebookRestClient
      */
     public function stream_removeComment($comment_id, $uid = null)
     {
-        return $this->call_method('facebook.stream.removeComment', array(
+        return $this->call_method('facebook.stream.removeComment', [
             'comment_id' => $comment_id,
             'uid'        => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -1044,10 +1044,10 @@ class FacebookRestClient
      */
     public function stream_addLike($post_id, $uid = null)
     {
-        return $this->call_method('facebook.stream.addLike', array(
+        return $this->call_method('facebook.stream.addLike', [
             'post_id' => $post_id,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -1059,10 +1059,10 @@ class FacebookRestClient
      */
     public function stream_removeLike($post_id, $uid = null)
     {
-        return $this->call_method('facebook.stream.removeLike', array(
+        return $this->call_method('facebook.stream.removeLike', [
             'post_id' => $post_id,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -1088,7 +1088,7 @@ class FacebookRestClient
      */
     public function &fql_query($query)
     {
-        return $this->call_method('facebook.fql.query', array('query' => $query));
+        return $this->call_method('facebook.fql.query', ['query' => $query]);
     }
 
     /**
@@ -1103,7 +1103,7 @@ class FacebookRestClient
      */
     public function &fql_multiquery($queries)
     {
-        return $this->call_method('facebook.fql.multiquery', array('queries' => $queries));
+        return $this->call_method('facebook.fql.multiquery', ['queries' => $queries]);
     }
 
     /**
@@ -1124,10 +1124,10 @@ class FacebookRestClient
      */
     public function &friends_areFriends($uids1, $uids2)
     {
-        return $this->call_method('facebook.friends.areFriends', array(
+        return $this->call_method('facebook.friends.areFriends', [
             'uids1' => $uids1,
             'uids2' => $uids2
-        ));
+        ]);
     }
 
     /**
@@ -1143,7 +1143,7 @@ class FacebookRestClient
         if (isset($this->friends_list)) {
             return $this->friends_list;
         }
-        $params = array();
+        $params = [];
         if (!$uid && isset($this->canvas_user)) {
             $uid = $this->canvas_user;
         }
@@ -1170,10 +1170,10 @@ class FacebookRestClient
      */
     public function &friends_getMutualFriends($target_uid, $source_uid = null)
     {
-        return $this->call_method('facebook.friends.getMutualFriends', array(
+        return $this->call_method('facebook.friends.getMutualFriends', [
             'target_uid' => $target_uid,
             'source_uid' => $source_uid
-        ));
+        ]);
     }
 
     /**
@@ -1210,10 +1210,10 @@ class FacebookRestClient
      */
     public function &groups_get($uid, $gids)
     {
-        return $this->call_method('facebook.groups.get', array(
+        return $this->call_method('facebook.groups.get', [
             'uid'  => $uid,
             'gids' => $gids
-        ));
+        ]);
     }
 
     /**
@@ -1226,7 +1226,7 @@ class FacebookRestClient
      */
     public function &groups_getMembers($gid)
     {
-        return $this->call_method('facebook.groups.getMembers', array('gid' => $gid));
+        return $this->call_method('facebook.groups.getMembers', ['gid' => $gid]);
     }
 
     /**
@@ -1240,10 +1240,10 @@ class FacebookRestClient
      */
     public function data_getCookies($uid, $name)
     {
-        return $this->call_method('facebook.data.getCookies', array(
+        return $this->call_method('facebook.data.getCookies', [
             'uid'  => $uid,
             'name' => $name
-        ));
+        ]);
     }
 
     /**
@@ -1259,13 +1259,13 @@ class FacebookRestClient
      */
     public function data_setCookie($uid, $name, $value, $expires, $path)
     {
-        return $this->call_method('facebook.data.setCookie', array(
+        return $this->call_method('facebook.data.setCookie', [
             'uid'     => $uid,
             'name'    => $name,
             'value'   => $value,
             'expires' => $expires,
             'path'    => $path
-        ));
+        ]);
     }
 
     /**
@@ -1280,11 +1280,11 @@ class FacebookRestClient
      */
     public function &links_get($uid, $limit, $link_ids = null)
     {
-        return $this->call_method('facebook.links.get', array(
+        return $this->call_method('facebook.links.get', [
             'uid'      => $uid,
             'limit'    => $limit,
             'link_ids' => $link_ids
-        ));
+        ]);
     }
 
     /**
@@ -1299,11 +1299,11 @@ class FacebookRestClient
      */
     public function &links_post($url, $comment = '', $uid = null)
     {
-        return $this->call_method('facebook.links.post', array(
+        return $this->call_method('facebook.links.post', [
             'uid'     => $uid,
             'url'     => $url,
             'comment' => $comment
-        ));
+        ]);
     }
 
     /**
@@ -1319,7 +1319,7 @@ class FacebookRestClient
      */
     public function permissions_checkGrantedApiAccess($permissions_apikey)
     {
-        return $this->call_method('facebook.permissions.checkGrantedApiAccess', array('permissions_apikey' => $permissions_apikey));
+        return $this->call_method('facebook.permissions.checkGrantedApiAccess', ['permissions_apikey' => $permissions_apikey]);
     }
 
     /**
@@ -1331,7 +1331,7 @@ class FacebookRestClient
      */
     public function permissions_checkAvailableApiAccess($permissions_apikey)
     {
-        return $this->call_method('facebook.permissions.checkAvailableApiAccess', array('permissions_apikey' => $permissions_apikey));
+        return $this->call_method('facebook.permissions.checkAvailableApiAccess', ['permissions_apikey' => $permissions_apikey]);
     }
 
     /**
@@ -1346,10 +1346,10 @@ class FacebookRestClient
      */
     public function permissions_grantApiAccess($permissions_apikey, $method_arr)
     {
-        return $this->call_method('facebook.permissions.grantApiAccess', array(
+        return $this->call_method('facebook.permissions.grantApiAccess', [
             'permissions_apikey' => $permissions_apikey,
             'method_arr'         => $method_arr
-        ));
+        ]);
     }
 
     /**
@@ -1361,7 +1361,7 @@ class FacebookRestClient
      */
     public function permissions_revokeApiAccess($permissions_apikey)
     {
-        return $this->call_method('facebook.permissions.revokeApiAccess', array('permissions_apikey' => $permissions_apikey));
+        return $this->call_method('facebook.permissions.revokeApiAccess', ['permissions_apikey' => $permissions_apikey]);
     }
 
     /**
@@ -1377,7 +1377,7 @@ class FacebookRestClient
      */
     public function payments_setProperties($properties)
     {
-        return $this->call_method('facebook.payments.setProperties', array('properties' => json_encode($properties)));
+        return $this->call_method('facebook.payments.setProperties', ['properties' => json_encode($properties)]);
     }
 
     /**
@@ -1386,7 +1386,7 @@ class FacebookRestClient
      */
     public function payments_getOrderDetails($order_id)
     {
-        return json_decode($this->call_method('facebook.payments.getOrderDetails', array('order_id' => $order_id)), true);
+        return json_decode($this->call_method('facebook.payments.getOrderDetails', ['order_id' => $order_id]), true);
     }
 
     /**
@@ -1397,11 +1397,11 @@ class FacebookRestClient
      */
     public function payments_updateOrder($order_id, $status, $params)
     {
-        return $this->call_method('facebook.payments.updateOrder', array(
+        return $this->call_method('facebook.payments.updateOrder', [
             'order_id' => $order_id,
             'status'   => $status,
             'params'   => json_encode($params)
-        ));
+        ]);
     }
 
     /**
@@ -1413,12 +1413,12 @@ class FacebookRestClient
      */
     public function payments_getOrders($status, $start_time, $end_time, $test_mode = false)
     {
-        return json_decode($this->call_method('facebook.payments.getOrders', array(
+        return json_decode($this->call_method('facebook.payments.getOrders', [
             'status'     => $status,
             'start_time' => $start_time,
             'end_time'   => $end_time,
             'test_mode'  => $test_mode
-        )), true);
+        ]), true);
     }
 
     /**
@@ -1432,7 +1432,7 @@ class FacebookRestClient
      */
     public function gifts_get()
     {
-        return json_decode($this->call_method('facebook.gifts.get', array()), true);
+        return json_decode($this->call_method('facebook.gifts.get', []), true);
     }
 
     /*
@@ -1448,7 +1448,7 @@ class FacebookRestClient
      */
     public function gifts_update($update_array)
     {
-        return json_decode($this->call_method('facebook.gifts.update', array('update_str' => json_encode($update_array))), true);
+        return json_decode($this->call_method('facebook.gifts.update', ['update_str' => json_encode($update_array)]), true);
     }
 
     /**
@@ -1463,11 +1463,11 @@ class FacebookRestClient
      */
     public function &notes_create($title, $content, $uid = null)
     {
-        return $this->call_method('facebook.notes.create', array(
+        return $this->call_method('facebook.notes.create', [
             'uid'     => $uid,
             'title'   => $title,
             'content' => $content
-        ));
+        ]);
     }
 
     /**
@@ -1481,10 +1481,10 @@ class FacebookRestClient
      */
     public function &notes_delete($note_id, $uid = null)
     {
-        return $this->call_method('facebook.notes.delete', array(
+        return $this->call_method('facebook.notes.delete', [
             'uid'     => $uid,
             'note_id' => $note_id
-        ));
+        ]);
     }
 
     /**
@@ -1501,12 +1501,12 @@ class FacebookRestClient
      */
     public function &notes_edit($note_id, $title, $content, $uid = null)
     {
-        return $this->call_method('facebook.notes.edit', array(
+        return $this->call_method('facebook.notes.edit', [
             'uid'     => $uid,
             'note_id' => $note_id,
             'title'   => $title,
             'content' => $content
-        ));
+        ]);
     }
 
     /**
@@ -1523,10 +1523,10 @@ class FacebookRestClient
      */
     public function &notes_get($uid, $note_ids = null)
     {
-        return $this->call_method('facebook.notes.get', array(
+        return $this->call_method('facebook.notes.get', [
             'uid'      => $uid,
             'note_ids' => $note_ids
-        ));
+        ]);
     }
 
     /**
@@ -1554,11 +1554,11 @@ class FacebookRestClient
      */
     public function &notifications_send($to_ids, $notification, $type)
     {
-        return $this->call_method('facebook.notifications.send', array(
+        return $this->call_method('facebook.notifications.send', [
             'to_ids'       => $to_ids,
             'notification' => $notification,
             'type'         => $type
-        ));
+        ]);
     }
 
     /**
@@ -1575,12 +1575,12 @@ class FacebookRestClient
      */
     public function &notifications_sendEmail($recipients, $subject, $text, $fbml)
     {
-        return $this->call_method('facebook.notifications.sendEmail', array(
+        return $this->call_method('facebook.notifications.sendEmail', [
             'recipients' => $recipients,
             'subject'    => $subject,
             'text'       => $text,
             'fbml'       => $fbml
-        ));
+        ]);
     }
 
     /**
@@ -1597,12 +1597,12 @@ class FacebookRestClient
      */
     public function &pages_getInfo($page_ids, $fields, $uid, $type)
     {
-        return $this->call_method('facebook.pages.getInfo', array(
+        return $this->call_method('facebook.pages.getInfo', [
             'page_ids' => $page_ids,
             'fields'   => $fields,
             'uid'      => $uid,
             'type'     => $type
-        ));
+        ]);
     }
 
     /**
@@ -1615,10 +1615,10 @@ class FacebookRestClient
      */
     public function &pages_isAdmin($page_id, $uid = null)
     {
-        return $this->call_method('facebook.pages.isAdmin', array(
+        return $this->call_method('facebook.pages.isAdmin', [
             'page_id' => $page_id,
             'uid'     => $uid
-        ));
+        ]);
     }
 
     /**
@@ -1630,7 +1630,7 @@ class FacebookRestClient
      */
     public function &pages_isAppAdded($page_id)
     {
-        return $this->call_method('facebook.pages.isAppAdded', array('page_id' => $page_id));
+        return $this->call_method('facebook.pages.isAppAdded', ['page_id' => $page_id]);
     }
 
     /**
@@ -1643,10 +1643,10 @@ class FacebookRestClient
      */
     public function &pages_isFan($page_id, $uid = null)
     {
-        return $this->call_method('facebook.pages.isFan', array(
+        return $this->call_method('facebook.pages.isFan', [
             'page_id' => $page_id,
             'uid'     => $uid
-        ));
+        ]);
     }
 
     /**
@@ -1678,7 +1678,7 @@ class FacebookRestClient
      */
     public function &photos_addTag($pid, $tag_uid, $tag_text, $x, $y, $tags, $owner_uid = 0)
     {
-        return $this->call_method('facebook.photos.addTag', array(
+        return $this->call_method('facebook.photos.addTag', [
             'pid'       => $pid,
             'tag_uid'   => $tag_uid,
             'tag_text'  => $tag_text,
@@ -1686,7 +1686,7 @@ class FacebookRestClient
             'y'         => $y,
             'tags'      => is_array($tags) ? json_encode($tags) : null,
             'owner_uid' => $this->get_uid($owner_uid)
-        ));
+        ]);
     }
 
     /**
@@ -1706,13 +1706,13 @@ class FacebookRestClient
      */
     public function &photos_createAlbum($name, $description = '', $location = '', $visible = '', $uid = 0)
     {
-        return $this->call_method('facebook.photos.createAlbum', array(
+        return $this->call_method('facebook.photos.createAlbum', [
             'name'        => $name,
             'description' => $description,
             'location'    => $location,
             'visible'     => $visible,
             'uid'         => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -1731,7 +1731,7 @@ class FacebookRestClient
      */
     public function &photos_get($subj_id, $aid, $pids)
     {
-        return $this->call_method('facebook.photos.get', array('subj_id' => $subj_id, 'aid' => $aid, 'pids' => $pids));
+        return $this->call_method('facebook.photos.get', ['subj_id' => $subj_id, 'aid' => $aid, 'pids' => $pids]);
     }
 
     /**
@@ -1748,10 +1748,10 @@ class FacebookRestClient
      */
     public function &photos_getAlbums($uid, $aids)
     {
-        return $this->call_method('facebook.photos.getAlbums', array(
+        return $this->call_method('facebook.photos.getAlbums', [
             'uid'  => $uid,
             'aids' => $aids
-        ));
+        ]);
     }
 
     /**
@@ -1765,7 +1765,7 @@ class FacebookRestClient
      */
     public function &photos_getTags($pids)
     {
-        return $this->call_method('facebook.photos.getTags', array('pids' => $pids));
+        return $this->call_method('facebook.photos.getTags', ['pids' => $pids]);
     }
 
     /**
@@ -1782,11 +1782,11 @@ class FacebookRestClient
      */
     public function photos_upload($file, $aid = null, $caption = null, $uid = null)
     {
-        return $this->call_upload_method('facebook.photos.upload', array(
+        return $this->call_upload_method('facebook.photos.upload', [
             'aid'     => $aid,
             'caption' => $caption,
             'uid'     => $uid
-        ), $file);
+        ], $file);
     }
 
     /**
@@ -1800,10 +1800,10 @@ class FacebookRestClient
      */
     public function video_upload($file, $title = null, $description = null)
     {
-        return $this->call_upload_method('facebook.video.upload', array(
+        return $this->call_upload_method('facebook.video.upload', [
             'title'       => $title,
             'description' => $description
-        ), $file, Facebook::get_facebook_url('api-video') . '/restserver.php');
+        ], $file, Facebook::get_facebook_url('api-video') . '/restserver.php');
     }
 
     /**
@@ -1828,10 +1828,10 @@ class FacebookRestClient
      */
     public function &users_getInfo($uids, $fields)
     {
-        return $this->call_method('facebook.users.getInfo', array(
+        return $this->call_method('facebook.users.getInfo', [
             'uids'   => $uids,
             'fields' => $fields
-        ));
+        ]);
     }
 
     /**
@@ -1851,10 +1851,10 @@ class FacebookRestClient
      */
     public function &users_getStandardInfo($uids, $fields)
     {
-        return $this->call_method('facebook.users.getStandardInfo', array(
+        return $this->call_method('facebook.users.getStandardInfo', [
             'uids'   => $uids,
             'fields' => $fields
-        ));
+        ]);
     }
 
     /**
@@ -1877,7 +1877,7 @@ class FacebookRestClient
      */
     public function &users_hasAppPermission($ext_perm, $uid = null)
     {
-        return $this->call_method('facebook.users.hasAppPermission', array('ext_perm' => $ext_perm, 'uid' => $uid));
+        return $this->call_method('facebook.users.hasAppPermission', ['ext_perm' => $ext_perm, 'uid' => $uid]);
     }
 
     /**
@@ -1893,7 +1893,7 @@ class FacebookRestClient
             return $this->is_user;
         }
 
-        return $this->call_method('facebook.users.isAppUser', array('uid' => $uid));
+        return $this->call_method('facebook.users.isAppUser', ['uid' => $uid]);
     }
 
     /**
@@ -1927,12 +1927,12 @@ class FacebookRestClient
      */
     public function &users_setStatus($status, $uid = null, $clear = false, $status_includes_verb = true)
     {
-        $args = array(
+        $args = [
             'status'               => $status,
             'uid'                  => $uid,
             'clear'                => $clear,
             'status_includes_verb' => $status_includes_verb,
-        );
+        ];
 
         return $this->call_method('facebook.users.setStatus', $args);
     }
@@ -1947,7 +1947,7 @@ class FacebookRestClient
      */
     public function &comments_get($xid)
     {
-        $args = array('xid' => $xid);
+        $args = ['xid' => $xid];
 
         return $this->call_method('facebook.comments.get', $args);
     }
@@ -1969,14 +1969,14 @@ class FacebookRestClient
      */
     public function &comments_add($xid, $text, $uid = 0, $title = '', $url = '', $publish_to_stream = false)
     {
-        $args = array(
+        $args = [
             'xid'               => $xid,
             'uid'               => $this->get_uid($uid),
             'text'              => $text,
             'title'             => $title,
             'url'               => $url,
             'publish_to_stream' => $publish_to_stream
-        );
+        ];
 
         return $this->call_method('facebook.comments.add', $args);
     }
@@ -1992,10 +1992,10 @@ class FacebookRestClient
      */
     public function &comments_remove($xid, $comment_id)
     {
-        $args = array(
+        $args = [
             'xid'        => $xid,
             'comment_id' => $comment_id
-        );
+        ];
 
         return $this->call_method('facebook.comments.remove', $args);
     }
@@ -2040,7 +2040,7 @@ class FacebookRestClient
         $query = null,
         $everyone_stream = false
     ) {
-        $args = array(
+        $args = [
             'viewer_id'       => $viewer_id,
             'source_ids'      => $source_ids,
             'start_time'      => $start_time,
@@ -2052,7 +2052,7 @@ class FacebookRestClient
             'post_ids'        => $post_ids,
             'query'           => $query,
             'everyone_stream' => $everyone_stream
-        );
+        ];
 
         return $this->call_method('facebook.stream.get', $args);
     }
@@ -2069,7 +2069,7 @@ class FacebookRestClient
      */
     public function &stream_getFilters($uid = null)
     {
-        $args = array('uid' => $uid);
+        $args = ['uid' => $uid];
 
         return $this->call_method('facebook.stream.getFilters', $args);
     }
@@ -2085,7 +2085,7 @@ class FacebookRestClient
      */
     public function &stream_getComments($post_id)
     {
-        $args = array('post_id' => $post_id);
+        $args = ['post_id' => $post_id];
 
         return $this->call_method('facebook.stream.getComments', $args);
     }
@@ -2112,14 +2112,14 @@ class FacebookRestClient
         $mobile_profile = '',
         $profile_main = ''
     ) {
-        return $this->call_method('facebook.profile.setFBML', array(
+        return $this->call_method('facebook.profile.setFBML', [
             'markup'         => $markup,
             'uid'            => $uid,
             'profile'        => $profile,
             'profile_action' => $profile_action,
             'mobile_profile' => $mobile_profile,
             'profile_main'   => $profile_main
-        ));
+        ]);
     }
 
     /**
@@ -2134,10 +2134,10 @@ class FacebookRestClient
      */
     public function &profile_getFBML($uid = null, $type = null)
     {
-        return $this->call_method('facebook.profile.getFBML', array(
+        return $this->call_method('facebook.profile.getFBML', [
             'uid'  => $uid,
             'type' => $type
-        ));
+        ]);
     }
 
     /**
@@ -2154,7 +2154,7 @@ class FacebookRestClient
      */
     public function &profile_getInfo($uid = null)
     {
-        return $this->call_method('facebook.profile.getInfo', array('uid' => $uid));
+        return $this->call_method('facebook.profile.getInfo', ['uid' => $uid]);
     }
 
     /**
@@ -2167,7 +2167,7 @@ class FacebookRestClient
      */
     public function &profile_getInfoOptions($field)
     {
-        return $this->call_method('facebook.profile.getInfoOptions', array('field' => $field));
+        return $this->call_method('facebook.profile.getInfoOptions', ['field' => $field]);
     }
 
     /**
@@ -2186,12 +2186,12 @@ class FacebookRestClient
      */
     public function &profile_setInfo($title, $type, $info_fields, $uid = null)
     {
-        return $this->call_method('facebook.profile.setInfo', array(
+        return $this->call_method('facebook.profile.setInfo', [
             'uid'         => $uid,
             'type'        => $type,
             'title'       => $title,
             'info_fields' => json_encode($info_fields)
-        ));
+        ]);
     }
 
     /**
@@ -2207,10 +2207,10 @@ class FacebookRestClient
      */
     public function profile_setInfoOptions($field, $options)
     {
-        return $this->call_method('facebook.profile.setInfoOptions', array(
+        return $this->call_method('facebook.profile.setInfoOptions', [
             'field'   => $field,
             'options' => json_encode($options)
-        ));
+        ]);
     }
 
     /////////////////////////////////////////////////////////////////////////////
@@ -2235,11 +2235,11 @@ class FacebookRestClient
      */
     public function &data_setUserPreference($pref_id, $value, $uid = null)
     {
-        return $this->call_method('facebook.data.setUserPreference', array(
+        return $this->call_method('facebook.data.setUserPreference', [
             'pref_id' => $pref_id,
             'value'   => $value,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -2262,11 +2262,11 @@ class FacebookRestClient
      */
     public function &data_setUserPreferences($values, $replace = false, $uid = null)
     {
-        return $this->call_method('facebook.data.setUserPreferences', array(
+        return $this->call_method('facebook.data.setUserPreferences', [
             'values'  => json_encode($values),
             'replace' => $replace,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -2286,10 +2286,10 @@ class FacebookRestClient
      */
     public function &data_getUserPreference($pref_id, $uid = null)
     {
-        return $this->call_method('facebook.data.getUserPreference', array(
+        return $this->call_method('facebook.data.getUserPreference', [
             'pref_id' => $pref_id,
             'uid'     => $this->get_uid($uid)
-        ));
+        ]);
     }
 
     /**
@@ -2306,7 +2306,7 @@ class FacebookRestClient
      */
     public function &data_getUserPreferences($uid = null)
     {
-        return $this->call_method('facebook.data.getUserPreferences', array('uid' => $this->get_uid($uid)));
+        return $this->call_method('facebook.data.getUserPreferences', ['uid' => $this->get_uid($uid)]);
     }
 
     /**
@@ -2326,7 +2326,7 @@ class FacebookRestClient
      */
     public function &data_createObjectType($name)
     {
-        return $this->call_method('facebook.data.createObjectType', array('name' => $name));
+        return $this->call_method('facebook.data.createObjectType', ['name' => $name]);
     }
 
     /**
@@ -2346,7 +2346,7 @@ class FacebookRestClient
      */
     public function &data_dropObjectType($obj_type)
     {
-        return $this->call_method('facebook.data.dropObjectType', array('obj_type' => $obj_type));
+        return $this->call_method('facebook.data.dropObjectType', ['obj_type' => $obj_type]);
     }
 
     /**
@@ -2369,10 +2369,10 @@ class FacebookRestClient
      */
     public function &data_renameObjectType($obj_type, $new_name)
     {
-        return $this->call_method('facebook.data.renameObjectType', array(
+        return $this->call_method('facebook.data.renameObjectType', [
             'obj_type' => $obj_type,
             'new_name' => $new_name
-        ));
+        ]);
     }
 
     /**
@@ -2393,11 +2393,11 @@ class FacebookRestClient
      */
     public function &data_defineObjectProperty($obj_type, $prop_name, $prop_type)
     {
-        return $this->call_method('facebook.data.defineObjectProperty', array(
+        return $this->call_method('facebook.data.defineObjectProperty', [
             'obj_type'  => $obj_type,
             'prop_name' => $prop_name,
             'prop_type' => $prop_type
-        ));
+        ]);
     }
 
     /**
@@ -2419,10 +2419,10 @@ class FacebookRestClient
      */
     public function &data_undefineObjectProperty($obj_type, $prop_name)
     {
-        return $this->call_method('facebook.data.undefineObjectProperty', array(
+        return $this->call_method('facebook.data.undefineObjectProperty', [
             'obj_type'  => $obj_type,
             'prop_name' => $prop_name
-        ));
+        ]);
     }
 
     /**
@@ -2447,11 +2447,11 @@ class FacebookRestClient
      */
     public function &data_renameObjectProperty($obj_type, $prop_name, $new_name)
     {
-        return $this->call_method('facebook.data.renameObjectProperty', array(
+        return $this->call_method('facebook.data.renameObjectProperty', [
             'obj_type'  => $obj_type,
             'prop_name' => $prop_name,
             'new_name'  => $new_name
-        ));
+        ]);
     }
 
     /**
@@ -2485,7 +2485,7 @@ class FacebookRestClient
      */
     public function &data_getObjectType($obj_type)
     {
-        return $this->call_method('facebook.data.getObjectType', array('obj_type' => $obj_type));
+        return $this->call_method('facebook.data.getObjectType', ['obj_type' => $obj_type]);
     }
 
     /**
@@ -2506,10 +2506,10 @@ class FacebookRestClient
      */
     public function &data_createObject($obj_type, $properties = null)
     {
-        return $this->call_method('facebook.data.createObject', array(
+        return $this->call_method('facebook.data.createObject', [
             'obj_type'   => $obj_type,
             'properties' => json_encode($properties)
-        ));
+        ]);
     }
 
     /**
@@ -2534,11 +2534,11 @@ class FacebookRestClient
      */
     public function &data_updateObject($obj_id, $properties, $replace = false)
     {
-        return $this->call_method('facebook.data.updateObject', array(
+        return $this->call_method('facebook.data.updateObject', [
             'obj_id'     => $obj_id,
             'properties' => json_encode($properties),
             'replace'    => $replace
-        ));
+        ]);
     }
 
     /**
@@ -2558,7 +2558,7 @@ class FacebookRestClient
      */
     public function &data_deleteObject($obj_id)
     {
-        return $this->call_method('facebook.data.deleteObject', array('obj_id' => $obj_id));
+        return $this->call_method('facebook.data.deleteObject', ['obj_id' => $obj_id]);
     }
 
     /**
@@ -2577,7 +2577,7 @@ class FacebookRestClient
      */
     public function &data_deleteObjects($obj_ids)
     {
-        return $this->call_method('facebook.data.deleteObjects', array('obj_ids' => json_encode($obj_ids)));
+        return $this->call_method('facebook.data.deleteObjects', ['obj_ids' => json_encode($obj_ids)]);
     }
 
     /**
@@ -2599,10 +2599,10 @@ class FacebookRestClient
      */
     public function &data_getObjectProperty($obj_id, $prop_name)
     {
-        return $this->call_method('facebook.data.getObjectProperty', array(
+        return $this->call_method('facebook.data.getObjectProperty', [
             'obj_id'    => $obj_id,
             'prop_name' => $prop_name
-        ));
+        ]);
     }
 
     /**
@@ -2622,10 +2622,10 @@ class FacebookRestClient
      */
     public function &data_getObject($obj_id, $prop_names = null)
     {
-        return $this->call_method('facebook.data.getObject', array(
+        return $this->call_method('facebook.data.getObject', [
             'obj_id'     => $obj_id,
             'prop_names' => json_encode($prop_names)
-        ));
+        ]);
     }
 
     /**
@@ -2645,10 +2645,10 @@ class FacebookRestClient
      */
     public function &data_getObjects($obj_ids, $prop_names = null)
     {
-        return $this->call_method('facebook.data.getObjects', array(
+        return $this->call_method('facebook.data.getObjects', [
             'obj_ids'    => json_encode($obj_ids),
             'prop_names' => json_encode($prop_names)
-        ));
+        ]);
     }
 
     /**
@@ -2672,11 +2672,11 @@ class FacebookRestClient
      */
     public function &data_setObjectProperty($obj_id, $prop_name, $prop_value)
     {
-        return $this->call_method('facebook.data.setObjectProperty', array(
+        return $this->call_method('facebook.data.setObjectProperty', [
             'obj_id'     => $obj_id,
             'prop_name'  => $prop_name,
             'prop_value' => $prop_value
-        ));
+        ]);
     }
 
     /**
@@ -2696,11 +2696,11 @@ class FacebookRestClient
      */
     public function &data_getHashValue($obj_type, $key, $prop_name = null)
     {
-        return $this->call_method('facebook.data.getHashValue', array(
+        return $this->call_method('facebook.data.getHashValue', [
             'obj_type'  => $obj_type,
             'key'       => $key,
             'prop_name' => $prop_name
-        ));
+        ]);
     }
 
     /**
@@ -2721,12 +2721,12 @@ class FacebookRestClient
      */
     public function &data_setHashValue($obj_type, $key, $value, $prop_name = null)
     {
-        return $this->call_method('facebook.data.setHashValue', array(
+        return $this->call_method('facebook.data.setHashValue', [
             'obj_type'  => $obj_type,
             'key'       => $key,
             'value'     => $value,
             'prop_name' => $prop_name
-        ));
+        ]);
     }
 
     /**
@@ -2751,12 +2751,12 @@ class FacebookRestClient
      */
     public function &data_incHashValue($obj_type, $key, $prop_name, $increment = 1)
     {
-        return $this->call_method('facebook.data.incHashValue', array(
+        return $this->call_method('facebook.data.incHashValue', [
             'obj_type'  => $obj_type,
             'key'       => $key,
             'prop_name' => $prop_name,
             'increment' => $increment
-        ));
+        ]);
     }
 
     /**
@@ -2777,10 +2777,10 @@ class FacebookRestClient
      */
     public function &data_removeHashKey($obj_type, $key)
     {
-        return $this->call_method('facebook.data.removeHashKey', array(
+        return $this->call_method('facebook.data.removeHashKey', [
             'obj_type' => $obj_type,
             'key'      => $key
-        ));
+        ]);
     }
 
     /**
@@ -2801,10 +2801,10 @@ class FacebookRestClient
      */
     public function &data_removeHashKeys($obj_type, $keys)
     {
-        return $this->call_method('facebook.data.removeHashKeys', array(
+        return $this->call_method('facebook.data.removeHashKeys', [
             'obj_type' => $obj_type,
             'keys'     => json_encode($keys)
-        ));
+        ]);
     }
 
     /**
@@ -2832,13 +2832,13 @@ class FacebookRestClient
      */
     public function &data_defineAssociation($name, $assoc_type, $assoc_info1, $assoc_info2, $inverse = null)
     {
-        return $this->call_method('facebook.data.defineAssociation', array(
+        return $this->call_method('facebook.data.defineAssociation', [
             'name'        => $name,
             'assoc_type'  => $assoc_type,
             'assoc_info1' => json_encode($assoc_info1),
             'assoc_info2' => json_encode($assoc_info2),
             'inverse'     => $inverse
-        ));
+        ]);
     }
 
     /**
@@ -2857,7 +2857,7 @@ class FacebookRestClient
      */
     public function &data_undefineAssociation($name)
     {
-        return $this->call_method('facebook.data.undefineAssociation', array('name' => $name));
+        return $this->call_method('facebook.data.undefineAssociation', ['name' => $name]);
     }
 
     /**
@@ -2880,12 +2880,12 @@ class FacebookRestClient
      */
     public function &data_renameAssociation($name, $new_name, $new_alias1 = null, $new_alias2 = null)
     {
-        return $this->call_method('facebook.data.renameAssociation', array(
+        return $this->call_method('facebook.data.renameAssociation', [
             'name'       => $name,
             'new_name'   => $new_name,
             'new_alias1' => $new_alias1,
             'new_alias2' => $new_alias2
-        ));
+        ]);
     }
 
     /**
@@ -2903,7 +2903,7 @@ class FacebookRestClient
      */
     public function &data_getAssociationDefinition($name)
     {
-        return $this->call_method('facebook.data.getAssociationDefinition', array('name' => $name));
+        return $this->call_method('facebook.data.getAssociationDefinition', ['name' => $name]);
     }
 
     /**
@@ -2918,7 +2918,7 @@ class FacebookRestClient
      */
     public function &data_getAssociationDefinitions()
     {
-        return $this->call_method('facebook.data.getAssociationDefinitions', array());
+        return $this->call_method('facebook.data.getAssociationDefinitions', []);
     }
 
     /**
@@ -2945,13 +2945,13 @@ class FacebookRestClient
      */
     public function &data_setAssociation($name, $obj_id1, $obj_id2, $data = null, $assoc_time = null)
     {
-        return $this->call_method('facebook.data.setAssociation', array(
+        return $this->call_method('facebook.data.setAssociation', [
             'name'       => $name,
             'obj_id1'    => $obj_id1,
             'obj_id2'    => $obj_id2,
             'data'       => $data,
             'assoc_time' => $assoc_time
-        ));
+        ]);
     }
 
     /**
@@ -2972,10 +2972,10 @@ class FacebookRestClient
      */
     public function &data_setAssociations($assocs, $name = null)
     {
-        return $this->call_method('facebook.data.setAssociations', array(
+        return $this->call_method('facebook.data.setAssociations', [
             'assocs' => json_encode($assocs),
             'name'   => $name
-        ));
+        ]);
     }
 
     /**
@@ -2997,11 +2997,11 @@ class FacebookRestClient
      */
     public function &data_removeAssociation($name, $obj_id1, $obj_id2)
     {
-        return $this->call_method('facebook.data.removeAssociation', array(
+        return $this->call_method('facebook.data.removeAssociation', [
             'name'    => $name,
             'obj_id1' => $obj_id1,
             'obj_id2' => $obj_id2
-        ));
+        ]);
     }
 
     /**
@@ -3022,10 +3022,10 @@ class FacebookRestClient
      */
     public function &data_removeAssociations($assocs, $name = null)
     {
-        return $this->call_method('facebook.data.removeAssociations', array(
+        return $this->call_method('facebook.data.removeAssociations', [
             'assocs' => json_encode($assocs),
             'name'   => $name
-        ));
+        ]);
     }
 
     /**
@@ -3046,10 +3046,10 @@ class FacebookRestClient
      */
     public function &data_removeAssociatedObjects($name, $obj_id)
     {
-        return $this->call_method('facebook.data.removeAssociatedObjects', array(
+        return $this->call_method('facebook.data.removeAssociatedObjects', [
             'name'   => $name,
             'obj_id' => $obj_id
-        ));
+        ]);
     }
 
     /**
@@ -3072,11 +3072,11 @@ class FacebookRestClient
      */
     public function &data_getAssociatedObjects($name, $obj_id, $no_data = true)
     {
-        return $this->call_method('facebook.data.getAssociatedObjects', array(
+        return $this->call_method('facebook.data.getAssociatedObjects', [
             'name'    => $name,
             'obj_id'  => $obj_id,
             'no_data' => $no_data
-        ));
+        ]);
     }
 
     /**
@@ -3097,10 +3097,10 @@ class FacebookRestClient
      */
     public function &data_getAssociatedObjectCount($name, $obj_id)
     {
-        return $this->call_method('facebook.data.getAssociatedObjectCount', array(
+        return $this->call_method('facebook.data.getAssociatedObjectCount', [
             'name'   => $name,
             'obj_id' => $obj_id
-        ));
+        ]);
     }
 
     /**
@@ -3121,10 +3121,10 @@ class FacebookRestClient
      */
     public function &data_getAssociatedObjectCounts($name, $obj_ids)
     {
-        return $this->call_method('facebook.data.getAssociatedObjectCounts', array(
+        return $this->call_method('facebook.data.getAssociatedObjectCounts', [
             'name'    => $name,
             'obj_ids' => json_encode($obj_ids)
-        ));
+        ]);
     }
 
     /**
@@ -3146,11 +3146,11 @@ class FacebookRestClient
      */
     public function &data_getAssociations($obj_id1, $obj_id2, $no_data = true)
     {
-        return $this->call_method('facebook.data.getAssociations', array(
+        return $this->call_method('facebook.data.getAssociations', [
             'obj_id1' => $obj_id1,
             'obj_id2' => $obj_id2,
             'no_data' => $no_data
-        ));
+        ]);
     }
 
     /**
@@ -3163,7 +3163,7 @@ class FacebookRestClient
      */
     public function admin_getAppProperties($properties)
     {
-        return json_decode($this->call_method('facebook.admin.getAppProperties', array('properties' => json_encode($properties))), true);
+        return json_decode($this->call_method('facebook.admin.getAppProperties', ['properties' => json_encode($properties)]), true);
     }
 
     /**
@@ -3176,7 +3176,7 @@ class FacebookRestClient
      */
     public function admin_setAppProperties($properties)
     {
-        return $this->call_method('facebook.admin.setAppProperties', array('properties' => json_encode($properties)));
+        return $this->call_method('facebook.admin.setAppProperties', ['properties' => json_encode($properties)]);
     }
 
     /**
@@ -3190,11 +3190,11 @@ class FacebookRestClient
      */
     public function admin_setLiveStreamViaLink($xid, $via_href, $via_text)
     {
-        return $this->call_method('facebook.admin.setLiveStreamViaLink', array(
+        return $this->call_method('facebook.admin.setLiveStreamViaLink', [
             'xid'      => $xid,
             'via_href' => $via_href,
             'via_text' => $via_text
-        ));
+        ]);
     }
 
     /**
@@ -3207,7 +3207,7 @@ class FacebookRestClient
      */
     public function admin_getLiveStreamViaLink($xid)
     {
-        return $this->call_method('facebook.admin.getLiveStreamViaLink', array('xid' => $xid));
+        return $this->call_method('facebook.admin.getLiveStreamViaLink', ['xid' => $xid]);
     }
 
     /**
@@ -3223,10 +3223,10 @@ class FacebookRestClient
      */
     public function &admin_getAllocation($integration_point_name, $uid = null)
     {
-        return $this->call_method('facebook.admin.getAllocation', array(
+        return $this->call_method('facebook.admin.getAllocation', [
             'integration_point_name' => $integration_point_name,
             'uid'                    => $uid
-        ));
+        ]);
     }
 
     /**
@@ -3247,12 +3247,12 @@ class FacebookRestClient
      */
     public function &admin_getMetrics($start_time, $end_time, $period, $metrics)
     {
-        return $this->call_method('facebook.admin.getMetrics', array(
+        return $this->call_method('facebook.admin.getMetrics', [
             'start_time' => $start_time,
             'end_time'   => $end_time,
             'period'     => $period,
             'metrics'    => json_encode($metrics)
-        ));
+        ]);
     }
 
     /**
@@ -3274,7 +3274,7 @@ class FacebookRestClient
             $restriction_str = json_encode($restriction_info);
         }
 
-        return $this->call_method('facebook.admin.setRestrictionInfo', array('restriction_str' => $restriction_str));
+        return $this->call_method('facebook.admin.setRestrictionInfo', ['restriction_str' => $restriction_str]);
     }
 
     /**
@@ -3301,7 +3301,7 @@ class FacebookRestClient
      */
     public function admin_banUsers($uids)
     {
-        return $this->call_method('facebook.admin.banUsers', array('uids' => json_encode($uids)));
+        return $this->call_method('facebook.admin.banUsers', ['uids' => json_encode($uids)]);
     }
 
     /**
@@ -3313,7 +3313,7 @@ class FacebookRestClient
      */
     public function admin_unbanUsers($uids)
     {
-        return $this->call_method('facebook.admin.unbanUsers', array('uids' => json_encode($uids)));
+        return $this->call_method('facebook.admin.unbanUsers', ['uids' => json_encode($uids)]);
     }
 
     /**
@@ -3327,7 +3327,7 @@ class FacebookRestClient
      */
     public function admin_getBannedUsers($uids = null)
     {
-        return $this->call_method('facebook.admin.getBannedUsers', array('uids' => $uids ? json_encode($uids) : null));
+        return $this->call_method('facebook.admin.getBannedUsers', ['uids' => $uids ? json_encode($uids) : null]);
     }
 
     /**
@@ -3343,10 +3343,10 @@ class FacebookRestClient
      */
     public function dashboard_addGlobalNews($news, $image = null)
     {
-        return $this->call_method('facebook.dashboard.addGlobalNews', array(
+        return $this->call_method('facebook.dashboard.addGlobalNews', [
             'news'  => $news,
             'image' => $image
-        ));
+        ]);
     }
 
     /**
@@ -3363,11 +3363,11 @@ class FacebookRestClient
      */
     public function dashboard_addNews($news, $image = null, $uid = null)
     {
-        return $this->call_method('facebook.dashboard.addNews', array(
+        return $this->call_method('facebook.dashboard.addNews', [
             'uid'   => $uid,
             'news'  => $news,
             'image' => $image
-        ));
+        ]);
     }
 
     /**
@@ -3382,7 +3382,7 @@ class FacebookRestClient
      */
     public function dashboard_clearGlobalNews($news_ids = null)
     {
-        return $this->call_method('facebook.dashboard.clearGlobalNews', array('news_ids' => $news_ids));
+        return $this->call_method('facebook.dashboard.clearGlobalNews', ['news_ids' => $news_ids]);
     }
 
     /**
@@ -3398,10 +3398,10 @@ class FacebookRestClient
      */
     public function dashboard_clearNews($news_ids, $uid = null)
     {
-        return $this->call_method('facebook.dashboard.clearNews', array(
+        return $this->call_method('facebook.dashboard.clearNews', [
             'uid'      => $uid,
             'news_ids' => $news_ids
-        ));
+        ]);
     }
 
     /**
@@ -3414,7 +3414,7 @@ class FacebookRestClient
      */
     public function dashboard_decrementCount($uid = null)
     {
-        return $this->call_method('facebook.dashboard.decrementCount', array('uid' => $uid));
+        return $this->call_method('facebook.dashboard.decrementCount', ['uid' => $uid]);
     }
 
     /**
@@ -3431,10 +3431,10 @@ class FacebookRestClient
      */
     public function dashboard_getActivity($activity_ids, $uid = null)
     {
-        return $this->call_method('facebook.dashboard.getActivity', array(
+        return $this->call_method('facebook.dashboard.getActivity', [
             'uid'          => $uid,
             'activity_ids' => $activity_ids
-        ));
+        ]);
     }
 
     /**
@@ -3447,7 +3447,7 @@ class FacebookRestClient
      */
     public function dashboard_getCount($uid = null)
     {
-        return $this->call_method('facebook.dashboard.getCount', array('uid' => $uid));
+        return $this->call_method('facebook.dashboard.getCount', ['uid' => $uid]);
     }
 
     /**
@@ -3463,7 +3463,7 @@ class FacebookRestClient
      */
     public function dashboard_getGlobalNews($news_ids = null)
     {
-        return $this->call_method('facebook.dashboard.getGlobalNews', array('news_ids' => $news_ids));
+        return $this->call_method('facebook.dashboard.getGlobalNews', ['news_ids' => $news_ids]);
     }
 
     /**
@@ -3480,10 +3480,10 @@ class FacebookRestClient
      */
     public function dashboard_getNews($news_ids = null, $uid = null)
     {
-        return $this->call_method('facebook.dashboard.getNews', array(
+        return $this->call_method('facebook.dashboard.getNews', [
             'uid'      => $uid,
             'news_ids' => $news_ids
-        ));
+        ]);
     }
 
     /**
@@ -3496,7 +3496,7 @@ class FacebookRestClient
      */
     public function dashboard_incrementCount($uid = null)
     {
-        return $this->call_method('facebook.dashboard.incrementCount', array('uid' => $uid));
+        return $this->call_method('facebook.dashboard.incrementCount', ['uid' => $uid]);
     }
 
     /**
@@ -3514,11 +3514,11 @@ class FacebookRestClient
      */
     public function dashboard_multiAddNews($uids, $news, $image = null)
     {
-        return $this->call_method('facebook.dashboard.multiAddNews', array(
+        return $this->call_method('facebook.dashboard.multiAddNews', [
             'uids'  => $uids,
             'news'  => $news,
             'image' => $image
-        ));
+        ]);
     }
 
     /**
@@ -3534,7 +3534,7 @@ class FacebookRestClient
      */
     public function dashboard_multiClearNews($ids)
     {
-        return $this->call_method('facebook.dashboard.multiClearNews', array('ids' => $ids));
+        return $this->call_method('facebook.dashboard.multiClearNews', ['ids' => $ids]);
     }
 
     /**
@@ -3550,7 +3550,7 @@ class FacebookRestClient
      */
     public function dashboard_multiDecrementCount($uids)
     {
-        return $this->call_method('facebook.dashboard.multiDecrementCount', array('uids' => $uids));
+        return $this->call_method('facebook.dashboard.multiDecrementCount', ['uids' => $uids]);
     }
 
     /**
@@ -3566,7 +3566,7 @@ class FacebookRestClient
      */
     public function dashboard_multiGetCount($uids)
     {
-        return $this->call_method('facebook.dashboard.multiGetCount', array('uids' => $uids));
+        return $this->call_method('facebook.dashboard.multiGetCount', ['uids' => $uids]);
     }
 
     /**
@@ -3586,7 +3586,7 @@ class FacebookRestClient
      */
     public function dashboard_multiGetNews($ids)
     {
-        return $this->call_method('facebook.dashboard.multiGetNews', array('ids' => $ids));
+        return $this->call_method('facebook.dashboard.multiGetNews', ['ids' => $ids]);
     }
 
     /**
@@ -3601,7 +3601,7 @@ class FacebookRestClient
      */
     public function dashboard_multiIncrementCount($uids)
     {
-        return $this->call_method('facebook.dashboard.multiIncrementCount', array('uids' => $uids));
+        return $this->call_method('facebook.dashboard.multiIncrementCount', ['uids' => $uids]);
     }
 
     /**
@@ -3618,7 +3618,7 @@ class FacebookRestClient
      */
     public function dashboard_multiSetCount($ids)
     {
-        return $this->call_method('facebook.dashboard.multiSetCount', array('ids' => $ids));
+        return $this->call_method('facebook.dashboard.multiSetCount', ['ids' => $ids]);
     }
 
     /**
@@ -3632,7 +3632,7 @@ class FacebookRestClient
      */
     public function dashboard_publishActivity($activity)
     {
-        return $this->call_method('facebook.dashboard.publishActivity', array('activity' => $activity));
+        return $this->call_method('facebook.dashboard.publishActivity', ['activity' => $activity]);
     }
 
     /**
@@ -3647,10 +3647,10 @@ class FacebookRestClient
      */
     public function dashboard_removeActivity($activity_ids, $uid = null)
     {
-        return $this->call_method('facebook.dashboard.removeActivity', array(
+        return $this->call_method('facebook.dashboard.removeActivity', [
             'uid'          => $uid,
             'activity_ids' => $activity_ids
-        ));
+        ]);
     }
 
     /**
@@ -3665,10 +3665,10 @@ class FacebookRestClient
      */
     public function dashboard_setCount($count, $uid = null)
     {
-        return $this->call_method('facebook.dashboard.setCount', array(
+        return $this->call_method('facebook.dashboard.setCount', [
             'uid'   => $uid,
             'count' => $count
-        ));
+        ]);
     }
 
     /* UTILITY FUNCTIONS */
@@ -3685,7 +3685,7 @@ class FacebookRestClient
      *               See: http://wiki.developers.facebook.com/index.php/Using_batching_API
      */
 
-    public function &call_method($method, $params = array(), $force_read_only = false)
+    public function &call_method($method, $params = [], $force_read_only = false)
     {
         if ($this->format) {
             $params['format'] = $this->format;
@@ -3704,7 +3704,7 @@ class FacebookRestClient
             }
         } else {
             $result              = null;
-            $batch_item          = array('m' => $method, 'p' => $params, 'r' => & $result);
+            $batch_item          = ['m' => $method, 'p' => $params, 'r' => & $result];
             $this->batch_queue[] = $batch_item;
             if (!static::methodIsReadOnly($method)) {
                 $this->pending_batch_is_read_only = false;
@@ -3866,7 +3866,7 @@ class FacebookRestClient
             $post['sig'] = Facebook::generate_sig(array_merge($get, $post), $this->secret);
         }
 
-        return array($get, $post);
+        return [$get, $post];
     }
 
     /**
@@ -3891,7 +3891,7 @@ class FacebookRestClient
     private function add_standard_params($method, $params)
     {
         $post = $params;
-        $get  = array();
+        $get  = [];
         if ($this->call_as_apikey) {
             $get['call_as_apikey'] = $this->call_as_apikey;
         }
@@ -3917,7 +3917,7 @@ class FacebookRestClient
             $post['return_ssl_resources'] = (bool)$this->use_ssl_resources;
         }
 
-        return array($get, $post);
+        return [$get, $post];
     }
 
     /**
@@ -3926,7 +3926,7 @@ class FacebookRestClient
      */
     private function create_url_string($params)
     {
-        $post_params = array();
+        $post_params = [];
         foreach ($params as $key => &$val) {
             $post_params[] = $key . '=' . urlencode($val);
         }
@@ -3951,7 +3951,7 @@ class FacebookRestClient
         // within the message, we prepend two extra hyphens.
         $delimiter       = '--' . $boundary;
         $close_delimiter = $delimiter . '--';
-        $content_lines   = array();
+        $content_lines   = [];
         foreach ($params as $key => &$val) {
             $content_lines[] = $delimiter;
             $content_lines[] = 'Content-Disposition: form-data; name="' . $key . '"';
@@ -4061,14 +4061,14 @@ class FacebookRestClient
     {
         $user_agent     = 'Facebook API PHP5 Client 1.1 (non-curl) ' . PHP_VERSION;
         $content_length = strlen($content);
-        $context        = array(
-            'http' => array(
+        $context        = [
+            'http' => [
                 'method'     => 'POST',
                 'user_agent' => $user_agent,
                 'header'     => 'Content-Type: ' . $content_type . "\r\n" . 'Content-Length: ' . $content_length,
                 'content'    => $content
-            )
-        );
+            ]
+        ];
         $context_id     = stream_context_create($context);
         $sock           = fopen($server_addr, 'r', false, $context_id);
 
@@ -4089,7 +4089,7 @@ class FacebookRestClient
      */
     public static function convert_simplexml_to_array($sxml)
     {
-        $arr = array();
+        $arr = [];
         if ($sxml) {
             foreach ($sxml as $k => $v) {
                 if ($sxml['list']) {
@@ -4125,7 +4125,7 @@ class FacebookRestClient
      */
     public static function methodIsReadOnly($method)
     {
-        static $READ_ONLY_CALLS = array(
+        static $READ_ONLY_CALLS = [
             'admin_getallocation'                  => 1,
             'admin_getappproperties'               => 1,
             'admin_getbannedusers'                 => 1,
@@ -4185,7 +4185,7 @@ class FacebookRestClient
             'users_isappuser'                      => 1,
             'users_isverified'                     => 1,
             'video_getuploadlimits'                => 1
-        );
+        ];
 
         if (substr($method, 0, 9) === 'facebook.') {
             $method = substr($method, 9);
@@ -4483,7 +4483,7 @@ class FacebookAPIErrorCodes
      * code, please look at the message element of the API response or visit
      * the developer wiki at http://wiki.developers.facebook.com/.
      */
-    public static $api_error_descriptions = array(
+    public static $api_error_descriptions = [
         self::API_EC_SUCCESS                                => 'Success',
         self::API_EC_UNKNOWN                                => 'An unknown error occurred',
         self::API_EC_SERVICE                                => 'Service temporarily unavailable',
@@ -4526,5 +4526,5 @@ class FacebookAPIErrorCodes
         self::API_EC_BATCH_ALREADY_STARTED                  => 'begin_batch already called, please make sure to call end_batch first',
         self::API_EC_BATCH_NOT_STARTED                      => 'end_batch called before begin_batch',
         self::API_EC_BATCH_METHOD_NOT_ALLOWED_IN_BATCH_MODE => 'This method is not allowed in batch mode'
-    );
+    ];
 }

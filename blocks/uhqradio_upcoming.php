@@ -13,7 +13,7 @@ function b_uhqradio_upcoming_show($options)
     global $xoopsDB;
     global $samDB;
 
-    $block = array();
+    $block = [];
 
     // Return a blank block if SAM Integration isn't enabled.
     if (uhqradio_samint() === false) {

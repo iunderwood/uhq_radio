@@ -54,7 +54,7 @@ function uhqradio_sam_closedb($samdb)
  */
 function uhqradio_sam_upcoming($samdb, $limit, $ids)
 {
-    $data = array();
+    $data = [];
 
     $query = 'SELECT songlist.*, queuelist.requestID as requestid ';
     $query .= 'FROM songlist, queuelist ';
@@ -103,7 +103,7 @@ function uhqradio_sam_upcoming($samdb, $limit, $ids)
  */
 function uhqradio_sam_nowplaying($samdb)
 {
-    $data = array();
+    $data = [];
 
     // The last song in the history is "now playing";
 
@@ -142,7 +142,7 @@ function uhqradio_sam_nowplaying($samdb)
  */
 function uhqradio_sam_where($input, $and = 0)
 {
-    $words  = array();
+    $words  = [];
     $output = '';
 
     // Get all the search terms out of the search string
@@ -221,7 +221,7 @@ function uhqradio_sam_where_letter($letter, $type = 'T')
  */
 function uhqradio_sam_countpl($samdb, $where = null)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -265,7 +265,7 @@ function uhqradio_sam_countpl($samdb, $where = null)
  */
 function uhqradio_sam_countalbum($samdb, $where = null)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -309,7 +309,7 @@ function uhqradio_sam_countalbum($samdb, $where = null)
  */
 function uhqradio_sam_countartist($samdb, $where = null)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -353,7 +353,7 @@ function uhqradio_sam_countartist($samdb, $where = null)
  */
 function uhqradio_sam_displayalbums($samdb, $where = null)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -413,7 +413,7 @@ function uhqradio_sam_displayalbums($samdb, $where = null)
  */
 function uhqradio_sam_displayartists($samdb, $where = null)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -472,7 +472,7 @@ function uhqradio_sam_displayartists($samdb, $where = null)
  */
 function uhqradio_sam_yearlist($samdb)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -522,7 +522,7 @@ function uhqradio_sam_yearlist($samdb)
  */
 function uhqradio_sam_lastxalbums($samdb, $limit = 10)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -576,7 +576,7 @@ function uhqradio_sam_lastxalbums($samdb, $limit = 10)
  */
 function uhqradio_sam_getalbum($samdb, $album)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -659,7 +659,7 @@ function uhqradio_sam_getalbum($samdb, $album)
  */
 function uhqradio_sam_getartist($samdb, $artist)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -747,7 +747,7 @@ function uhqradio_sam_getartist($samdb, $artist)
  */
 function uhqradio_sam_displaypl($samdb, $where = null, $start = 0, $limit = 15)
 {
-    $data = array();
+    $data = [];
 
     $category = uhqradio_opt_plcat();
 
@@ -837,7 +837,7 @@ function uhqradio_sam_songinfo($samdb, $songid)
  */
 function uhqradio_sam_djtest($djid, $host)
 {
-    $data                      = array();
+    $data                      = [];
     $data['test'][1]['descr']  = _MD_UHQRADIO_POP_DJT_TEST1;
     $data['test'][1]['status'] = 0;
     $data['test'][1]['error']  = '';

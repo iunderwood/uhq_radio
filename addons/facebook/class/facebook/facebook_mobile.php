@@ -103,10 +103,10 @@ class FacebookMobile extends Facebook
      */
     public function get_add_url($next = null)
     {
-        return $this->get_m_url('add.php', array(
+        return $this->get_m_url('add.php', [
             'api_key' => $this->api_key,
             'next'    => $next
-        ));
+        ]);
     }
 
     /**
@@ -117,13 +117,13 @@ class FacebookMobile extends Facebook
      */
     public function get_tos_url($next = null, $cancel = null, $canvas = null)
     {
-        return $this->get_m_url('tos.php', array(
+        return $this->get_m_url('tos.php', [
             'api_key' => $this->api_key,
             'v'       => '1.0',
             'next'    => $next,
             'canvas'  => $canvas,
             'cancel'  => $cancel
-        ));
+        ]);
     }
 
     /**
@@ -132,10 +132,10 @@ class FacebookMobile extends Facebook
      */
     public function get_logout_url($next = null)
     {
-        $params = array(
+        $params = [
             'api_key'     => $this->api_key,
             'session_key' => $this->api_client->session_key,
-        );
+        ];
 
         if ($next) {
             $params['connect_next'] = 1;
@@ -152,12 +152,12 @@ class FacebookMobile extends Facebook
      */
     public function get_register_url($next = null, $cancel_url = null)
     {
-        return $this->get_m_url('r.php', array(
+        return $this->get_m_url('r.php', [
             'fbconnect'  => 1,
             'api_key'    => $this->api_key,
             'next'       => $next ?: parent::current_url(),
             'cancel_url' => $cancel_url ?: parent::current_url()
-        ));
+        ]);
     }
 
     /**
@@ -200,13 +200,13 @@ class FacebookMobile extends Facebook
      */
     public function get_prompt_permissions_url($ext_perm, $next = null, $cancel_url = null)
     {
-        return $this->get_www_url('connect/prompt_permissions.php', array(
+        return $this->get_www_url('connect/prompt_permissions.php', [
             'api_key'  => $this->api_key,
             'ext_perm' => $ext_perm,
             'next'     => $next ?: parent::current_url(),
             'cancel'   => $cancel_url ?: parent::current_url(),
             'display'  => 'wap'
-        ));
+        ]);
     }
 
     /**
@@ -222,12 +222,12 @@ class FacebookMobile extends Facebook
         $next       = $next ?: parent::current_url();
         $cancel_url = $cancel_url ?: parent::current_url();
 
-        return $this->get_m_url('authorize.php', array(
+        return $this->get_m_url('authorize.php', [
             'api_key'    => $this->api_key,
             'ext_perm'   => $ext_perm,
             'next'       => $next,
             'cancel_url' => $cancel_url
-        ));
+        ]);
     }
 
     /**
@@ -252,20 +252,20 @@ class FacebookMobile extends Facebook
         $attachment = null,
         $preview = true
     ) {
-        $params = array(
+        $params = [
             'api_key'     => $this->api_key,
             'session_key' => $this->api_client->session_key,
-        );
+        ];
         if (!empty($attachment)) {
             $params['attachment'] = urlencode(json_encode($attachment));
         } else {
             $attachment              = new stdClass();
-            $app_display_info        = $this->api_client->admin_getAppProperties(array(
+            $app_display_info        = $this->api_client->admin_getAppProperties([
                                                                                      'application_name',
                                                                                      'callback_url',
                                                                                      'description',
                                                                                      'logo_url'
-                                                                                 ));
+                                                                                 ]);
             $app_display_info        = $app_display_info;
             $attachment->name        = $app_display_info['application_name'];
             $attachment->caption     = !empty($caption) ? $caption : 'Just see what\'s new!';
@@ -276,7 +276,7 @@ class FacebookMobile extends Facebook
                 $logo->type        = 'image';
                 $logo->src         = $app_display_info['logo_url'];
                 $logo->href        = $app_display_info['callback_url'];
-                $attachment->media = array($logo);
+                $attachment->media = [$logo];
             }
             $params['attachment'] = urlencode(json_encode($attachment));
         }
@@ -329,7 +329,7 @@ class FacebookMobile extends Facebook
         $cancel = null,
         $preview = true
     ) {
-        $params            = array('api_key' => $this->api_key);
+        $params            = ['api_key' => $this->api_key];
         $params['preview'] = $preview;
         if (isset($template_id) && $template_id) {
             $params['template_id'] = $template_id;

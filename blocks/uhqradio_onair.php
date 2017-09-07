@@ -10,7 +10,7 @@ function b_uhqradio_onair_show($options)
 {
     global $xoopsDB;
 
-    $block = array();
+    $block = [];
 
     // Load channel info.
 

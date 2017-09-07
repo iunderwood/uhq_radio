@@ -42,7 +42,7 @@ include XOOPS_ROOT_PATH . '/header.php';
 
 // THe meat of showing the playlist and showing the raw information will go here.
 
-$data = array();
+$data = [];
 
 /**
  * @param int  $start
@@ -56,7 +56,7 @@ function uhqradio_playlist_dopage($start = 0, $limit = 20, $search = null)
     global $samdb;
     global $uhqradio_request;
 
-    $block = array();
+    $block = [];
 
     // Return a blank block if SAM Integration isn't enabled.
     if (uhqradio_samint() === false) {

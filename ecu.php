@@ -23,7 +23,7 @@ require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sanity.php';
 // All logging functions should be turned off for this page.
 $xoopsLogger->activated = false;
 
-$data = array();
+$data = [];
 
 $sane_REQUEST = uhqradio_dosanity();
 

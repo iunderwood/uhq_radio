@@ -61,7 +61,7 @@ if ($_REQUEST['op']) {
         break;
     }
 
-    $blockgroups = array();
+    $blockgroups = [];
     while ($row = $xoopsDB->fetchRow($result)) {
         $blockgroups[] = $row[0];
     }

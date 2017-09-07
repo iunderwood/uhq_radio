@@ -191,7 +191,7 @@ switch ($op) {
             if ($result === false) {
                 $xoospTpl->assign('error', $xoopsDB->error());
             } else {
-                $data = array();
+                $data = [];
                 $i    = 1;
                 while ($row = $xoopsDB->fetchArray($result)) {
 
@@ -205,7 +205,7 @@ switch ($op) {
                     if ($result2 === false) {
                         echo "d'oh!";
                     } else {
-                        $mapdata = array();
+                        $mapdata = [];
                         $j       = 1;
                         while ($crow = $xoopsDB->fetchArray($result2)) {
                             $mapdata[$j] = $crow;

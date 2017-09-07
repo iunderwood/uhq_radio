@@ -3,7 +3,7 @@
 use Xmf\Module\Admin;
 use Xmf\Module\Helper;
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 //$path = dirname(dirname(dirname(__DIR__)));
 //require_once $path . '/mainfile.php';
@@ -18,41 +18,41 @@ $pathIcon32    = Admin::menuIconPath('');
 $pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
 
 xoops_loadLanguage('modinfo', $moduleDirName);
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_0,
     'link'  => 'admin/index.php',
     'icon'  => $pathIcon32 . '/menu_index.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_1,
     'link'  => 'admin/airstaff.php',
     'icon'  => $pathModIcon32 . '/menu_airstaff.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_2,
     'link'  => 'admin/mountpoints.php',
     'icon'  => $pathModIcon32 . '/menu_mounts.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_3,
     'link'  => 'admin/channels.php',
     'icon'  => $pathModIcon32 . '/menu_channels.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_4,
     'link'  => 'admin/playlists.php',
     'icon'  => $pathModIcon32 . '/menu_playlists.png'
-);
+];
 
-$adminmenu[] = array(
+$adminmenu[] = [
     'title' => _AM_MODULEADMIN_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
-);
+];
 
 // Adjust icon path depending on the XOOPS version we're using.
 

@@ -18,7 +18,7 @@ function uhqradio_data_status($chid)
 {
     global $xoopsDB;
 
-    $data = array();
+    $data = [];
 
     // Locate Channel Info
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels') . " WHERE chid = '" . $chid . '\'';
@@ -157,7 +157,7 @@ function uhqradio_data_djlist()
 {
     global $xoopsDB;
 
-    $data = array();
+    $data = [];
 
     // Load the DJ List
     $query = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_airstaff');
@@ -242,7 +242,7 @@ function uhqradio_data_lhistory($id, $type, $minutes = 15, $summary = false)
 
         return false;
     }
-    $data = array();
+    $data = [];
     $i    = 0;
 
     if ($summary) {

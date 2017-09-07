@@ -167,7 +167,7 @@ switch ($op) {
             if ($result === false) {
                 $xoospTpl->assign('error', $xoopsDB->error());
             } else {
-                $data = array();
+                $data = [];
                 $i    = 1;
                 while ($row = $xoopsDB->fetchArray($result)) {
                     $data[$i] = $row;

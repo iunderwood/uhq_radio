@@ -22,7 +22,7 @@ if (isset($sane_REQUEST['start'])) {
     $start = null;
 }
 
-$data = array();
+$data = [];
 
 // Do the Header
 

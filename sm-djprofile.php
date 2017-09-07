@@ -74,6 +74,7 @@ switch ($op) {
             $xoopsTpl->assign('error', _MD_UHQRADIO_DJPROFILE_NPS);
             break;
         }
+        // no break
     default:
         if (isset($sane_REQUEST['djid'])) {
             // Try and load data

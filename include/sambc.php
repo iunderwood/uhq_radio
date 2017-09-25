@@ -17,14 +17,14 @@ function uhqradio_sam_opendb($djid, $host)
 {
     $djinfo = uhqradio_dj_info($djid);
 
-    if ($djinfo === false) {
+    if (false === $djinfo) {
         // Return false if we haven't found any DJ info
         return false;
     }
 
     $samdb = mysqli_pconnect($host . ':' . $djinfo['rdb_port'], $djinfo['rdb_user'], $djinfo['rdb_pass']);
 
-    if ($samdb === false) {
+    if (false === $samdb) {
         // Return false if we can't connect.
         return false;
     }
@@ -71,7 +71,7 @@ function uhqradio_sam_upcoming($samdb, $limit, $ids)
     }
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error();
 
         // Return if query fails.
@@ -110,7 +110,7 @@ function uhqradio_sam_nowplaying($samdb)
     $query = 'SELECT * FROM historylist ORDER BY id DESC LIMIT 1';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query: ' . $GLOBALS['xoopsDB']->error();
 
         return false;
@@ -201,7 +201,7 @@ function uhqradio_sam_where_letter($letter, $type = 'T')
             return null;
     }
 
-    if ($letter == '0') {
+    if ('0' == $letter) {
         $output = ' AND ' . $field . " >= '0' AND " . $field . " <= '9ZZZZZZZZZZ' ";
     } else {
         $output = ' AND ' . $field . " >= '" . $letter . '\' AND ' . $field . " <= '" . $letter . "ZZZZZZZZZZ' ";
@@ -245,7 +245,7 @@ function uhqradio_sam_countpl($samdb, $where = null)
     }
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query: ' . $GLOBALS['xoopsDB']->error($samdb) . '<br>' . $query;
 
         return false;
@@ -289,7 +289,7 @@ function uhqradio_sam_countalbum($samdb, $where = null)
     }
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query: ' . $GLOBALS['xoopsDB']->error($samdb) . '<br>' . $query;
 
         return false;
@@ -333,7 +333,7 @@ function uhqradio_sam_countartist($samdb, $where = null)
     }
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query: ' . $GLOBALS['xoopsDB']->error($samdb) . '<br>' . $query;
 
         return false;
@@ -379,7 +379,7 @@ function uhqradio_sam_displayalbums($samdb, $where = null)
     $query .= ' ORDER BY album ASC';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -439,7 +439,7 @@ function uhqradio_sam_displayartists($samdb, $where = null)
     $query .= ' ORDER BY artist ASC';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -492,7 +492,7 @@ function uhqradio_sam_yearlist($samdb)
     $query .= ' GROUP BY albumyear DESC';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -544,7 +544,7 @@ function uhqradio_sam_lastxalbums($samdb, $limit = 10)
     $query .= ' ORDER BY date_added DESC LIMIT ' . $limit;
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -600,7 +600,7 @@ function uhqradio_sam_getalbum($samdb, $album)
     $query .= ' ORDER BY filename ASC ';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -610,7 +610,7 @@ function uhqradio_sam_getalbum($samdb, $album)
     $i = 0;
 
     while ($row = mysqli_fetch_assoc($result)) {
-        if ($i == 0) {
+        if (0 == $i) {
             $data['album']['picture'] = $row['picture'];
             $data['album']['year']    = $row['albumyear'];
             $data['album']['label']   = $row['label'];
@@ -683,7 +683,7 @@ function uhqradio_sam_getartist($samdb, $artist)
     $query .= ' ORDER BY albumyear DESC, album ASC, filename ASC ';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -774,7 +774,7 @@ function uhqradio_sam_displaypl($samdb, $where = null, $start = 0, $limit = 15)
     $query .= ' LIMIT ' . $limit . ' OFFSET ' . $start;
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'bad query' . $GLOBALS['xoopsDB']->error() . '<br>' . $query;
 
         // Return if query fails.
@@ -813,7 +813,7 @@ function uhqradio_sam_songinfo($samdb, $songid)
     $query = "SELECT * FROM songlist WHERE ID = '" . $songid . '\'';
 
     $result = mysqli_query($samdb, $query);
-    if ($result === false) {
+    if (false === $result) {
         echo 'Bad Query: ' . $GLOBALS['xoopsDB']->error() . '<br>' . $query . '<br>';
 
         return false;
@@ -852,7 +852,7 @@ function uhqradio_sam_djtest($djid, $host)
 
     // If we don't have a DJ ID, there's no point in testing further.
 
-    if ($djinfo === false) {
+    if (false === $djinfo) {
         $data['error'] = 'DJ ID Not Found';
 
         return $data;
@@ -862,14 +862,14 @@ function uhqradio_sam_djtest($djid, $host)
 
     $samdb = mysqli_pconnect($host . ':' . $djinfo['rdb_port'], $djinfo['rdb_user'], $djinfo['rdb_pass']);
 
-    if ($samdb === false) {
+    if (false === $samdb) {
         // Set error message if we can't get a resource.
         $data['test'][1]['status'] = -1;
         $data['test'][1]['error']  = $GLOBALS['xoopsDB']->errno() . ': ' . $GLOBALS['xoopsDB']->error();
     } else {
         // Only test selection if we can open up a DB resource
         $data['test'][1]['status'] = 1;
-        if (mysqli_select_db($djinfo['rdb_name'], $samdb) === false) {
+        if (false === mysqli_select_db($djinfo['rdb_name'], $samdb)) {
             // Set error message if we can't select the database
             $data['test'][2]['status'] = -1;
             $data['test'][2]['error']  = $GLOBALS['xoopsDB']->errno($samdb) . ': ' . $GLOBALS['xoopsDB']->error($samdb);
@@ -880,7 +880,7 @@ function uhqradio_sam_djtest($djid, $host)
 
     // Test #3 - Verify SAM access
 
-    if (uhqradio_externalurl('http://' . $host . ':' . $djinfo['sam_port'] . '/event/test') === false) {
+    if (false === uhqradio_externalurl('http://' . $host . ':' . $djinfo['sam_port'] . '/event/test')) {
         $data['test'][3]['status'] = -1;
         $data['test'][3]['error']  = _MD_UHQRADIO_POP_DJT_SAMFAIL . $djinfo['sam_port'];
     } else {

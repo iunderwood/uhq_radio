@@ -19,7 +19,7 @@ function uhqradio_airstaffsum($djid = '')
     }
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         echo _AM_UHQRADIO_SQLERR . $query;
 
         return false;
@@ -27,7 +27,7 @@ function uhqradio_airstaffsum($djid = '')
         list($count) = $xoopsDB->fetchRow($result);
     }
 
-    if ($count == 0) {
+    if (0 == $count) {
         echo _AM_UHQRADIO_AIR_NONE;
     } else {
         echo $count;
@@ -54,7 +54,7 @@ function uhqradio_mountpointsum()
     $query = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('uhqradio_mountpoints');
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         echo _AM_UHQRADIO_SQLERR . $query;
 
         return false;
@@ -62,7 +62,7 @@ function uhqradio_mountpointsum()
         list($count) = $xoopsDB->fetchRow($result);
     }
 
-    if ($count == 0) {
+    if (0 == $count) {
         echo _AM_UHQRADIO_MOUNT_NONE;
     } else {
         echo $count;
@@ -89,7 +89,7 @@ function uhqradio_channelsum()
     $query = 'SELECT COUNT(*) FROM ' . $xoopsDB->prefix('uhqradio_channels');
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         echo _AM_UHQRADIO_SQLERR . $query;
 
         return false;
@@ -97,7 +97,7 @@ function uhqradio_channelsum()
         list($count) = $xoopsDB->fetchRow($result);
     }
 
-    if ($count == 0) {
+    if (0 == $count) {
         echo _AM_UHQRADIO_CHANNEL_NONE;
     } else {
         echo $count;
@@ -136,7 +136,7 @@ function uhqradio_summarycount($sumtype)
     }
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         return false;
     } else {
         list($count) = $xoopsDB->fetchRow($result);

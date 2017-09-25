@@ -67,11 +67,11 @@ function xml_stats()
         $i  = 0;
         $i2 = 0;
 
-        if (uhqradio_statspw($_SERVER['PHP_AUTH_PW']) === true) {
+        if (true === uhqradio_statspw($_SERVER['PHP_AUTH_PW'])) {
             // Load channels
             $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels');
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 $xoopsTpl->assign('error', $xoopsDB->error());
 
                 return false;

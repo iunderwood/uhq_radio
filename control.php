@@ -56,7 +56,7 @@ if ($_REQUEST['op']) {
     $query .= 'ORDER BY xb.bid, xp.gperm_itemid';
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         redirect_header($refer, 1, _MD_UHQRADIO_ERROR_NOAUTH);
         break;
     }
@@ -68,7 +68,7 @@ if ($_REQUEST['op']) {
 
     // Reject if the user does not have permission.
 
-    if (count(array_intersect($xoopsUser->getGroups(), $blockgroups)) == 0) {
+    if (0 == count(array_intersect($xoopsUser->getGroups(), $blockgroups))) {
         redirect_header($refer, 10, _MD_UHQRADIO_ERROR_NOPERM);
         break;
     }
@@ -80,7 +80,7 @@ if ($_REQUEST['op']) {
     $query .= " WHERE dirname = 'uhq_radio' AND show_func = 'b_uhqradio_control_show'";
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         redirect_header($refer, 1, _MD_UHQRADIO_ERROR_BLOCKOPT);
         break;
     }

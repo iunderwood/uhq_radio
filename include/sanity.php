@@ -210,7 +210,7 @@ function uhqradio_dosanity()
     }
 
     if (isset($_REQUEST['start'])) {
-        if (($_REQUEST['start'] == '0') || (($_REQUEST['start'][0] >= 'A') && ($_REQUEST['start'][0] <= 'Z'))) {
+        if (('0' == $_REQUEST['start']) || (($_REQUEST['start'][0] >= 'A') && ($_REQUEST['start'][0] <= 'Z'))) {
             $sanerequest['start'] = $_REQUEST['start'][0];
         }
     }

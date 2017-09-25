@@ -37,7 +37,7 @@ switch ($op) {
             $query  = uhqradio_mountform_insertquery($sane_REQUEST);
             $result = $xoopsDB->queryF($query);
 
-            if ($result === false) {
+            if (false === $result) {
                 redirect_header('mountpoints.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                 break;
             } else {
@@ -58,7 +58,7 @@ switch ($op) {
             $query .= " WHERE mpid = '" . $sane_REQUEST['mpid'] . '\'';
 
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 redirect_header('mountpoints.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                 break;
             }
@@ -67,7 +67,7 @@ switch ($op) {
                 // Make Changes
                 $query  = uhqradio_mountform_updatequery($sane_REQUEST);
                 $result = $xoopsDB->queryF($query);
-                if ($result === false) {
+                if (false === $result) {
                     redirect_header('mountpoints.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                     break;
                 } else {
@@ -94,7 +94,7 @@ switch ($op) {
             $query .= " WHERE mpid = '" . $sane_REQUEST['mpid'] . '\'';
 
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 redirect_header('mountpoints.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                 break;
             }
@@ -104,7 +104,7 @@ switch ($op) {
                 $query  = 'DELETE FROM ' . $xoopsDB->prefix('uhqradio_mountpoints');
                 $query  .= " WHERE mpid = '" . $sane_REQUEST['mpid'] . '\'';
                 $result = $xoopsDB->queryF($query);
-                if ($result === false) {
+                if (false === $result) {
                     redirect_header('mountpoints.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                     break;
                 } else {
@@ -115,7 +115,7 @@ switch ($op) {
                     $query  = 'UPDATE ' . $xoopsDB->prefix('uhqradio_channels');
                     $query  .= " SET text_mpid = '0' WHERE text_mpid = '" . $sane_REQUEST['mpid'] . '\'';
                     $result = $xoopsDB->queryF($query);
-                    if ($result === false) {
+                    if (false === $result) {
                         $textresult .= _AM_UHQRADIO_MP_TEXTCLEAR_NOK . ' (' . $xoopsDB->error() . ')';
                     } else {
                         $textresult .= _AM_UHQRADIO_MP_TEXTCLEAR_OK;
@@ -126,7 +126,7 @@ switch ($op) {
                     $query  = 'DELETE FROM ' . $xoopsDB->prefix('uhqradio_countmap');
                     $query  .= " WHERE mpid = '" . $sane_REQUEST['mpid'] . '\'';
                     $result = $xoopsDB->queryF($query);
-                    if ($result === false) {
+                    if (false === $result) {
                         $textresult .= _AM_UHQRADIO_MP_COUNTCLEAR_NOK . ' (' . $xoopsDB->error() . ')';
                     } else {
                         $textresult .= _AM_UHQRADIO_MP_COUNTCLEAR_OK;
@@ -140,7 +140,7 @@ switch ($op) {
                     $query  = 'DELETE FROM ' . $xoopsDB->prefix('uhqradio_lhistory');
                     $query  .= " WHERE mpid = '" . $sane_REQUEST['mpid'] . '\'';
                     $result = $xoopsDB->queryF($query);
-                    if ($result === false) {
+                    if (false === $result) {
                         $textresult .= _AM_UHQRADIO_MP_LHCLEAR_NOK . ' (' . $xoopsDB->error() . ')';
                     } else {
                         $textresult .= _AM_UHQRADIO_MP_LHCLEAR_OK;
@@ -164,7 +164,7 @@ switch ($op) {
             // List Mount Points
             $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . ' ORDER BY server, port, mount';
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 $xoospTpl->assign('error', $xoopsDB->error());
             } else {
                 $data = [];

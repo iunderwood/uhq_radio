@@ -77,7 +77,7 @@ function uhqradio_samint()
         $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
 
         // Return true if SAM integration is enabled in the configuration.
-        if ($xoopsModuleConfig['sambc'] == 1) {
+        if (1 == $xoopsModuleConfig['sambc']) {
             return true;
         } else {
             return false;
@@ -108,7 +108,7 @@ function uhqradio_opt_savelh()
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     // Return true if SAM integration is enabled in the configuration.
-    if ($xoopsModuleConfig['savelh'] == 1) {
+    if (1 == $xoopsModuleConfig['savelh']) {
         return true;
     } else {
         return false;
@@ -130,7 +130,7 @@ function uhqradio_opt_savesh()
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     // Return true if SAM integration is enabled in the configuration.
-    if ($xoopsModuleConfig['savesh'] == 1) {
+    if (1 == $xoopsModuleConfig['savesh']) {
         return true;
     } else {
         return false;
@@ -152,7 +152,7 @@ function uhqradio_opt_fbapikey()
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     // Return true if SAM integration is enabled in the configuration.
-    if ($xoopsModuleConfig['fbapikey'] != '') {
+    if ('' != $xoopsModuleConfig['fbapikey']) {
         return $xoopsModuleConfig['fbapikey'];
     } else {
         return false;
@@ -174,7 +174,7 @@ function uhqradio_opt_fbsecret()
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
     // Return true if SAM integration is enabled in the configuration.
-    if ($xoopsModuleConfig['fbsecret'] != '') {
+    if ('' != $xoopsModuleConfig['fbsecret']) {
         return $xoopsModuleConfig['fbsecret'];
     } else {
         return false;
@@ -195,7 +195,7 @@ function uhqradio_opt_plcat()
     $configHandler     = xoops_getHandler('config');
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
-    if ($xoopsModuleConfig['pl_category'] != '') {
+    if ('' != $xoopsModuleConfig['pl_category']) {
         return $xoopsModuleConfig['pl_category'];
     } else {
         return false;
@@ -216,7 +216,7 @@ function uhqradio_opt_albumurl()
     $configHandler     = xoops_getHandler('config');
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
-    if ($xoopsModuleConfig['album_url'] != '') {
+    if ('' != $xoopsModuleConfig['album_url']) {
         return $xoopsModuleConfig['album_url'];
     } else {
         return false;
@@ -237,7 +237,7 @@ function uhqradio_opt_songhistlen()
     $configHandler     = xoops_getHandler('config');
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
-    if ($xoopsModuleConfig['songhist_len'] != '') {
+    if ('' != $xoopsModuleConfig['songhist_len']) {
         return $xoopsModuleConfig['songhist_len'];
     } else {
         return false;
@@ -258,7 +258,7 @@ function uhqradio_opt_reqlistlen()
     $configHandler     = xoops_getHandler('config');
     $xoopsModuleConfig = $configHandler->getConfigsByCat(0, $xoopsModule->getVar('mid'));
 
-    if ($xoopsModuleConfig['reqlist_len'] != '') {
+    if ('' != $xoopsModuleConfig['reqlist_len']) {
         return $xoopsModuleConfig['reqlist_len'];
     } else {
         return false;

@@ -21,7 +21,7 @@ if (uhqradio_opt_savesh()) {
     $xoopsTpl->assign('data', $data);
 
     $shistory = uhqradio_data_shistory($chid, uhqradio_opt_songhistlen());
-    if ($shistory !== false) {
+    if (false !== $shistory) {
         $xoopsTpl->assign('shistory', $shistory);
     }
 }

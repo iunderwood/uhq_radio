@@ -492,10 +492,10 @@ class facebook
         $cookies                = [];
         $cookies['user']        = $user;
         $cookies['session_key'] = $session_key;
-        if ($expires != null) {
+        if (null != $expires) {
             $cookies['expires'] = $expires;
         }
-        if ($session_secret != null) {
+        if (null != $session_secret) {
             $cookies['ss'] = $session_secret;
         }
 
@@ -507,7 +507,7 @@ class facebook
         setcookie($this->api_key, $sig, (int)$expires, '', $this->base_domain);
         $_COOKIE[$this->api_key] = $sig;
 
-        if ($this->base_domain != null) {
+        if (null != $this->base_domain) {
             $base_domain_cookie = 'base_domain_' . $this->api_key;
             setcookie($base_domain_cookie, $this->base_domain, (int)$expires, '', $this->base_domain);
             $_COOKIE[$base_domain_cookie] = $this->base_domain;
@@ -571,7 +571,7 @@ class facebook
         foreach ($params as $name => $val) {
             // pull out only those parameters that match the prefix
             // note that the signature itself ($params[$namespace]) is not in the list
-            if (strpos($name, $prefix) === 0) {
+            if (0 === strpos($name, $prefix)) {
                 $fb_params[substr($name, $prefix_len)] = self::no_magic_quotes($val);
             }
         }
@@ -649,7 +649,7 @@ class facebook
         $signature = base64_decode($signed_data['sig']);
         $result    = openssl_verify($serialized_data, $signature, $public_key, OPENSSL_ALGO_SHA1);
 
-        return $result == 1;
+        return 1 == $result;
     }
 
     /*

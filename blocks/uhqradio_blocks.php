@@ -18,7 +18,7 @@ function b_uhqradio_status_show($options)
     // Locate Channel Info
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels') . " WHERE chid = '" . $options[0] . '\'';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $block['status']    = _MB_UHQRADIO_OFFAIR;
         $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
         $block['error']     = 1;
@@ -31,7 +31,7 @@ function b_uhqradio_status_show($options)
 
     // Load Channel Info
     $channel = $xoopsDB->fetchArray($result);
-    if ($channel['chid'] == null) {
+    if (null == $channel['chid']) {
         $block['status']    = _MB_UHQRADIO_OFFAIR;
         $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
         $block['error']     = 1;
@@ -46,23 +46,23 @@ function b_uhqradio_status_show($options)
 
         // Prep for the on-air link if we use one.
 
-        if ($options[1] == 1) {
+        if (1 == $options[1]) {
             $block['linkurl'] = $options[2];
             $block['target']  = $options[3];
 
-            if ($block['target'] == 'pop') {
+            if ('pop' == $block['target']) {
                 $block['popw'] = $options[4];
                 $block['poph'] = $options[5];
             }
 
-            if ($options[8] == 1) {
+            if (1 == $options[8]) {
                 $block['graphic'] = 1;
             }
         }
 
         // AJAX is easy.  If enabled, toss out the AJAX flag, and the channel ID
 
-        if ($options[9] == 1) {
+        if (1 == $options[9]) {
             $block['ajax']          = 1;
             $block['chid']          = $options[0];
             $block['showlisteners'] = $options[6];
@@ -76,7 +76,7 @@ function b_uhqradio_status_show($options)
         // Locate Text Mountpoint
         $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . " WHERE mpid = '" . $channel['text_mpid'] . '\'';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $block['status']    = _MB_UHQRADIO_OFFAIR;
             $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
             $block['error']     = 1;
@@ -90,7 +90,7 @@ function b_uhqradio_status_show($options)
         // Load Text Mountpoint info
         $mountinfo = $xoopsDB->fetchArray($result);
 
-        if ($mountinfo === false) {
+        if (false === $mountinfo) {
             $block['status']    = _MB_UHQRADIO_OFFAIR;
             $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
             $block['error']     = 1;
@@ -120,7 +120,7 @@ function b_uhqradio_status_show($options)
 
         // Scrub XML.
         $cleanxml = uhqradio_scrubxml($xmldata, $mountinfo['type'], $mountinfo['mount'], $mountinfo['fallback']);
-        if ($cleanxml === false) {
+        if (false === $cleanxml) {
             $block['status']    = _MB_UHQRADIO_OFFAIR;
             $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
             $block['error']     = 1;
@@ -132,8 +132,8 @@ function b_uhqradio_status_show($options)
         }
 
         // Process Status if we have Shoutcast
-        if ($mountinfo['type'] == 'S') {
-            if (uhqradio_isolatexml($cleanxml, '<STREAMSTATUS>', '</STREAMSTATUS>') != 1) {
+        if ('S' == $mountinfo['type']) {
+            if (1 != uhqradio_isolatexml($cleanxml, '<STREAMSTATUS>', '</STREAMSTATUS>')) {
                 $block['status']    = _MB_UHQRADIO_OFFAIR;
                 $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
                 $block['error']     = 1;
@@ -155,17 +155,17 @@ function b_uhqradio_status_show($options)
 
         // If we get this far, we're good on our song info.  Process show names if we use them.
 
-        if ($channel['flag_show'] == 1) {
+        if (1 == $channel['flag_show']) {
             $block['statusdetail'] = uhqradio_getinfos($cleanxml, $mountinfo['type'], $channel['flag_s_sol'], $channel['delim_sh_s'], $channel['flag_s_eol'], $channel['delim_sh_e']);
         }
 
         // Provide listener response if configured.
 
-        if ($options[6] == 1) {
+        if (1 == $options[6]) {
             $block['count'] = uhqradio_listeners($channel['chid']);
-            if ($block['count'] == 0) {
+            if (0 == $block['count']) {
                 $block['listeners'] = _MB_UHQRADIO_LISTENERS_NONE;
-            } elseif ($block['count'] == 1) {
+            } elseif (1 == $block['count']) {
                 $block['listeners'] = _MB_UHQRADIO_LISTENERS_ONE;
             } elseif ($block['count'] > 1) {
                 $block['listeners'] = _MB_UHQRADIO_LISTENERS_MANY . $block['count'];
@@ -174,7 +174,7 @@ function b_uhqradio_status_show($options)
 
         // If we have album art, show it.
 
-        if ($options[10] == 1) {
+        if (1 == $options[10]) {
         }
 
         // If we've gotten this far, we are on the air.
@@ -207,7 +207,7 @@ function b_uhqradio_status_edit($options)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels');
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $form .= _MB_UHQRADIO_ERROR . $xoopsDB->error();
     } else {
         $form .= "<select size=1 name='options[0]'>";
@@ -221,13 +221,13 @@ function b_uhqradio_status_edit($options)
     // Use a tune-in link?
     $form .= _MB_UHQRADIO_STATUS_OPTO;
     $form .= "<input type='radio' name='options[1]' value= '1' ";
-    if ($options[1] == '1') {
+    if ('1' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[1]' value= '0' ";
-    if ($options[1] == '0') {
+    if ('0' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -243,17 +243,17 @@ function b_uhqradio_status_edit($options)
     $form .= _MB_UHQRADIO_STATUS_OPTQ;
     $form .= "<select name='options[3]'>";
     $form .= "<option value='_top' ";
-    if ($options[3] == '_top') {
+    if ('_top' == $options[3]) {
         $form .= 'selected';
     }
     $form .= '>' . _MB_UHQRADIO_TARGET_SELF . '</option>';
     $form .= "<option value='_blank' ";
-    if ($options[3] == '_blank') {
+    if ('_blank' == $options[3]) {
         $form .= 'selected';
     }
     $form .= '>' . _MB_UHQRADIO_TARGET_NEW . '</option>';
     $form .= "<option value='pop' ";
-    if ($options[3] == 'pop') {
+    if ('pop' == $options[3]) {
         $form .= 'selected';
     }
     $form .= '>' . _MB_UHQRADIO_TARGET_POPUP . '</option>';
@@ -273,13 +273,13 @@ function b_uhqradio_status_edit($options)
     // Show listeners?
     $form .= _MB_UHQRADIO_STATUS_OPTT;
     $form .= "<input type='radio' name='options[6]' value= '1' ";
-    if ($options[6] == '1') {
+    if ('1' == $options[6]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[6]' value= '0' ";
-    if ($options[6] == '0') {
+    if ('0' == $options[6]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -289,13 +289,13 @@ function b_uhqradio_status_edit($options)
     // Show Errors?
     $form .= _MB_UHQRADIO_STATUS_OPTU;
     $form .= "<input type='radio' name='options[7]' value= '1' ";
-    if ($options[7] == '1') {
+    if ('1' == $options[7]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[7]' value= '0' ";
-    if ($options[7] == '0') {
+    if ('0' == $options[7]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -305,13 +305,13 @@ function b_uhqradio_status_edit($options)
     // Use a link graphic?
     $form .= _MB_UHQRADIO_STATUS_OPTV;
     $form .= "<input type='radio' name='options[8]' value= '1' ";
-    if ($options[8] == '1') {
+    if ('1' == $options[8]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[8]' value= '0' ";
-    if ($options[8] == '0') {
+    if ('0' == $options[8]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -321,13 +321,13 @@ function b_uhqradio_status_edit($options)
     // Standard block or AJAX?
     $form .= _MB_UHQRADIO_STATUS_OPT_AJAX;
     $form .= "<input type='radio' name='options[9]' value= '1' ";
-    if ($options[9] == '1') {
+    if ('1' == $options[9]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[9]' value= '0' ";
-    if ($options[9] == '0') {
+    if ('0' == $options[9]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -337,13 +337,13 @@ function b_uhqradio_status_edit($options)
     // Show Album Art?
     $form .= _MB_UHQRADIO_STATUS_OPT_ALBUMART;
     $form .= "<input type='radio' name='options[10]' value= '1' ";
-    if ($options[10] == '1') {
+    if ('1' == $options[10]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[10]' value= '0' ";
-    if ($options[10] == '0') {
+    if ('0' == $options[10]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -442,7 +442,7 @@ function b_uhqradio_handoff_show($options)
 
     $result = $xoopsDB->queryF($query);
 
-    if ($result === false) {
+    if (false === $result) {
         $block['error'] = 'Unable to retrieve handoff information.';
 
         return $block;
@@ -460,7 +460,7 @@ function b_uhqradio_handoff_show($options)
             $user            = $memberHandler->getUser($handoff['requser']);
             $block['ondeck'] = $user->uname() . ' is ';
         }
-        if ($handoff['reqstat'] == 2) {
+        if (2 == $handoff['reqstat']) {
             $block['status'] = 'ready to go';
         }
     } else {
@@ -486,13 +486,13 @@ function b_uhqradio_handoff_edit($options)
 
     $form .= _MB_UHQRADIO_HANDOFF_OPTB;
     $form .= "<input type='radio' name='options[1]' value= '1' ";
-    if ($options[1] == '1') {
+    if ('1' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[1]' value= '0' ";
-    if ($options[1] == '0') {
+    if ('0' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -536,14 +536,14 @@ function b_uhqradio_djpanel_show($options)
 
         $result = $xoopsDB->queryF($query);
 
-        if ($result === false) {
+        if (false === $result) {
             return false;
         }
         $row = $xoopsDB->fetchArray($result);
 
         if ($row['djid']) {
             $block['djid'] = $row['djid'];
-            if ($row['flag_req'] == '1') {
+            if ('1' == $row['flag_req']) {
                 $block['reqstat'] = _MB_UHQRADIO_DJP_REQ_OK;
             } else {
                 $block['reqstat'] = _MB_UHQRADIO_DJP_REQ_NOK;
@@ -572,7 +572,7 @@ function b_uhqradio_djpanel_show($options)
         }
     }
 
-    if ($showblock == 1) {
+    if (1 == $showblock) {
         return $block;
     } else {
         return false;
@@ -602,7 +602,7 @@ function b_uhqradio_djlist_show($options)
     $block['cols'] = $options[0];
     $block['size'] = $options[1];
 
-    if ($block['djcount'] == 0) {
+    if (0 == $block['djcount']) {
         return false;
     }
 

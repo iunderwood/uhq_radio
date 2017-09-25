@@ -23,7 +23,7 @@ function uhqradio_data_status($chid)
     // Locate Channel Info
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels') . " WHERE chid = '" . $chid . '\'';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $data['error'] = $xoopsDB->error();
 
         return $data;
@@ -31,7 +31,7 @@ function uhqradio_data_status($chid)
 
     // Load Channel Info
     $channel = $xoopsDB->fetchArray($result);
-    if ($channel['chid'] == null) {
+    if (null == $channel['chid']) {
         $data['error'] = _MD_UHQRADIO_XMLSTATUS_CND;
 
         return $data;
@@ -46,7 +46,7 @@ function uhqradio_data_status($chid)
         // Locate Text Mountpoint
         $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . " WHERE mpid = '" . $channel['text_mpid'] . '\'';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $data['error'] = _MD_UHQRADIO_XMLSTATUS_MLERR . $xoopsDB->error();
 
             return $data;
@@ -55,7 +55,7 @@ function uhqradio_data_status($chid)
         // Load Text Mountpoint info
         $mountinfo = $xoopsDB->fetchArray($result);
 
-        if ($mountinfo === false) {
+        if (false === $mountinfo) {
             $data['error'] = _MD_UHQRADIO_XMLSTATUS_TMNF;
 
             return $data;
@@ -76,15 +76,15 @@ function uhqradio_data_status($chid)
 
         // Scrub XML.
         $cleanxml = uhqradio_scrubxml($xmldata, $mountinfo['type'], $mountinfo['mount'], $mountinfo['fallback']);
-        if ($cleanxml === false) {
+        if (false === $cleanxml) {
             $data['error'] = _MD_UHQRADIO_XMLSTATUS_MNF;
 
             return $data;
         }
 
         // Process Status if we have Shoutcast
-        if ($mountinfo['type'] == 'S') {
-            if (uhqradio_isolatexml($cleanxml, '<STREAMSTATUS>', '</STREAMSTATUS>') != 1) {
+        if ('S' == $mountinfo['type']) {
+            if (1 != uhqradio_isolatexml($cleanxml, '<STREAMSTATUS>', '</STREAMSTATUS>')) {
                 $data['error'] = _MD_UHQRADIO_XMLSTATUS_SCOFF;
 
                 return $data;
@@ -92,14 +92,14 @@ function uhqradio_data_status($chid)
         }
 
         // Extract DJ ID, if used.  Expand DJ Name.
-        if ($channel['flag_djid'] == 1) {
+        if (1 == $channel['flag_djid']) {
             $data['onair']['djid']   = uhqradio_getinfos($cleanxml, $mountinfo['type'], $channel['flag_d_sol'], $channel['delim_dj_s'], $channel['flag_d_eol'], $channel['delim_dj_e']);
             $djinfo                  = uhqradio_dj_info($data['onair']['djid']);
             $data['onair']['djname'] = uhqradio_username($djinfo['userkey']);
         }
 
         // Extract Show name, if used.
-        if ($channel['flag_show'] == 1) {
+        if (1 == $channel['flag_show']) {
             $data['onair']['showname'] = uhqradio_getinfos($cleanxml, $mountinfo['type'], $channel['flag_s_sol'], $channel['delim_sh_s'], $channel['flag_s_eol'], $channel['delim_sh_e']);
         }
 
@@ -131,14 +131,14 @@ function uhqradio_data_status($chid)
 
             $sh_result = $xoopsDB->queryF($sh_lquery);
 
-            if ($sh_result !== false) {
+            if (false !== $sh_result) {
                 $lastsong = $xoopsDB->fetchArray($sh_result);
             }
 
             // Add to $data if either the artist or track matches.  Sometimes encoding will throw this off.
 
-            if ((strcasecmp($lastsong['artist'], $data['onair']['artist']) == 0)
-                || (strcasecmp($lastsong['track'], $data['onair']['title']) == 0)) {
+            if ((0 == strcasecmp($lastsong['artist'], $data['onair']['artist']))
+                || (0 == strcasecmp($lastsong['track'], $data['onair']['title']))) {
                 $data['saminfo']           = $lastsong;
                 $data['saminfo']['xalbum'] = htmlspecialchars($data['saminfo']['album']);
             }
@@ -164,7 +164,7 @@ function uhqradio_data_djlist()
 
     $result = $xoopsDB->queryF($query);
 
-    if ($result === false) {
+    if (false === $result) {
         return false;
     }
 
@@ -236,7 +236,7 @@ function uhqradio_data_lhistory($id, $type, $minutes = 15, $summary = false)
     }
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // Return false if we can't load data.
         echo "can't load " . $query . '<br>' . $xoopsDB->error();
 
@@ -271,14 +271,14 @@ function uhqradio_data_shistory($chid, $limit = 10, $type = 'S')
 
     $query = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_shistory') . " WHERE chid = '" . $chid . '\'';
 
-    if ($type != 'A') {
+    if ('A' != $type) {
         $query .= " AND songtype = '" . $type . '\'';
     }
 
     $query .= ' ORDER BY stamp DESC LIMIT ' . $limit;
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // Return false if we can't load data.
         echo "can't load " . $query . '<br>' . $xoopsDB->error();
 
@@ -325,7 +325,7 @@ function uhqradio_data_requestchart($chid, $limit = 10, $type = null)
     $query .= ' GROUP BY artist, track, album ORDER BY reqs DESC LIMIT ' . $limit;
 
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // Return false if we can't load data.
         echo "can't load " . $query . '<br>' . $xoopsDB->error();
 

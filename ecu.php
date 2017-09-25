@@ -40,7 +40,7 @@ function update_cache($type)
 
     // Check update PW first.
 
-    if (uhqradio_updatepw($_REQUEST['updatepw']) === false) {
+    if (false === uhqradio_updatepw($_REQUEST['updatepw'])) {
         $error = _MD_UHQRADIO_ECU_BADPW;
 
         return false;
@@ -70,7 +70,7 @@ function update_cache($type)
 
     $result = $xoopsDB->queryF($query);
 
-    if ($result === false) {
+    if (false === $result) {
         $error = _MD_UHQRADIO_ERROR_SQL . $xoopsDB->error();
 
         return false;

@@ -19,12 +19,12 @@ if (uhqradio_opt_savesh()) {
     $xoopsTpl->assign('data', $data);
 
     $chartall = uhqradio_data_requestchart($chid, uhqradio_opt_reqlistlen());
-    if ($chartall !== false) {
+    if (false !== $chartall) {
         $xoopsTpl->assign('chartall', $chartall);
     }
 
     $lastmonth = uhqradio_data_requestchart($chid, uhqradio_opt_reqlistlen(), 'LM');
-    if ($lastmonth !== false) {
+    if (false !== $lastmonth) {
         $xoopsTpl->assign('lastmonth', $lastmonth);
     }
 }

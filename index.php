@@ -42,13 +42,13 @@ function uhqradio_nre_open()
 
     $info = uhqradio_dj_onair(1);
 
-    if ($info === false) {
+    if (false === $info) {
         $block['error'] = _MB_UHQRADIO_ERROR . $xoopsDB->error();
 
         return $block;
     }
 
-    if ($info['djip'] == 0) {
+    if (0 == $info['djip']) {
         $block['error'] = 'No Source IP Found';
 
         return $block;
@@ -57,7 +57,7 @@ function uhqradio_nre_open()
     // Open Database
 
     $samdb = uhqradio_sam_opendb($info['djid'], $info['djip']);
-    if ($samdb === false) {
+    if (false === $samdb) {
         $block['error'] = 'Unable to contact DB ' . $info['djid'] . ' at ' . $info['djip'];
 
         return $block;
@@ -93,7 +93,7 @@ function uhqradio_nre_summary($view, $start)
 
     // Handle starting letters & Generate List
 
-    if ($start != null) {
+    if (null != $start) {
         $block['start'] = $start;
 
         // Count up either the number of artists or albums.
@@ -156,7 +156,7 @@ function uhqradio_index()
 
     // Verify that we've enable automation integration.
 
-    if (uhqradio_samint() === false) {
+    if (false === uhqradio_samint()) {
         $data['samint'] = 0;
 
         return $data;

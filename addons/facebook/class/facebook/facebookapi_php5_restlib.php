@@ -1889,7 +1889,7 @@ class FacebookRestClient
      */
     public function &users_isAppUser($uid = null)
     {
-        if ($uid === null && isset($this->is_user)) {
+        if (null === $uid && isset($this->is_user)) {
             return $this->is_user;
         }
 
@@ -3722,7 +3722,7 @@ class FacebookRestClient
      */
     protected function convert_result($data, $method, $params)
     {
-        $is_xml = (empty($params['format']) || strtolower($params['format']) !== 'json');
+        $is_xml = (empty($params['format']) || 'json' !== strtolower($params['format']));
 
         return $is_xml ? $this->convert_xml_to_result($data, $method, $params) : json_decode($data, true);
     }
@@ -4187,7 +4187,7 @@ class FacebookRestClient
             'video_getuploadlimits'                => 1
         ];
 
-        if (substr($method, 0, 9) === 'facebook.') {
+        if ('facebook.' === substr($method, 0, 9)) {
             $method = substr($method, 9);
         }
         $method = strtolower(str_replace('.', '_', $method));

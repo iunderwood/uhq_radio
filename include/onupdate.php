@@ -73,7 +73,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
                 PRIMARY KEY (djid)
             ) ENGINE=MyISAM;';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $module->setErrors('Error adding DB table uhqradio_airstaff');
 
             return false;
@@ -106,7 +106,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
                 PRIMARY KEY (mpid)
             ) ENGINE=MyISAM;';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $module->setErrors('Error adding DB table uhqradio_mountpoints');
 
             return false;
@@ -136,7 +136,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
                 PRIMARY KEY (chid)
             ) ENGINE=MyISAM;';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $module->setErrors('Error adding DB table uhqradio_channels');
 
             return false;
@@ -152,7 +152,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
                 PRIMARY KEY (chid,mpid)
             ) ENGINE=MyISAM;';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $module->setErrors('Error adding DB table uhqradio_countmap');
 
             return false;
@@ -235,7 +235,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
             ) ENGINE=MyISAM;';
 
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $module->setErrors('Error adding DB table uhqradio_lhistory');
 
             return false;
@@ -263,7 +263,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
             ) ENGINE=MyISAM;';
 
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             $module->setErrors('Error adding DB table uhqradio_shistory');
 
             return false;

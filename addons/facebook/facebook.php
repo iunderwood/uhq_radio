@@ -37,7 +37,7 @@ if (!isset($xoopsTpl)) {
 $fbapikey = uhqradio_opt_fbapikey();
 $fbsecret = uhqradio_opt_fbsecret();
 
-if (($fbapikey != null) && ($fbsecret != null)) {
+if ((null != $fbapikey) && (null != $fbsecret)) {
     $facebook = new Facebook($fbapikey, $fbsecret);
 } else {
     break;
@@ -52,7 +52,7 @@ if (isset($_REQUEST['chid'])) {
 // Load Current Infos
 
 $status = uhqradio_data_status($chid);
-if ($status !== false) {
+if (false !== $status) {
     $xoopsTpl->assign('status', $status);
 }
 
@@ -60,7 +60,7 @@ if ($status !== false) {
 
 if (uhqradio_opt_savesh()) {
     $shistory = uhqradio_data_shistory($chid);
-    if ($shistory !== false) {
+    if (false !== $shistory) {
         $xoopsTpl->assign('shistory', $shistory);
     }
 }

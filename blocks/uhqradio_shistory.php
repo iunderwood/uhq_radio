@@ -17,7 +17,7 @@ function b_uhqradio_shistory_show($options)
 
     // Empty the block if we're not saving the history.
 
-    if (uhqradio_opt_savesh() != 1) {
+    if (1 != uhqradio_opt_savesh()) {
         if ($options[1]) {
             $block['error'] = _MB_UHQRADIO_SHIST_ERR_DISABLED;
 
@@ -32,7 +32,7 @@ function b_uhqradio_shistory_show($options)
 
     // Trap an error if we couldn't load the data.
 
-    if ($block === false) {
+    if (false === $block) {
         if ($options[1]) {
             $block['error'] = _MB_UHQRADIO_SHIST_ERR_LOAD;
 
@@ -61,7 +61,7 @@ function b_uhqradio_shistory_edit($options)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels');
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $form = _MB_UHQRADIO_ERROR . $xoopsDB->error();
     } else {
         $form .= "<select size=1 name='options[0]'>";
@@ -75,13 +75,13 @@ function b_uhqradio_shistory_edit($options)
     // Show Errors?
     $form .= _MB_UHQRADIO_SHIST_OPT_ERR;
     $form .= "<input type='radio' name='options[1]' value= '1' ";
-    if ($options[1] == '1') {
+    if ('1' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[1]' value= '0' ";
-    if ($options[1] == '0') {
+    if ('0' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -96,13 +96,13 @@ function b_uhqradio_shistory_edit($options)
     // Extended form?
     $form .= _MB_UHQRADIO_SHIST_OPT_EXTENDED;
     $form .= "<input type='radio' name='options[3]' value= '1' ";
-    if ($options[3] == '1') {
+    if ('1' == $options[3]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[3]' value= '0' ";
-    if ($options[3] == '0') {
+    if ('0' == $options[3]) {
         $form .= 'checked';
     }
     $form .= '>';

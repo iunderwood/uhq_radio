@@ -99,8 +99,8 @@ function uhqradio_fetchxml($ipfqdn, $port, $xmlpath, $auth, &$xmldata, $override
 
     if (file_exists($cachefile)) {
         if ((((time() - filemtime($cachefile)) > $xoopsModuleConfig['cache_time'])
-             && ($xoopsModuleConfig['cache_external'] == 0))
-            || ($override == 1)) {
+             && (0 == $xoopsModuleConfig['cache_external']))
+            || (1 == $override)) {
             // Don't read cache data, move to update XML.
         } else {
             // Read cache file.
@@ -122,7 +122,7 @@ function uhqradio_fetchxml($ipfqdn, $port, $xmlpath, $auth, &$xmldata, $override
 
     $httpreq = 'GET ' . $xmlpath . " HTTP/1.0\r\n";
     $httpreq .= "User-Agent: Mozilla/3.0 (Compatible; UHQ-Radio)\r\n";
-    if ($auth != null) {
+    if (null != $auth) {
         $httpreq .= 'Authorization: Basic ' . $auth . "\r\n";
     }
     $httpreq .= "\r\n";
@@ -202,7 +202,7 @@ function uhqradio_externalurl($eventurl)
 
     curl_close($ext);
 
-    if ($resp === false) {
+    if (false === $resp) {
         return false;
     } else {
         return true;
@@ -241,7 +241,7 @@ function uhqradio_scrubxml($xmldata, $type, $mountpoint = null, $fallback = null
 
     // Extract specific mountpoint for Icecast, supporting fallback.
 
-    if ($type === 'I') {
+    if ('I' === $type) {
         if (strpos($xmldata, $mountpoint)) {
             $cleanxml = uhqradio_isolatexml($xmldata, $mountpoint . '">', '</source>');
             // If we have a server description, we've probably got a good source.
@@ -249,7 +249,7 @@ function uhqradio_scrubxml($xmldata, $type, $mountpoint = null, $fallback = null
                 return $cleanxml;
             }
         }
-        if ($fallback != null) {
+        if (null != $fallback) {
             if (strpos($xmldata, $fallback)) {
                 $cleanxml = uhqradio_isolatexml($xmldata, $fallback . '">', '</source>');
             }
@@ -292,13 +292,13 @@ function uhqradio_getinfos($xmldata, $type, $flag_sdel, $sdel, $flag_edel, $edel
     }
 
     // Process Start Delimiter
-    if ($flag_sdel == 1) {
+    if (1 == $flag_sdel) {
         $spos   = strpos($output, $sdel);
         $output = substr($output, $spos + strlen($sdel));
     }
 
     // Process End Delimiter
-    if ($flag_edel == 1) {
+    if (1 == $flag_edel) {
         $epos   = strpos($output, $edel);
         $output = substr($output, 0, $epos);
     }
@@ -320,7 +320,7 @@ function uhqradio_getartist($xmldata, $type)
 {
     switch ($type) {
         case 'I':
-            if (strpos($xmldata, '<artist>') !== false) {
+            if (false !== strpos($xmldata, '<artist>')) {
                 // If the <artist> tag exists, this is easy.
                 return uhqradio_isolatexml($xmldata, '<artist>', '</artist>');
             } else {
@@ -359,7 +359,7 @@ function uhqradio_gettitle($xmldata, $type)
 {
     switch ($type) {
         case 'I':
-            if (strpos($xmldata, '<artist>') !== false) {
+            if (false !== strpos($xmldata, '<artist>')) {
                 // If the <artist> tag exists, take the title as it is.
                 return uhqradio_isolatexml($xmldata, '<title>', '</title>');
             } else {
@@ -439,7 +439,7 @@ function uhqradio_listeners($chid)
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_countmap') . " WHERE chid = '" . $chid . '\'';
     $result = $xoopsDB->queryF($query);
 
-    if ($result === false) {
+    if (false === $result) {
         return false;
     }
 
@@ -451,7 +451,7 @@ function uhqradio_listeners($chid)
         $query     = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . " WHERE mpid = '" . $row['mpid'] . '\'';
         $subresult = $xoopsDB->queryF($query);
 
-        if ($subresult === false) {
+        if (false === $subresult) {
             continue;
         }
 
@@ -471,7 +471,7 @@ function uhqradio_listeners($chid)
 
         // Scrub XML.
         $cleanxml = uhqradio_scrubxml($xmldata, $mountinfo['type'], $mountinfo['mount']);
-        if ($cleanxml === false) {
+        if (false === $cleanxml) {
             continue;
         }
 
@@ -497,7 +497,7 @@ function uhqradio_channel_info($chid)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels') . " WHERE chid = '" . $chid . '\'';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // Fail if we cannot connect
         return false;
     } else {
@@ -522,17 +522,17 @@ function uhqradio_dj_onair($chid)
     // Load Channel
 
     $channel = uhqradio_channel_info($chid);
-    if ($channel === false) {
+    if (false === $channel) {
         // Return if we can't load channel info.
         return false;
     }
 
-    if (($channel['flag_djid'] == 1) && ($channel['text_mpid'] > 0)) {
+    if ((1 == $channel['flag_djid']) && ($channel['text_mpid'] > 0)) {
         // Load Text Mountpoint
 
         $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . " WHERE mpid = '" . $channel['text_mpid'] . '\'';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             return false;
         } else {
             // Load mountpoint information into the block.
@@ -555,7 +555,7 @@ function uhqradio_dj_onair($chid)
 
         $cleanxml = uhqradio_scrubxml($xmldata, $mountinfo['type'], $mountinfo['mount'], $mountinfo['fallback']);
 
-        if ($cleanxml === false) {
+        if (false === $cleanxml) {
             return false;
         }
 
@@ -584,7 +584,7 @@ function uhqradio_dj_info($djid)
 
     $result = $xoopsDB->queryF($query);
 
-    if ($result === false) {
+    if (false === $result) {
         return false;
     }
     $row = $xoopsDB->fetchArray($result);
@@ -604,7 +604,7 @@ function uhqradio_updatelh()
     // Get timestamp
     $query  = 'SELECT now()';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // If we can't get the time, quit.
         return false;
     }
@@ -613,7 +613,7 @@ function uhqradio_updatelh()
     // Locate mountpoints, but only use ones set for reliable count.
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . " WHERE flag_count = '1' ORDER BY mpid";
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // If we can't load up the mount points, then quit.
         return false;
     }
@@ -636,9 +636,9 @@ function uhqradio_updatelh()
         }
 
         // Scrub the XML as required
-        if ($status === 'O') {
+        if ('O' === $status) {
             $cleanxml = uhqradio_scrubxml($xmldata, $mountinfo['type'], $mountinfo['mount']);
-            if ($cleanxml === false) {
+            if (false === $cleanxml) {
                 $status = 'X';
             }
         }
@@ -679,7 +679,7 @@ function uhqradio_updatesh($chid)
     // Get timestamp
     $query  = 'SELECT now()';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // If we can't get the time, quit.
         return false;
     }
@@ -698,14 +698,14 @@ function uhqradio_updatesh($chid)
 
     $result = $xoopsDB->queryF($query);
 
-    if ($result !== false) {
+    if (false !== $result) {
         $lastsong = $xoopsDB->fetchRow($query);
     }
 
     // If we've got the same song title and artist, go no further.
 
-    if ((strcasecmp($lastsong['artist'], $data['onair']['artist']) == 0)
-        && (strcasecmp($lastsong['track'], $data['onair']['title']) == 0)) {
+    if ((0 == strcasecmp($lastsong['artist'], $data['onair']['artist']))
+        && (0 == strcasecmp($lastsong['track'], $data['onair']['title']))) {
         echo " Match found.  Not updating ... \r\n";
 
         return false;
@@ -713,12 +713,12 @@ function uhqradio_updatesh($chid)
 
     // Get SAM information for additionals if available
 
-    $samdata === false;
+    false === $samdata;
     if (uhqradio_samint()) {
         require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sambc.php';
         $info = uhqradio_dj_onair($chid);
-        if ($info !== false) {
-            if ($info['djip'] != 0) {
+        if (false !== $info) {
+            if (0 != $info['djip']) {
                 $samdb = uhqradio_sam_opendb($info['djid'], $info['djip']);
                 if ($samdb) {
                     $samdata = uhqradio_sam_nowplaying($samdb);
@@ -758,7 +758,7 @@ function uhqradio_updatesh($chid)
 
     $sh_result = $xoopsDB->queryF($sh_query);
 
-    if ($sh_result === false) {
+    if (false === $sh_result) {
         echo 'History Update Failed: ' . $xoopsDB->error() . "\r\n";
     } else {
         echo 'Recorded: ' . $timestamp . ' :: ' . $data['onair']['artist'] . ' - ' . $data['onair']['title'] . "\r\n";
@@ -772,7 +772,7 @@ function uhqradio_updatesh($chid)
         $lc_url .= '&title=' . rawurlencode($data['onair']['title']);
         $lc_url .= '&viewers=' . $data['onair']['listeners'];
         if ($samdata) {
-            if ($samdata['songtype'] === 'S') {
+            if ('S' === $samdata['songtype']) {
                 $lc_url .= '&album=';
                 if ($samdata['album']) {
                     $lc_url .= rawurlencode($samdata['album']);
@@ -833,10 +833,10 @@ function uhqradio_updatesh($chid)
         $tunein_url .= '&title=' . rawurlencode($data['onair']['title']);
 
         if ($samdata) {
-            if (($samdata['songtype'] === 'S') && $samdata['album']) {
+            if (('S' === $samdata['songtype']) && $samdata['album']) {
                 $tunein_url .= '&album=' . rawurlencode($samdata['album']);
             }
-            if ($samdata['songtype'] === 'A') {
+            if ('A' === $samdata['songtype']) {
                 $tunein_url .= '&commercial=true';
             }
         }
@@ -902,7 +902,7 @@ function uhqradio_reqallowed($chid = 1)
 
     // If SAM integration is disabled, requests are not allowed.
 
-    if (uhqradio_samint() === false) {
+    if (false === uhqradio_samint()) {
         $uhqradio_request = false;
 
         return false;
@@ -913,7 +913,7 @@ function uhqradio_reqallowed($chid = 1)
 
     $djonair = uhqradio_dj_onair($chid);
 
-    if ($djonair === false) {
+    if (false === $djonair) {
         $uhqradio_request = false;
 
         return false;
@@ -923,7 +923,7 @@ function uhqradio_reqallowed($chid = 1)
 
     $djinfo = uhqradio_dj_info($djonair['djid']);
 
-    if ($djinfo === false) {
+    if (false === $djinfo) {
         $uhqradio_request = false;
 
         return false;

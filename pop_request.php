@@ -39,7 +39,7 @@ function uhqradio_request_dorequest($songid)
     $xmldata = null;
 
     // Return a blank block if SAM Integration isn't enabled.
-    if (uhqradio_samint() === false) {
+    if (false === uhqradio_samint()) {
         $block['samint'] = 0;
 
         return $block;
@@ -58,14 +58,14 @@ function uhqradio_request_dorequest($songid)
 
     $info = uhqradio_dj_onair(1);
 
-    if ($info === false) {
+    if (false === $info) {
         $block['code']    = '901';
         $block['message'] = _MB_UHQRADIO_ERROR . $xoopsDB->error();
 
         return $block;
     }
 
-    if ($info['djip'] == 0) {
+    if (0 == $info['djip']) {
         $data['code']   = '902';
         $block['error'] = 'No Source IP Found';
 
@@ -97,7 +97,7 @@ function uhqradio_request_dorequest($songid)
     // Open Remote Database
 
     $samdb = uhqradio_sam_opendb($info['djid'], $info['djip']);
-    if ($samdb === false) {
+    if (false === $samdb) {
         $block['error'] = 'Unable to contact DB ' . $info['djid'] . ' at ' . $info['djip'];
 
         return $block;

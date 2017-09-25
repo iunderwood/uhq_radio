@@ -57,7 +57,7 @@ switch ($op) {
             $query  = uhqradio_airform_insertquery($sane_REQUEST);
             $result = $xoopsDB->queryF($query);
 
-            if ($result === false) {
+            if (false === $result) {
                 redirect_header('airstaff.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                 break;
             } else {
@@ -77,7 +77,7 @@ switch ($op) {
             $query .= " WHERE djid = '" . $sane_REQUEST['djid'] . '\'';
 
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 redirect_header('airstaff.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                 break;
             }
@@ -86,7 +86,7 @@ switch ($op) {
                 // Make Changes
                 $query  = uhqradio_airform_updatequery($sane_REQUEST);
                 $result = $xoopsDB->queryF($query);
-                if ($result === false) {
+                if (false === $result) {
                     redirect_header('airstaff.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                     break;
                 } else {
@@ -111,7 +111,7 @@ switch ($op) {
             $query .= " WHERE djid = '" . $sane_REQUEST['djid'] . '\'';
 
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 redirect_header('airstaff.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                 break;
             }
@@ -121,7 +121,7 @@ switch ($op) {
                 $query  = 'DELETE FROM ' . $xoopsDB->prefix('uhqradio_airstaff');
                 $query  .= " WHERE djid = '" . $sane_REQUEST['djid'] . '\'';
                 $result = $xoopsDB->queryF($query);
-                if ($result === false) {
+                if (false === $result) {
                     redirect_header('airstaff.php', 30, _AM_UHQRADIO_SQLERR . $query . "\r\n" . $xoopsDB->error());
                     break;
                 } else {
@@ -145,7 +145,7 @@ switch ($op) {
             // List DJs
             $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_airstaff') . ' ORDER BY djid';
             $result = $xoopsDB->queryF($query);
-            if ($result === false) {
+            if (false === $result) {
                 $xoospTpl->assign('error', $xoopsDB->error());
             } else {
                 $data = [];

@@ -29,7 +29,7 @@ function b_uhqradio_status2_edit($options)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels');
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $form = _MB_UHQRADIO_ERROR . $xoopsDB->error();
     } else {
         $form .= "<select size=1 name='options[0]'>";

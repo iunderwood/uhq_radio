@@ -35,7 +35,7 @@ function uhqradio_airform($title, $target, $formdata = null, $op = null)
     // Draw Form
     $form = new XoopsThemeForm($title, 'airform', $target, 'post', true);
 
-    if ($op === 'edit') {
+    if ('edit' === $op) {
         // DJ Identifiers can't be changed once created.
         $form->addElement(new XoopsFormHidden('djid', $formdata['djid']));
         $form->addElement(new XoopsFormHidden('op', $op));
@@ -44,13 +44,13 @@ function uhqradio_airform($title, $target, $formdata = null, $op = null)
         $form->addElement(new XoopsFormHidden('op', 'insert'));
     }
     // Can't change users in a self-edit
-    if ($target === 'airstaff.php') {
+    if ('airstaff.php' === $target) {
         $form->addElement(new XoopsFormSelectUser(_FM_UHQRADIO_USER, 'userkey', false, $formdata['userkey'], 1, false));
     }
     /*    Changing this to a file handler
         $form->addElement(new XoopsFormText(_FM_UHQRADIO_URLPIC,"urlpic",60,120,$formdata['urlpic']) );
     */
-    if ($op === 'edit') {
+    if ('edit' === $op) {
         $form->addElement(new XoopsFormLabel(_FM_UHQRADIO_PROFILE_CURPIC, '<img src="' . $formdata['urlpic'] . '">'));
         $form->addElement(new XoopsFormFile(_FM_UHQRADIO_PROFILE_EDITPIC, 'djpic', 512000));
         $form->addElement(new XoopsFormHidden('urlpic', $formdata['urlpic']));
@@ -174,7 +174,7 @@ function uhqradio_airform_updatequery($sane_REQUEST)
             // Set Variable
             $urlpic = '/modules/uhq_radio/images/profile/' . $uploader->getSavedFileName();
             // Delete previous file, if it exists.
-            if (file_exists(XOOPS_ROOT_PATH . $sane_REQUEST['urlpic']) && ($sane_REQUEST['urlpic'] != null)) {
+            if (file_exists(XOOPS_ROOT_PATH . $sane_REQUEST['urlpic']) && (null != $sane_REQUEST['urlpic'])) {
                 $err = unlink(XOOPS_ROOT_PATH . $sane_REQUEST['urlpic']);
                 if ($err) {
                     echo "Can't delete " . XOOPS_ROOT_PATH > $sane_REQUEST['urlpic'] . ' (' . $err . ')';
@@ -222,7 +222,7 @@ function uhqradio_mountform($title, $target, $formdata = null, $op = null)
     $form = new XoopsThemeForm($title, 'mountform', $target, 'post', true);
 
     // Set some defaults if the form is blank.
-    if ($formdata == null) {
+    if (null == $formdata) {
         $formdata['type']       = 'I';
         $formdata['codec']      = 'O';
         $formdata['variance']   = 0;
@@ -230,7 +230,7 @@ function uhqradio_mountform($title, $target, $formdata = null, $op = null)
         $formdata['flag_count'] = 1;
     }
 
-    if ($op === 'edit') {
+    if ('edit' === $op) {
         $form->addElement(new XoopsFormHidden('mpid', $formdata['mpid']));
         $form->addElement(new XoopsFormHidden('op', 'edit'));
     } else {
@@ -336,7 +336,7 @@ function uhqradio_mountform_insertquery($sane_REQUEST)
     $query .= " SET server = '" . $sane_REQUEST['server'] . '\', ';
     $query .= " port = '" . $sane_REQUEST['port'] . '\', ';
     $query .= " type = '" . $sane_REQUEST['type'] . '\', ';
-    if ($sane_REQUEST['type'] === 'I') {
+    if ('I' === $sane_REQUEST['type']) {
         $query .= " mount = '" . $sane_REQUEST['mount'] . '\', ';
         $query .= " fallback = '" . $sane_REQUEST['fallback'] . '\', ';
     } else {
@@ -349,7 +349,7 @@ function uhqradio_mountform_insertquery($sane_REQUEST)
     $query .= " listeners = '" . $sane_REQUEST['listeners'] . '\', ';
     $query .= " bitrate = '" . $sane_REQUEST['bitrate'] . '\', ';
     $query .= " variance = '" . $sane_REQUEST['variance'] . '\', ';
-    if ($sane_REQUEST['type'] === 'P') {
+    if ('P' === $sane_REQUEST['type']) {
         $query .= " flag_text = '0', ";
     } else {
         $query .= " flag_text = '" . $sane_REQUEST['flag_text'] . '\', ';
@@ -373,7 +373,7 @@ function uhqradio_mountform_updatequery($sane_REQUEST)
     $query .= " SET server = '" . $sane_REQUEST['server'] . '\', ';
     $query .= " port = '" . $sane_REQUEST['port'] . '\', ';
     $query .= " type = '" . $sane_REQUEST['type'] . '\', ';
-    if ($sane_REQUEST['type'] === 'I') {
+    if ('I' === $sane_REQUEST['type']) {
         $query .= " mount = '" . $sane_REQUEST['mount'] . '\', ';
         $query .= " fallback = '" . $sane_REQUEST['fallback'] . '\', ';
     } else {
@@ -386,7 +386,7 @@ function uhqradio_mountform_updatequery($sane_REQUEST)
     $query .= " listeners = '" . $sane_REQUEST['listeners'] . '\', ';
     $query .= " bitrate = '" . $sane_REQUEST['bitrate'] . '\', ';
     $query .= " variance = '" . $sane_REQUEST['variance'] . '\', ';
-    if ($sane_REQUEST['type'] === 'P') {
+    if ('P' === $sane_REQUEST['type']) {
         $query .= " flag_text = '0', ";
     } else {
         $query .= " flag_text = '" . $sane_REQUEST['flag_text'] . '\', ';
@@ -417,7 +417,7 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
 
     // Set some defaults if the form is blank.
 
-    if ($formdata == null) {
+    if (null == $formdata) {
         $formdata['text_mpid']  = 0;
         $formdata['flag_djid']  = 0;
         $formdata['flag_d_sol'] = 0;
@@ -429,7 +429,7 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
 
     // Set the operation to pass on the form.
 
-    if ($op === 'edit') {
+    if ('edit' === $op) {
         $form->addElement(new XoopsFormHidden('chid', $formdata['chid']));
         $form->addElement(new XoopsFormHidden('op', 'edit'));
     } else {
@@ -449,7 +449,7 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints');
     $query  .= ' WHERE flag_text > 0';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // Do not add options.
     } else {
         // Load option from DB
@@ -639,7 +639,7 @@ function uhqradio_mapform($title, $target, $formdata = null, $op = null)
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints');
     $query  .= ' WHERE flag_count > 0';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         // Do not add options.
     } else {
         // Load option from DB

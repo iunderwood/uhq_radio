@@ -36,7 +36,7 @@ switch ($op) {
 
             $result = $xoopsDB->queryF($query);
 
-            if ($result === false) {
+            if (false === $result) {
                 $xoopsTpl->assign('error', $xoopsDB->error());
                 break;
             }
@@ -52,7 +52,7 @@ switch ($op) {
                     if (isset($_REQUEST['verify'])) {
                         $result = $xoopsDB->queryF(uhqradio_airform_updatequery($sane_REQUEST));
 
-                        if ($result === false) {
+                        if (false === $result) {
                             $xoopsTpl->assign('error', $xoopsDB->error());
                             break;
                         }
@@ -83,7 +83,7 @@ switch ($op) {
 
             $result = $xoopsDB->queryF($query);
 
-            if ($result === false) {
+            if (false === $result) {
                 $xoopsTpl->assign('error', $xoopsDB->error());
                 break;
             }

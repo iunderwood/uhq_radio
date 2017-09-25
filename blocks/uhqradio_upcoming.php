@@ -16,7 +16,7 @@ function b_uhqradio_upcoming_show($options)
     $block = [];
 
     // Return a blank block if SAM Integration isn't enabled.
-    if (uhqradio_samint() === false) {
+    if (false === uhqradio_samint()) {
         return false;
     }
 
@@ -24,7 +24,7 @@ function b_uhqradio_upcoming_show($options)
 
     $info = uhqradio_dj_onair($options[0]);
 
-    if ($info === false) {
+    if (false === $info) {
         if ($options[1]) {
             $block['error'] = _MB_UHQRADIO_ERROR . $xoopsDB->error();
 
@@ -35,7 +35,7 @@ function b_uhqradio_upcoming_show($options)
         }
     }
 
-    if ($info['djip'] == 0) {
+    if (0 == $info['djip']) {
         if ($options[1]) {
             $block['error'] = 'No Source IP Found';
 
@@ -49,7 +49,7 @@ function b_uhqradio_upcoming_show($options)
     // Open Database
 
     $samdb = uhqradio_sam_opendb($info['djid'], $info['djip']);
-    if ($samdb === false) {
+    if (false === $samdb) {
         if ($options[1]) {
             $block['error'] = 'Unable to contact DB ' . $info['djid'] . ' at ' . $info['djip'];
 
@@ -64,7 +64,7 @@ function b_uhqradio_upcoming_show($options)
 
     $block['upcoming'] = uhqradio_sam_upcoming($samdb, $options[2], $options[3]);
 
-    if ($block['upcoming'] === false) {
+    if (false === $block['upcoming']) {
         if ($options[1]) {
             $block['error'] = 'No Upcoming Data';
 
@@ -98,7 +98,7 @@ function b_uhqradio_upcoming_edit($options)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels');
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $form = _MB_UHQRADIO_ERROR . $xoopsDB->error();
     } else {
         $form .= "<select size=1 name='options[0]'>";
@@ -112,13 +112,13 @@ function b_uhqradio_upcoming_edit($options)
     // Show Errors?
     $form .= _MB_UHQRADIO_UPCOMING_OPT_ERR;
     $form .= "<input type='radio' name='options[1]' value= '1' ";
-    if ($options[1] == '1') {
+    if ('1' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[1]' value= '0' ";
-    if ($options[1] == '0') {
+    if ('0' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
@@ -135,13 +135,13 @@ function b_uhqradio_upcoming_edit($options)
 
     $form .= _MB_UHQRADIO_UPCOMING_OPT_IDS;
     $form .= "<input type='radio' name='options[3]' value= '1' ";
-    if ($options[3] == '1') {
+    if ('1' == $options[3]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[3]' value= '0' ";
-    if ($options[3] == '0') {
+    if ('0' == $options[3]) {
         $form .= 'checked';
     }
     $form .= '>';

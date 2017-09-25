@@ -16,7 +16,7 @@ function b_uhqradio_onair_show($options)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels') . " WHERE chid = '" . $options[0] . '\'';
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         if ($options[1]) {
             $block['error'] = _MB_UHQRADIO_ERROR . $xoopsDB->error();
 
@@ -32,13 +32,13 @@ function b_uhqradio_onair_show($options)
 
     // Verify that we're using the DJ info ... and that there's a text mountpoint set.
 
-    if (($channel['flag_djid'] == 1) && ($channel['text_mpid'] > 0)) {
+    if ((1 == $channel['flag_djid']) && ($channel['text_mpid'] > 0)) {
 
         // Find text mountpoint
 
         $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints') . " WHERE mpid = '" . $block['channel']['text_mpid'] . '\'';
         $result = $xoopsDB->queryF($query);
-        if ($result === false) {
+        if (false === $result) {
             if ($options[1]) {
                 $block['error'] = _MB_UHQRADIO_ERROR . $xoopsDB->error();
 
@@ -73,7 +73,7 @@ function b_uhqradio_onair_show($options)
 
         $cleanxml = uhqradio_scrubxml($xmldata, $mountinfo['type'], $mountinfo['mount'], $mountinfo['fallback']);
 
-        if ($cleanxml === false) {
+        if (false === $cleanxml) {
             if ($options[1]) {
                 $block['error'] = _MB_UHQRADIO_ERROR_MNF;
 
@@ -89,7 +89,7 @@ function b_uhqradio_onair_show($options)
 
         // Load show name if we're using it.
 
-        if ($channel['flag_show'] == 1) {
+        if (1 == $channel['flag_show']) {
             $showname = uhqradio_getinfos($cleanxml, $mountinfo['type'], $channel['flag_s_sol'], $channel['delim_sh_s'], $channel['flag_s_eol'], $channel['delim_sh_e']);
         }
 
@@ -98,7 +98,7 @@ function b_uhqradio_onair_show($options)
         $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_airstaff') . " WHERE djid = '" . $djid . '\'';
         $result = $xoopsDB->queryF($query);
 
-        if ($result === false) {
+        if (false === $result) {
             if ($options[1]) {
                 $block['error'] = _MB_UHQRADIO_ERROR . $xoopsDB->error();
 
@@ -149,7 +149,7 @@ function b_uhqradio_onair_edit($options)
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_channels');
     $result = $xoopsDB->queryF($query);
-    if ($result === false) {
+    if (false === $result) {
         $form = _MB_UHQRADIO_ERROR . $xoopsDB->error();
     } else {
         $form .= "<select size=1 name='options[0]'>";
@@ -163,13 +163,13 @@ function b_uhqradio_onair_edit($options)
     // Show Errors?
     $form .= _MB_UHQRADIO_ONAIR_OPT_ERR;
     $form .= "<input type='radio' name='options[1]' value= '1' ";
-    if ($options[1] == '1') {
+    if ('1' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';
     $form .= _MB_UHQRADIO_YES;
     $form .= "<input type='radio' name='options[1]' value= '0' ";
-    if ($options[1] == '0') {
+    if ('0' == $options[1]) {
         $form .= 'checked';
     }
     $form .= '>';

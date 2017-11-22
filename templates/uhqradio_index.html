@@ -1,0 +1,45 @@
+<h3><{$smarty.const._MD_UHQRADIO_INDEX_HEADER}></h3>
+<hr>
+<{if $shistory}>
+  <h4><{$smarty.const._MD_UHQRADIO_SHIST_HDR1}><{$shistory.count}><{$smarty.const._MD_UHQRADIO_SHIST_HDR2}></h4>
+  <div class="some_div">
+  <table>
+    <tr>
+      <th>-</th>
+      <th><{$smarty.const._MD_UHQRADIO_SHIST_ARTIST}></th>
+      <th><{$smarty.const._MD_UHQRADIO_SHIST_TITLE}></th>
+      <th><{$smarty.const._MD_UHQRADIO_SHIST_ALBUM}></th>
+      <th width=1%><{$smarty.const._MD_UHQRADIO_SHIST_YEAR}></th>
+    </tr>
+    <{foreach item=list from=$shistory.history}>
+      <tr>
+        <td><{if $list.requestID >0}>R<{/if}></td>
+        <td><{if $list.artist}><{$list.artist}><{else}>-<{/if}></td>
+        <td><{if $list.track}><{$list.track}><{else}>-<{/if}></td>
+        <td><{if $list.album}><{$list.album}><{else}>-<{/if}></td>
+        <td><{if $list.albumyear}><{$list.albumyear}><{else}>-<{/if}></td>
+      </tr>
+    <{/foreach}>
+  </table>
+  </div>
+  <hr>
+  <div class="some_div">
+  <h4>Top <{$reqchart.count}> Requests of All Time</h4>
+  <table>
+    <tr>
+        <th width=1%>Reqs</th>
+        <th>Song</th>
+        <th>Album</th>
+    </tr>
+    <{foreach item=list from=$reqchart.request}>
+    <tr>
+        <td><{$list.reqs}></td>
+        <td><{$list.artist}> - <{$list.track}></td>
+        <td><{$list.album}></td>
+    </tr>
+    <{/foreach}>
+  </table>
+  <hr>
+<{else}>
+  <h4><{$smarty.const._MD_UHQRADIO_SHIST_NA}></h4>
+<{/if}>

@@ -287,7 +287,7 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
 
     if ($oldversion < 12) {
         // Remove unused template file.
-        unlink(XOOPS_ROOT_PATH . '/modules/uhq_radio/templates/uhqradio_ecu.html');
+        unlink(XOOPS_ROOT_PATH . '/modules/uhq_radio/templates/uhqradio_ecu.tpl');
 
         $oldversion = 12;
     }

@@ -5,23 +5,19 @@ use Xmf\Module\Helper;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
-//$path = dirname(dirname(dirname(__DIR__)));
-//require_once $path . '/mainfile.php';
+use Xoopsmodules\uhqradio;
 
-$moduleDirName = basename(dirname(__DIR__));
+require_once __DIR__ . '/../class/Helper.php';
+//require_once __DIR__ . '/../include/common.php';
+$helper = uhqradio\Helper::getInstance();
 
-if (false !== ($moduleHelper = Helper::getHelper($moduleDirName))) {
-} else {
-    $moduleHelper = Helper::getHelper('system');
-}
-$pathIcon32    = Admin::menuIconPath('');
-$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
-xoops_loadLanguage('modinfo', $moduleDirName);
 $adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_0,
     'link'  => 'admin/index.php',
-    'icon'  => $pathIcon32 . '/menu_index.png'
+    'icon'  => $pathModIcon32 . '/menu_index.png'
 ];
 
 $adminmenu[] = [
@@ -49,7 +45,7 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
-    'title' => _AM_MODULEADMIN_ABOUT,
+    'title' => _MI_UHQRADIO_ADMENU_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png'
 ];

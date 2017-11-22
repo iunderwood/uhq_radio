@@ -36,7 +36,7 @@ if (isset($_REQUEST['op'])) {
 
 // Do the Header
 
-$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_playlist.html';
+$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_playlist.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 

@@ -1,7 +1,7 @@
 <?php
 include __DIR__ . '/../../mainfile.php';
 
-$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_sm_songhistory.html';
+$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_sm_songhistory.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 

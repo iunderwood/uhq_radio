@@ -1,5 +1,5 @@
 <?php
-include __DIR__ . '/../../../mainfile.php';
+require_once __DIR__ . '/admin_header.php';
 include XOOPS_ROOT_PATH . '/include/cp_header.php';
 
 include __DIR__ . '/functions.inc.php';
@@ -24,8 +24,7 @@ if (isset($_REQUEST['op'])) {
 }
 
 xoops_cp_header();
-
-//adminMenu(3);
+$adminObject->displayNavigation(basename(__FILE__));
 
 // Do sanity checks here
 

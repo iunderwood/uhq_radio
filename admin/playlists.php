@@ -1,11 +1,10 @@
 <?php
-include __DIR__ . '/../../../mainfile.php';
+require_once __DIR__ . '/admin_header.php';
 include XOOPS_ROOT_PATH . '/include/cp_header.php';
 include __DIR__ . '/header.php';
 
 xoops_cp_header();
-
-//adminMenu(4);
+$adminObject->displayNavigation(basename(__FILE__));
 
 echo _AM_UHQRADIO_NOTHINGTOSET;
 

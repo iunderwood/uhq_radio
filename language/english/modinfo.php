@@ -72,6 +72,9 @@ define('_MI_UHQRADIO_ADMENU_1', 'Airstaff');
 define('_MI_UHQRADIO_ADMENU_2', 'Mountpoints');
 define('_MI_UHQRADIO_ADMENU_3', 'Channels');
 define('_MI_UHQRADIO_ADMENU_4', 'Playlists');
+define('_MI_UHQRADIO_ADMENU_ABOUT', 'About');
+
+
 
 // Template Descriptions
 

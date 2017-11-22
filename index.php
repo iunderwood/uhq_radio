@@ -26,7 +26,7 @@ $data = [];
 
 // Do the Header
 
-$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_index.html';
+$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_index.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 

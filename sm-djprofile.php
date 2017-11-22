@@ -20,7 +20,7 @@ if (isset($_REQUEST['op'])) {
 
 // Do the Header
 
-$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_djprofile.html';
+$GLOBALS['xoopsOption']['template_main'] = 'uhqradio_djprofile.tpl';
 
 include XOOPS_ROOT_PATH . '/header.php';
 

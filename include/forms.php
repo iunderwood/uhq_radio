@@ -37,35 +37,35 @@ function uhqradio_airform($title, $target, $formdata = null, $op = null)
 
     if ('edit' === $op) {
         // DJ Identifiers can't be changed once created.
-        $form->addElement(new XoopsFormHidden('djid', $formdata['djid']));
+        $form->addElement(new XoopsFormHidden('djid', isset($formdata['djid'])?: ''));
         $form->addElement(new XoopsFormHidden('op', $op));
     } else {
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_DJID, 'djid', 5, 5, $formdata['djid']), true);
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_DJID, 'djid', 5, 5, isset($formdata['djid'])?: ''), true);
         $form->addElement(new XoopsFormHidden('op', 'insert'));
     }
     // Can't change users in a self-edit
     if ('airstaff.php' === $target) {
-        $form->addElement(new XoopsFormSelectUser(_FM_UHQRADIO_USER, 'userkey', false, $formdata['userkey'], 1, false));
+        $form->addElement(new XoopsFormSelectUser(_FM_UHQRADIO_USER, 'userkey', false, isset($formdata['userkey'])?: '', 1, false));
     }
     /*    Changing this to a file handler
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_URLPIC,"urlpic",60,120,$formdata['urlpic']) );
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_URLPIC,"urlpic",60,120,$formdata['urlpic'])?: '') );
     */
     if ('edit' === $op) {
-        $form->addElement(new XoopsFormLabel(_FM_UHQRADIO_PROFILE_CURPIC, '<img src="' . $formdata['urlpic'] . '">'));
+        $form->addElement(new XoopsFormLabel(_FM_UHQRADIO_PROFILE_CURPIC, '<img src="' . isset($formdata['urlpic'])?: '' . '">'));
         $form->addElement(new XoopsFormFile(_FM_UHQRADIO_PROFILE_EDITPIC, 'djpic', 512000));
-        $form->addElement(new XoopsFormHidden('urlpic', $formdata['urlpic']));
+        $form->addElement(new XoopsFormHidden('urlpic', isset($formdata['urlpic'])?: ''));
     } else {
         $form->addElement(new XoopsFormFile(_FM_UHQRADIO_PROFILE_PIC, 'djpic', 512000));
     }
     $form->setExtra('enctype="multipart/form-data"');
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_URLSITE, 'urlsite', 60, 120, $formdata['urlsite']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_URLSITE, 'urlsite', 60, 120, isset($formdata['urlsite'])?: ''));
 
-    $form->addElement(new XoopsFormTextArea(_FM_UHQRADIO_PLAYGAME, 'play_ga', $formdata['play_ga'], 2, 60));
-    $form->addElement(new XoopsFormTextArea(_FM_UHQRADIO_PLAYMUSIC, 'play_mu', $formdata['play_mu'], 2, 60));
-    $form->addElement(new XoopsFormDhtmlTextArea(_FM_UHQRADIO_BLURB, 'blurb', $formdata['blurb'], 10, 60));
+    $form->addElement(new XoopsFormTextArea(_FM_UHQRADIO_PLAYGAME, 'play_ga', isset($formdata['play_ga'])?: '', 2, 60));
+    $form->addElement(new XoopsFormTextArea(_FM_UHQRADIO_PLAYMUSIC, 'play_mu', isset($formdata['play_mu'])?: '', 2, 60));
+    $form->addElement(new XoopsFormDhtmlTextArea(_FM_UHQRADIO_BLURB, 'blurb', isset($formdata['blurb'])?: '', 10, 60));
 
-    $form_c = new XoopsFormRadio(_FM_UHQRADIO_REQUESTS, 'flag_req', $formdata['flag_req']);
+    $form_c = new XoopsFormRadio(_FM_UHQRADIO_REQUESTS, 'flag_req', isset($formdata['flag_req'])?: '');
     $form_c->addOption(1, _FM_UHQRADIO_REQ_OK);
     $form_c->addOption(0, _FM_UHQRADIO_REQ_NOK);
 
@@ -74,11 +74,11 @@ function uhqradio_airform($title, $target, $formdata = null, $op = null)
     // Enable SAM Broadcaster fields if enabled.
     if (uhqradio_samint()) {
         $form->insertBreak(_FM_UHQRADIO_SAMDB_HDR);
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLP, 'rdb_port', 5, 5, $formdata['rdb_port']));
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLDB, 'rdb_name', 20, 20, $formdata['rdb_name']));
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLUN, 'rdb_user', 20, 20, $formdata['rdb_user']));
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLPW, 'rdb_pass', 20, 20, $formdata['rdb_pass']));
-        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_HTTP, 'sam_port', 5, 5, $formdata['sam_port']));
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLP, 'rdb_port', 5, 5, isset($formdata['rdb_port'])?: ''));
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLDB, 'rdb_name', 20, 20, isset($formdata['rdb_name'])?: ''));
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLUN, 'rdb_user', 20, 20, isset($formdata['rdb_user'])?: ''));
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_SQLPW, 'rdb_pass', 20, 20, isset($formdata['rdb_pass'])?: ''));
+        $form->addElement(new XoopsFormText(_FM_UHQRADIO_SAMDB_HTTP, 'sam_port', 5, 5, isset($formdata['sam_port'])?: ''));
     }
 
     $form->addElement(new XoopsFormButton('', 'post', $title, 'submit'));
@@ -95,14 +95,14 @@ function uhqradio_airform($title, $target, $formdata = null, $op = null)
  */
 function uhqradio_del_airform($formdata)
 {
-    $title = _FM_UHQRADIO_DELETE . ' ' . $formdata['djid'];
+    $title = _FM_UHQRADIO_DELETE . ' ' . isset($formdata['djid'])?: '';
 
     // Draw Form
     $form = new XoopsThemeForm($title, 'del_airform', 'airstaff.php', 'post', true);
 
     $form->addElement(new XoopsFormHidden('op', 'delete'));
     $form->addElement(new XoopsFormHidden('verify', '1'));
-    $form->addElement(new XoopsFormHidden('djid', $formdata['djid']));
+    $form->addElement(new XoopsFormHidden('djid', isset($formdata['djid'])?: ''));
 
     $form->addElement(new XoopsFormButton(_FM_UHQRADIO_DEL_AYS, 'post', $title, 'submit'));
     $form->display();
@@ -231,7 +231,7 @@ function uhqradio_mountform($title, $target, $formdata = null, $op = null)
     }
 
     if ('edit' === $op) {
-        $form->addElement(new XoopsFormHidden('mpid', $formdata['mpid']));
+        $form->addElement(new XoopsFormHidden('mpid', isset($formdata['mpid'])?: ''));
         $form->addElement(new XoopsFormHidden('op', 'edit'));
     } else {
         $form->addElement(new XoopsFormHidden('op', 'insert'));
@@ -239,47 +239,47 @@ function uhqradio_mountform($title, $target, $formdata = null, $op = null)
 
     // Start the form!
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRFQDN, 'server', 60, 120, $formdata['server']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRPORT, 'port', 5, 5, $formdata['port']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRFQDN, 'server', 60, 120, isset($formdata['server']))?: '');
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRPORT, 'port', 5, 5, isset($formdata['port'])?: ''));
 
     // Server Type
-    $form_type = new XoopsFormRadio(_FM_UHQRADIO_SVRTYPE, 'type', $formdata['type']);
+    $form_type = new XoopsFormRadio(_FM_UHQRADIO_SVRTYPE, 'type', isset($formdata['type'])?: '');
     $form_type->addOption('I', _FM_UHQRADIO_STYPE_I);
     $form_type->addOption('P', _FM_UHQRADIO_STYPE_P);
     $form_type->addOption('S', _FM_UHQRADIO_STYPE_S);
     $form->addElement($form_type);
 
     // IceCast Options
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRMOUNT, 'mount', 20, 20, $formdata['mount']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRFALLBACK, 'fallback', 20, 20, $formdata['fallback']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRMOUNT, 'mount', 20, 20, isset($formdata['mount'])?: ''));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRFALLBACK, 'fallback', 20, 20, isset($formdata['fallback'])?: ''));
 
     // Authentication Options
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRAUN, 'auth_un', 20, 20, $formdata['auth_un'], true));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRAPW, 'auth_pw', 20, 20, $formdata['auth_pw'], true));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRAUN, 'auth_un', 20, 20, isset($formdata['auth_un'])?: '', true));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRAPW, 'auth_pw', 20, 20, isset($formdata['auth_pw'])?: '', true));
 
     // Codec & Bitrate
 
-    $form_codec = new XoopsFormRadio(_FM_UHQRADIO_SVRCODE, 'codec', $formdata['codec']);
+    $form_codec = new XoopsFormRadio(_FM_UHQRADIO_SVRCODE, 'codec', isset($formdata['codec'])?: '');
     $form_codec->addOption('A', _FM_UHQRADIO_CODEC_A);
     $form_codec->addOption('M', _FM_UHQRADIO_CODEC_M);
     $form_codec->addOption('O', _FM_UHQRADIO_CODEC_O);
     $form->addElement($form_codec);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRBR, 'bitrate', 3, 3, $formdata['bitrate']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRMAX, 'listeners', 4, 4, $formdata['listeners']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRBR, 'bitrate', 3, 3, isset($formdata['bitrate'])?: ''));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRMAX, 'listeners', 4, 4, isset($formdata['listeners'])?: ''));
 
     // Listener Variance
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRVAR, 'variance', 2, 2, $formdata['variance']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_SVRVAR, 'variance', 2, 2, isset($formdata['variance'])?: ''));
 
     // Ok for Text
 
-    $form_text = new XoopsFormRadio(_FM_UHQRADIO_SVRTXT, 'flag_text', $formdata['flag_text']);
+    $form_text = new XoopsFormRadio(_FM_UHQRADIO_SVRTXT, 'flag_text', isset($formdata['flag_text'])?: '');
     $form_text->addOption(0, _FM_UHQRADIO_TEXT_NOK);
     $form_text->addOption(1, _FM_UHQRADIO_TEXT_OK);
     $form->addElement($form_text);
 
-    $form_count = new XoopsFormRadio(_FM_UHQRADIO_SVRCOUNT, 'flag_count', $formdata['flag_count']);
+    $form_count = new XoopsFormRadio(_FM_UHQRADIO_SVRCOUNT, 'flag_count', isset($formdata['flag_count'])?: '');
     $form_count->addOption(0, _FM_UHQRADIO_COUNT_NOK);
     $form_count->addOption(1, _FM_UHQRADIO_COUNT_OK);
     $form->addElement($form_count);
@@ -300,8 +300,8 @@ function uhqradio_mountform($title, $target, $formdata = null, $op = null)
  */
 function uhqradio_mountform_del($formdata)
 {
-    $title = _FM_UHQRADIO_DELETE . ' #' . $formdata['mpid'] . ': ';
-    $title .= $formdata['type'] . '=' . $formdata['server'] . ':' . $formdata['port'] . $formdata['mount'];
+    $title = _FM_UHQRADIO_DELETE . ' #' . isset($formdata['mpid'])?: '' . ': ';
+    $title .= isset($formdata['type'])?: '' . '=' . isset($formdata['server'])?: '' . ':' . isset($formdata['port'])?: '' . isset($formdata['mount'])?: '';
 
     echo _FM_UHQRADIO_MOUNT_DELWARN;
 
@@ -315,7 +315,7 @@ function uhqradio_mountform_del($formdata)
 
     $form->addElement(new XoopsFormHidden('op', 'delete'));
     $form->addElement(new XoopsFormHidden('verify', '1'));
-    $form->addElement(new XoopsFormHidden('mpid', $formdata['mpid']));
+    $form->addElement(new XoopsFormHidden('mpid', isset($formdata['mpid'])?: ''));
 
     $form->addElement(new XoopsFormButton(_FM_UHQRADIO_DEL_AYS, 'post', $title, 'submit'));
 
@@ -430,20 +430,20 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
     // Set the operation to pass on the form.
 
     if ('edit' === $op) {
-        $form->addElement(new XoopsFormHidden('chid', $formdata['chid']));
+        $form->addElement(new XoopsFormHidden('chid', isset($formdata['chid'])?: ''));
         $form->addElement(new XoopsFormHidden('op', 'edit'));
     } else {
         $form->addElement(new XoopsFormHidden('op', 'insert'));
     }
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_CHANNEL_NAME, 'chan_name', 60, 80, $formdata['chan_name']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_CHANNEL_TAG, 'chan_tag', 60, 80, $formdata['chan_tag']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_CHANNEL_WEB, 'chan_web', 60, 80, $formdata['chan_web']));
-    $form->addElement(new XoopsFormDhtmlTextArea(_FM_UHQRADIO_CHANNEL_DESC, 'chan_descr', $formdata['chan_descr'], 8, 60));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_CHANNEL_NAME, 'chan_name', 60, 80, isset($formdata['chan_name'])?: ''));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_CHANNEL_TAG, 'chan_tag', 60, 80, isset($formdata['chan_tag'])?: ''));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_CHANNEL_WEB, 'chan_web', 60, 80, isset($formdata['chan_web'])?: ''));
+    $form->addElement(new XoopsFormDhtmlTextArea(_FM_UHQRADIO_CHANNEL_DESC, 'chan_descr', isset($formdata['chan_descr'])?: '', 8, 60));
 
     // Selection of Text Info for station
 
-    $form_t = new XoopsFormSelect(_FM_UHQRADIO_TEXT_INFO, 'text_mpid', $formdata['text_mpid']);
+    $form_t = new XoopsFormSelect(_FM_UHQRADIO_TEXT_INFO, 'text_mpid', isset($formdata['text_mpid'])?: '');
     $form_t->addOption(0, _FM_UHQRADIO_TEXT_NONE);
 
     $query  = 'SELECT * FROM ' . $xoopsDB->prefix('uhqradio_mountpoints');
@@ -464,57 +464,57 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
 
     $form->insertBreak(_FM_UHQRADIO_DJINFO_HDR);
 
-    $form_d = new XoopsFormRadio(_FM_UHQRADIO_DJINFO, 'flag_djid', $formdata['flag_djid']);
+    $form_d = new XoopsFormRadio(_FM_UHQRADIO_DJINFO, 'flag_djid', isset($formdata['flag_djid'])?: '');
     $form_d->addOption(0, _FM_UHQRADIO_INFOSRC_0);
     $form_d->addOption(1, _FM_UHQRADIO_INFOSRC_1);
     $form->addElement($form_d);
 
-    $form_ds = new XoopsFormRadio(_FM_UHQRADIO_START, 'flag_d_sol', $formdata['flag_d_sol']);
+    $form_ds = new XoopsFormRadio(_FM_UHQRADIO_START, 'flag_d_sol', isset($formdata['flag_d_sol'])?: '');
     $form_ds->addOption(0, _FM_UHQRADIO_SOL);
     $form_ds->addOption(1, _FM_UHQRADIO_DELIM);
     $form->addElement($form_ds);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_START_TXT, 'delim_dj_s', 5, 5, $formdata['delim_dj_s']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_START_TXT, 'delim_dj_s', 5, 5, isset($formdata['delim_dj_s'])?: ''));
 
-    $form_de = new XoopsFormRadio(_FM_UHQRADIO_END, 'flag_d_eol', $formdata['flag_d_eol']);
+    $form_de = new XoopsFormRadio(_FM_UHQRADIO_END, 'flag_d_eol', isset($formdata['flag_d_eol'])?: '');
     $form_de->addOption(0, _FM_UHQRADIO_EOL);
     $form_de->addOption(1, _FM_UHQRADIO_DELIM);
     $form->addElement($form_de);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_END_TXT, 'delim_dj_e', 5, 5, $formdata['delim_dj_e']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_END_TXT, 'delim_dj_e', 5, 5, isset($formdata['delim_dj_e'])?: ''));
 
     // How to parse Show info
 
     $form->insertBreak(_FM_UHQRADIO_SHOWINFO_HDR);
 
-    $form_s = new XoopsFormRadio(_FM_UHQRADIO_SHOWINFO, 'flag_show', $formdata['flag_show']);
+    $form_s = new XoopsFormRadio(_FM_UHQRADIO_SHOWINFO, 'flag_show', isset($formdata['flag_show'])?: '');
     $form_s->addOption(0, _FM_UHQRADIO_INFOSRC_0);
     $form_s->addOption(1, _FM_UHQRADIO_INFOSRC_1);
     $form->addElement($form_s);
 
-    $form_ss = new XoopsFormRadio(_FM_UHQRADIO_START, 'flag_s_sol', $formdata['flag_s_sol']);
+    $form_ss = new XoopsFormRadio(_FM_UHQRADIO_START, 'flag_s_sol', isset($formdata['flag_s_sol'])?: '');
     $form_ss->addOption(0, _FM_UHQRADIO_SOL);
     $form_ss->addOption(1, _FM_UHQRADIO_DELIM);
     $form->addElement($form_ss);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_START_TXT, 'delim_sh_s', 5, 5, $formdata['delim_sh_s']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_START_TXT, 'delim_sh_s', 5, 5, isset($formdata['delim_sh_s'])?: ''));
 
-    $form_se = new XoopsFormRadio(_FM_UHQRADIO_END, 'flag_s_eol', $formdata['flag_s_eol']);
+    $form_se = new XoopsFormRadio(_FM_UHQRADIO_END, 'flag_s_eol', isset($formdata['flag_s_eol'])?: '');
     $form_se->addOption(0, _FM_UHQRADIO_EOL);
     $form_se->addOption(1, _FM_UHQRADIO_DELIM);
     $form->addElement($form_se);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_END_TXT, 'delim_sh_e', 5, 5, $formdata['delim_sh_e']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_END_TXT, 'delim_sh_e', 5, 5, isset($formdata['delim_sh_e'])?: ''));
 
     $form->insertBreak(_FM_UHQRADIO_LICENSING);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_LOUDCITY_GUID, 'lc_guid', 40, 40, $formdata['lc_guid']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_LOUDCITY_GUID, 'lc_guid', 40, 40, isset($formdata['lc_guid'])?: ''));
 
     $form->insertBreak(_FM_UHQRADIO_REPORTING);
 
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_TUNEIN_PID, 'tunein_pid', 8, 8, $formdata['tunein_pid']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_TUNEIN_PKEY, 'tunein_pkey', 12, 12, $formdata['tunein_pkey']));
-    $form->addElement(new XoopsFormText(_FM_UHQRADIO_TUNEIN_SID, 'tunein_sid', 8, 8, $formdata['tunein_sid']));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_TUNEIN_PID, 'tunein_pid', 8, 8, isset($formdata['tunein_pid'])?: ''));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_TUNEIN_PKEY, 'tunein_pkey', 12, 12, isset($formdata['tunein_pkey'])?: ''));
+    $form->addElement(new XoopsFormText(_FM_UHQRADIO_TUNEIN_SID, 'tunein_sid', 8, 8, isset($formdata['tunein_sid'])?: ''));
 
     $form->addElement(new XoopsFormButton('', 'post', $title, 'submit'));
 
@@ -530,7 +530,7 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
  */
 function uhqradio_channelform_del($formdata)
 {
-    $title = _FM_UHQRADIO_DELETE . ' ' . $formdata['chan_name'] . ': ';
+    $title = _FM_UHQRADIO_DELETE . ' ' . isset($formdata['chan_name'])?: '' . ': ';
 
     echo _FM_UHQRADIO_CHANNEL_DELWARN;
 
@@ -539,7 +539,7 @@ function uhqradio_channelform_del($formdata)
 
     $form->addElement(new XoopsFormHidden('op', 'delete'));
     $form->addElement(new XoopsFormHidden('verify', '1'));
-    $form->addElement(new XoopsFormHidden('chid', $formdata['chid']));
+    $form->addElement(new XoopsFormHidden('chid', isset($formdata['chid'])?: ''));
 
     $form->addElement(new XoopsFormButton(_FM_UHQRADIO_DEL_AYS, 'post', $title, 'submit'));
 
@@ -651,7 +651,7 @@ function uhqradio_mapform($title, $target, $formdata = null, $op = null)
     $form->addElement($form_c);
 
     $form->addElement(new XoopsFormButton('', 'post', $title, 'submit'));
-    $form->addElement(new XoopsFormHidden('chid', $formdata['chid']));
+    $form->addElement(new XoopsFormHidden('chid', isset($formdata['chid'])?: ''));
     $form->addElement(new XoopsFormHidden('op', 'addch'));
     $form->addElement(new XoopsFormHidden('verify', '1'));
 

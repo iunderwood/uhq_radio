@@ -19,7 +19,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-include __DIR__ . '/../../../mainfile.php';
+require_once __DIR__ . '/admin_header.php';
 include XOOPS_ROOT_PATH . '/include/cp_header.php';
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -45,7 +45,7 @@ if (isset($_REQUEST['op'])) {
 }
 
 xoops_cp_header();
-//adminMenu(1);
+$adminObject->displayNavigation(basename(__FILE__));
 
 // Do sanity checks here
 

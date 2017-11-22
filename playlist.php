@@ -1,15 +1,15 @@
 <?php
 
-include '../../mainfile.php';
-include 'include/sanity.php';
-include 'include/functions.php';
-require_once (XOOPS_ROOT_PATH.'/modules/uhq_radio/include/rawdata.php');
-require_once (XOOPS_ROOT_PATH.'/modules/uhq_radio/include/modoptions.php');
-require_once (XOOPS_ROOT_PATH.'/modules/uhq_radio/include/sambc.php');
+include __DIR__ . '/../../mainfile.php';
+include __DIR__ . '/include/sanity.php';
+include __DIR__ . '/include/functions.php';
+require_once(XOOPS_ROOT_PATH.'/modules/uhq_radio/include/rawdata.php');
+require_once(XOOPS_ROOT_PATH.'/modules/uhq_radio/include/modoptions.php');
+require_once(XOOPS_ROOT_PATH.'/modules/uhq_radio/include/sambc.php');
 
 $sane_REQUEST = uhqradio_dosanity();
 
-if ( isset($_REQUEST['op']) ) {
+if (isset($_REQUEST['op'])) {
     $op = $_REQUEST['op'];
 } else {
     $op = "none";
@@ -17,7 +17,7 @@ if ( isset($_REQUEST['op']) ) {
 
 // Do the Header
 
-$xoopsOption['template_main'] = "uhqradio_playlist.tpl";
+$GLOBALS['xoopsOption']['template_main'] = "uhqradio_playlist.tpl";
 
 include XOOPS_ROOT_PATH."/header.php";
 
@@ -25,7 +25,7 @@ include XOOPS_ROOT_PATH."/header.php";
 
 $data = array();
 
-function uhqradio_playlist_dopage($start=0,$limit=20, $search=null)
+function uhqradio_playlist_dopage($start=0, $limit=20, $search=null)
 {
     global $xoopsDB;
     global $samdb;
@@ -33,7 +33,7 @@ function uhqradio_playlist_dopage($start=0,$limit=20, $search=null)
     $block = array();
 
     // Return a blank block if SAM Integration isn't enabled.
-    if (uhqradio_samint() == false) {
+    if (uhqradio_samint() === false) {
         $block['samint'] = 0;
 
         return $block;
@@ -44,7 +44,7 @@ function uhqradio_playlist_dopage($start=0,$limit=20, $search=null)
 
     $info = uhqradio_dj_onair(1);
 
-    if ($info == false) {
+    if ($info === false) {
         $block['error'] = _MB_UHQRADIO_ERROR.$xoopsDB->error();
 
         return $block;
@@ -59,7 +59,7 @@ function uhqradio_playlist_dopage($start=0,$limit=20, $search=null)
     // Open Database
 
     $samdb = uhqradio_sam_opendb($info['djid'], $info['djip']);
-    if ($samdb == false) {
+    if ($samdb === false) {
         $block['error'] = "Unable to contact DB ".$info['djid']." at ".$info['djip'];
 
         return $block;
@@ -67,12 +67,12 @@ function uhqradio_playlist_dopage($start=0,$limit=20, $search=null)
 
     // Build out search query.
 
-    $where = uhqradio_sam_where($search,0);
+    $where = uhqradio_sam_where($search, 0);
 
     // Get Song Count
 
-    $block['trackcount'] = uhqradio_sam_countpl($samdb,$where);
-    $block['tracklist'] = uhqradio_sam_displaypl($samdb,$where,$start,$limit);
+    $block['trackcount'] = uhqradio_sam_countpl($samdb, $where);
+    $block['tracklist'] = uhqradio_sam_displaypl($samdb, $where, $start, $limit);
     $block['start'] = $start;
     $block['limit'] = $limit;
 
@@ -86,24 +86,26 @@ function uhqradio_playlist_dopage($start=0,$limit=20, $search=null)
 // Initialize start if it's not in the URL.
 
 $start=0;
-if (isset($sane_REQUEST['pl_start'])) $start = $sane_REQUEST['pl_start'];
+if (isset($sane_REQUEST['pl_start'])) {
+    $start = $sane_REQUEST['pl_start'];
+}
 
 // Initialize limit
 
 $limit=15;
 
-if ( isset($sane_REQUEST['pl_limit']) ) {
+if (isset($sane_REQUEST['pl_limit'])) {
     // Take limit from command line and pass to a cookie.  Good for 7 days.
     $limit = $sane_REQUEST['pl_limit'];
-    setcookie("pl_limit_cookie",$limit,time()+86400*7);
-} elseif ( isset($_COOKIE['pl_limit_cookie']) ) {
+    setcookie("pl_limit_cookie", $limit, time()+86400*7);
+} elseif (isset($_COOKIE['pl_limit_cookie'])) {
     // Check and assign limit from cookie.
-    if ( intval($_COOKIE['pl_limit_cookie']) < 0 ) {
+    if (intval($_COOKIE['pl_limit_cookie']) < 0) {
         $limit = 5;
-        setcookie("pl_limit_cookie",$limit,time()+86400*7);
-    } elseif ( intval($_COOKIE['pl_limit_cookie']) > 50 ) {
+        setcookie("pl_limit_cookie", $limit, time()+86400*7);
+    } elseif (intval($_COOKIE['pl_limit_cookie']) > 50) {
         $limit = 50;
-        setcookie("pl_limit_cookie",$limit,time()+86400*7);
+        setcookie("pl_limit_cookie", $limit, time()+86400*7);
     } else {
         $limit = intval($_COOKIE['pl_limit_cookie']);
     }
@@ -117,7 +119,7 @@ if (isset($sane_REQUEST['pl_search'])) {
     $search = null;
 }
 
-$data = uhqradio_playlist_dopage($start,$limit,$search);
+$data = uhqradio_playlist_dopage($start, $limit, $search);
 
 $data['increments'][0] = 5;
 $dara['increments'][1] = 10;
@@ -125,12 +127,12 @@ $data['increments'][2] = 15;
 $data['increments'][3] = 25;
 $data['increments'][4] = 50;
 
-if (isset ($_REQUEST['pl_search']) ) {
+if (isset($_REQUEST['pl_search'])) {
     $data['rawsearch'] = stripslashes($search);
     $data['urlsearch'] = urlencode($data['rawsearch']);
 }
 
-$xoopsTpl->assign('data',$data);
+$xoopsTpl->assign('data', $data);
 
 // Do the Footer
 

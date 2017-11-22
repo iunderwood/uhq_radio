@@ -222,7 +222,7 @@ function uhqradio_mountform($title, $target, $formdata = null, $op = null)
     $form = new XoopsThemeForm($title, 'mountform', $target, 'post', true);
 
     // Set some defaults if the form is blank.
-    if (null == $formdata) {
+    if (null === $formdata) {
         $formdata['type']       = 'I';
         $formdata['codec']      = 'O';
         $formdata['variance']   = 0;
@@ -417,7 +417,7 @@ function uhqradio_channelform($title, $target, $formdata = null, $op = null)
 
     // Set some defaults if the form is blank.
 
-    if (null == $formdata) {
+    if (null === $formdata) {
         $formdata['text_mpid']  = 0;
         $formdata['flag_djid']  = 0;
         $formdata['flag_d_sol'] = 0;

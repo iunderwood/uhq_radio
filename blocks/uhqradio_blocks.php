@@ -31,7 +31,7 @@ function b_uhqradio_status_show($options)
 
     // Load Channel Info
     $channel = $xoopsDB->fetchArray($result);
-    if (null == $channel['chid']) {
+    if (null === $channel['chid']) {
         $block['status']    = _MB_UHQRADIO_OFFAIR;
         $block['statusimg'] = _MB_UHQRADIO_OFFAIR_IMG;
         $block['error']     = 1;

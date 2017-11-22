@@ -31,7 +31,7 @@ function uhqradio_data_status($chid)
 
     // Load Channel Info
     $channel = $xoopsDB->fetchArray($result);
-    if (null == $channel['chid']) {
+    if (null === $channel['chid']) {
         $data['error'] = _MD_UHQRADIO_XMLSTATUS_CND;
 
         return $data;

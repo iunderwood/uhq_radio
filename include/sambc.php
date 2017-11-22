@@ -250,7 +250,7 @@ function uhqradio_sam_countpl($samdb, $where = null)
 
         return false;
     } else {
-        list($count) = mysqli_fetch_row($result);
+        list($count) = $GLOBALS['xoopsDB']->fetchRow($result);
     }
 
     return $count;
@@ -294,7 +294,7 @@ function uhqradio_sam_countalbum($samdb, $where = null)
 
         return false;
     } else {
-        list($count) = mysqli_fetch_row($result);
+        list($count) = $GLOBALS['xoopsDB']->fetchRow($result);
     }
 
     return $count;
@@ -338,7 +338,7 @@ function uhqradio_sam_countartist($samdb, $where = null)
 
         return false;
     } else {
-        list($count) = mysqli_fetch_row($result);
+        list($count) = $GLOBALS['xoopsDB']->fetchRow($result);
     }
 
     return $count;

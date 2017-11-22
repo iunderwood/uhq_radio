@@ -10,8 +10,8 @@ include __DIR__ . '/include/functions.php';
 
 // Set a referrer.
 
-if ($_SERVER['HTTP_REFERER']) {
-    $refer = $_SERVER['HTTP_REFERER'];
+if (Request::getString('HTTP_REFERER', '', 'SERVER')) {
+    $refer = Request::getString('HTTP_REFERER', '', 'SERVER');
 } else {
     $refer = '/';
 }
@@ -213,7 +213,7 @@ if ($_REQUEST['op']) {
 
     // Handle if there is no operation
 
-    if ($_SERVER['HTTP_REFERER']) {
+    if (Request::getString('HTTP_REFERER', '', 'SERVER')) {
         redirect_header($refer, 1, _MD_UHQRADIO_ERROR_NOOP);
     } else {
         redirect_header('/', 1, _MD_UHQRADIO_ERROR_DIRECT);

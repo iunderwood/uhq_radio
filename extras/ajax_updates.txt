@@ -9,85 +9,85 @@ The four <div> tags at the end represent where the actual information will be pl
 <script type="text/javascript">
 <!--
 function uhqradioStatus() {
-	var xmlhttp;
+    var xmlhttp;
 
-	// Initialize XML HTTP Object
-	xmlhttp=getXmlHttpObject();
-	if (xmlhttp==null) {
-		document.getElementByID("uhqradio_status").innerHTML="AJAX Not Supported";
-		return
-	}
+    // Initialize XML HTTP Object
+    xmlhttp=getXmlHttpObject();
+    if (xmlhttp==null) {
+        document.getElementByID("uhqradio_status").innerHTML="AJAX Not Supported";
+        return
+    }
 
-	xmlhttp.onreadystatechange=function() {
-		if ( (xmlhttp.readyState==4) && (xmlhttp.status==200) ) {
-			xmldoc = xmlhttp.responseXML.documentElement;
-			
-			blk_status = xmldoc.getElementsByTagName("status")[0].childNodes[0].nodeValue;
-			if (blk_status == 1) {
-				blk_status_div = "<img src='/modules/uhq_radio/language/english/onair.png' alt='On-Air'>";
-				document.getElementById("uhqradio_status").innerHTML = blk_status_div;
-				
-				if (xmldoc.getElementsByTagName("showname")[0]) {
-					blk_statusdetail = xmldoc.getElementsByTagName("showname")[0].childNodes[0].nodeValue;
-					document.getElementById("uhqradio_statusdetail").innerHTML = blk_statusdetail;
-				} else {
-					document.getElementById("uhqradio_statusdetail").innerHTML = null;
-				}
-								
-				blk_title = xmldoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
-				if (blk_title != null) {
-					blk_nowplaying = "<hr/><b>Now Playing:</b> <br/>";
-					
-					if (xmldoc.getElementsByTagName("artist")[0]) {
-						blk_artist = xmldoc.getElementsByTagName("artist")[0].childNodes[0].nodeValue;
-						if (blk_artist != null) {
-							blk_nowplaying = blk_nowplaying+"<u>"+blk_artist+"</u><br/>";
-						}
-					}
+    xmlhttp.onreadystatechange=function() {
+        if ( (xmlhttp.readyState==4) && (xmlhttp.status==200) ) {
+            xmldoc = xmlhttp.responseXML.documentElement;
 
-					blk_nowplaying = blk_nowplaying+blk_title;
-					document.getElementById("uhqradio_nowplaying").innerHTML = blk_nowplaying;
-				} else {
-					document.getElementById("uhqradio_nowplaying").innerHTML = null;
-				}
-				
-				blk_listeners = xmldoc.getElementsByTagName("listeners")[0].childNodes[0].nodeValue;
-				if (blk_listeners != null) {
-					if (blk_listeners == 0) {
-						blk_listeners_div = "Nobody is listening.";
-					} else if (blk_listeners == 1) {
-						blk_listeners_div = "One listener!";
-					} else {
-						blk_listeners_div = "Listeners: "+blk_listeners;
-					}
-					hrdone = 1;
-					document.getElementById("uhqradio_listeners").innerHTML = "<hr/>"+blk_listeners_div;					
-				} else {
-					document.getElementByID("uhqradio_listeners").innerHTML = null;
-				}
+            blk_status = xmldoc.getElementsByTagName("status")[0].childNodes[0].nodeValue;
+            if (blk_status == 1) {
+                blk_status_div = "<img src='/modules/uhq_radio/language/english/onair.png' alt='On-Air'>";
+                document.getElementById("uhqradio_status").innerHTML = blk_status_div;
 
-			} else {
-				document.getElementById("uhqradio_status").innerHTML="<img src='/modules/uhq_radio/language/english/offair.png' alt='Off-Air'>";
-				document.getElementById("uhqradio_nowplaying").innerHTML = null;
-				document.getElementByID("uhqradio_listeners").innerHTML = null;
-			}
-		}
-	}
-	
-	xmlhttp.open("GET","/modules/uhq_radio/xml_status.php?chid=1",true);
-	xmlhttp.send(null);
+                if (xmldoc.getElementsByTagName("showname")[0]) {
+                    blk_statusdetail = xmldoc.getElementsByTagName("showname")[0].childNodes[0].nodeValue;
+                    document.getElementById("uhqradio_statusdetail").innerHTML = blk_statusdetail;
+                } else {
+                    document.getElementById("uhqradio_statusdetail").innerHTML = null;
+                }
+
+                blk_title = xmldoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                if (blk_title != null) {
+                    blk_nowplaying = "<hr/><b>Now Playing:</b> <br/>";
+
+                    if (xmldoc.getElementsByTagName("artist")[0]) {
+                        blk_artist = xmldoc.getElementsByTagName("artist")[0].childNodes[0].nodeValue;
+                        if (blk_artist != null) {
+                            blk_nowplaying = blk_nowplaying+"<u>"+blk_artist+"</u><br/>";
+                        }
+                    }
+
+                    blk_nowplaying = blk_nowplaying+blk_title;
+                    document.getElementById("uhqradio_nowplaying").innerHTML = blk_nowplaying;
+                } else {
+                    document.getElementById("uhqradio_nowplaying").innerHTML = null;
+                }
+
+                blk_listeners = xmldoc.getElementsByTagName("listeners")[0].childNodes[0].nodeValue;
+                if (blk_listeners != null) {
+                    if (blk_listeners == 0) {
+                        blk_listeners_div = "Nobody is listening.";
+                    } else if (blk_listeners == 1) {
+                        blk_listeners_div = "One listener!";
+                    } else {
+                        blk_listeners_div = "Listeners: "+blk_listeners;
+                    }
+                    hrdone = 1;
+                    document.getElementById("uhqradio_listeners").innerHTML = "<hr/>"+blk_listeners_div;
+                } else {
+                    document.getElementByID("uhqradio_listeners").innerHTML = null;
+                }
+
+            } else {
+                document.getElementById("uhqradio_status").innerHTML="<img src='/modules/uhq_radio/language/english/offair.png' alt='Off-Air'>";
+                document.getElementById("uhqradio_nowplaying").innerHTML = null;
+                document.getElementByID("uhqradio_listeners").innerHTML = null;
+            }
+        }
+    }
+
+    xmlhttp.open("GET","/modules/uhq_radio/xml_status.php?chid=1",true);
+    xmlhttp.send(null);
 }
 
 function getXmlHttpObject() {
-	if (window.XMLHttpRequest) {
-		// code for IE7+, Firefox, Chrome, Opera, Safari
- 		return new XMLHttpRequest();
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+         return new XMLHttpRequest();
   } else if (window.ActiveXObject){
-		// code for IE6, IE5
-		return new ActiveXObject("Microsoft.XMLHTTP");
- 	} else {
-		return null;
-	}	
+        // code for IE6, IE5
+        return new ActiveXObject("Microsoft.XMLHTTP");
+     } else {
+        return null;
+    }
 }
 
 uhqradioStatus();

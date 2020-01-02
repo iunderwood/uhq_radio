@@ -1,15 +1,13 @@
 <?php
 
-include '../../mainfile.php';
+include __DIR__ . '/../../mainfile.php';
 
-include XOOPS_ROOT_PATH."/header.php";
+include XOOPS_ROOT_PATH . '/header.php';
 
-$xoopsOption['template_main'] = 'showblock.html';
+$GLOBALS['xoopsOption']['template_main'] = 'showblock.tpl';
 
-$xoopsTpl->assign('blkid','56');
+$xoopsTpl->assign('blkid', '56');
 
-echo("bleh.");
+echo('bleh.');
 
-include XOOPS_ROOT_PATH."/footer.php";
-
-?>
+include XOOPS_ROOT_PATH . '/footer.php';

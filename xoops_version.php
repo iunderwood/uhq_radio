@@ -23,8 +23,8 @@ $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => 0.30,
-    'module_status'       => 'Beta 1',
+    'version'             => 1.00,
+    'module_status'       => 'Alpha 1',
     'release_date'        => '2021/08/06', //yyyy/mm/dd
     'name'                => _MI_UHQRADIO_NAME,
     'description'         => _MI_UHQRADIO_DESC,

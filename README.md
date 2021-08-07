@@ -1,15 +1,23 @@
-uhq-radio :: readme
+![alt XOOPS CMS](https://xoops.org/images/logoXoopsPhp8.png)
+## uhqradio module for  [XOOPS CMS 2.5.10+](https://xoops.org)
+[![XOOPS CMS Module](https://img.shields.io/badge/XOOPS%20CMS-Module-blue.svg)](https://xoops.org)
+[![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-2.0.html)
+
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/XoopsModules25x/uhqradio.svg?style=flat)](https://scrutinizer-ci.com/g/mambax7/uhqradio/?branch=master)
+[![Latest Pre-Release](https://img.shields.io/github/tag/XoopsModules25x/uhqradio.svg?style=flat)](https://github.com/mambax7/uhqradio/tags/)
+[![Latest Version](https://img.shields.io/github/release/XoopsModules25x/uhqradio.svg?style=flat)](https://github.com/mambax7/uhqradio/releases/)
+
 v0.09 release
 
 Requires cURL to be installed.
 
-##==[ Credits ]==
+## [ Credits ]
 
 Module created and maintained by Ian A. Underwood (iunderwood).
 
 Admin EXM/Oxygen Icons from the Crystal Project (http://www.everaldo.com/crystal/).
 
-##==[ Description ]==
+## [ Description ]
 
 The purpose of this module is to provide an interface for an Internet radio station within a XOOPS environment.
 
@@ -19,7 +27,7 @@ This module parses XML statistic files only, and thus you will need to get the a
 
 See changelog.txt for details, and readme.txt for configuration information.
 
-##==[ License ]==
+## [ License ]
 
 All source code for this module is licensed under the Creative Commons GNU General Public license.  All code is copyright 2008-2009 by Ian Underwood.  For more information, visit the following URL:
 
@@ -27,7 +35,7 @@ http://creativecommons.org/licenses/GPL/2.0/
 
 The full text of the GPL is included in license.txt.
 
-##==[ The Story ]==
+## [ The Story ]
 
 In the summer of 2006, shortly before my son was born, a friend and I decided to start up our own Internet radio station specializing in game OSTs during the off-time, and as a place where we could share our music with other folks online.  A previous station that both of us used to DJ at used XOOPS for its website so we thought we'd do the same.
 
@@ -39,7 +47,7 @@ During the summer of 2008, I was presented with an opportunity to develop some c
 
 Please glance over this readme.txt in full, because the module had a fair number of options.
 
-##==[ Features ]==
+## [ Features ]
 
 This module provides the following features to Internet broadcasters:
 
@@ -54,7 +62,7 @@ This module provides the following features to Internet broadcasters:
 
   Information about integrating with SAM Broadcaster can be found in the extras directory of this module.
 
-##==[ Installation & Updates ]==
+## [ Installation & Updates ]
 
 Installation is as simple and straightforward as most of the other XOOPS modules available today.  Extract the uhq_radio folder into your modules directory and use the module installer to load the module into your site.
 
@@ -62,19 +70,19 @@ Your PHP installation must allow for "allow_url_fopen" to be enabled.
 
 If you are updating from a previous version, please review the notes in the event that there are any additional steps or items to note.  You will likely need to clear your template cache.
 
-##==[ Streaming Metadata Requirements ]==
+## [ Streaming Metadata Requirements ]
 
 If you intend to use show names and DJ IDs as part of your station information, the module will attempt to extract this information from either the <server_description> tag under an IceCast mountpoint, or in the <SERVERTITLE> on ShoutCast.
 
 This solution may present some difficulty for stations that rely on the server description or title for information in their directory or YP listings.  If this is the case, it is recommended to set up a separate IceCast mountpoint or a Shoutcast instance where text information can be gleaned.  However, this second instance would then be configured to use the absolute lowest bitrate supported codec that your broadcast software is capable of.  This can be as low as 8kbps for MP3 and 14kbps for Ogg Vorbis.
 
-##==[ Admin Configuration Items ]==
+## [ Admin Configuration Items ]
 
 Before the power contained within this module can be harnessed, it must be configured appropriately from the administrative side.
 
 I will describe each configuration section as it's presented by the interface on the module.
 
-#--[ Module Preferences ]--
+### [ Module Preferences ]
 
 There's only one module-wide preference to set for now:
 
@@ -92,11 +100,11 @@ There's only one module-wide preference to set for now:
 * Enable SAM Broadcaster
   Currently, this enables features specific to the support of SAM Broadcaster to be visible to DJs and other parts of the module.
 
-#--[ Index ]--
+### [ Index ]
 
 The index is a generic page which simply gives the administrator a set of statistics for the module.  There may be some more status information and such at a future date.
 
-#--[ Airstaff ]--
+### [ Airstaff ]
 
 This section is where you can optionally define DJ IDs, and then associate that with a website account.
 
@@ -106,7 +114,7 @@ While not required for station operation, you will need this in order to use DJ 
 
 A DJID can be up to 5 characters in length and can be any combination of letters and numbers.  The ID is case sensitive, so be sure to keep that a consideration.
 
-#--[ Mount Points ]--
+### [ Mount Points ]
 
 A mount point is simply a location where an audio stream can be connected to.  At a minimum, your station needs one mountpoint in order to determine text information and listener count.
 
@@ -151,7 +159,7 @@ Configuration options:
 * Reliable count?
   This is set to suitable if the module should use the mount point as part of a counter series.
 
-#--[ Channels ]--
+### [ Channels ]
 
 A channel is a single program.  A channel can support multiple bitrates and codecs.
 
@@ -248,15 +256,15 @@ End Delimiter Text: (blank)
 
 Do take the time to find out what form will work for you.
 
-#--[ Playlists ]--
+### [ Playlists ]
 
 A playlist is simply a list of mountpoints that a listener can use to latch onto a stream.
 
 This functionality has not yet been implemented.
 
-##==[ Blocks and Block Configuration ]==
+## [ Blocks and Block Configuration ]
 
-#--[ Radio Status ]--
+### [ Radio Status ]
 
 This block shows what's playing, how many listeners are tuned in, and what the show name is, if used.
 
@@ -291,7 +299,7 @@ Block Options:
 * Use AJAX?
   Select Yes to have this block dynamically refresh with the latest information once per minute.
   
-#--[ Radio Control ]--
+### [ Radio Control ]
 
 Starting in version 0.04, the option was added to give remote start/stop and skip track capability to a station autoplayer or jukebox.  This is done by using calling out a URL to a remote system, presumably your autoplayer.  A command is deemed successful if there is an HTTP response from the autoplayer.  No further checks are performed at this time.
 
@@ -307,7 +315,7 @@ Autoplayer permission is enforced based upon who can see the control block.  The
 
 Please refer to the extras directory for information about integrating this with SpacialAudio's SAM Broadcaster.
 
-#--[ Handoff Control ]--
+### [ Handoff Control ]
 
 This block provides an interface where DJs may coordinate handoff between themselves and the autoplayer at any given time.  In the event that there is no handoff taken, the autoplayer start event will be sent.
 
@@ -345,13 +353,13 @@ Handoff permission is enforced based upon who can see the handoff block and is n
 
 Please refer to the extras directory for information about integrating this with SpacialAudio's SAM Broadcaster.
 
-#--[ DJ Panel ]--
+### [ DJ Panel ]
 
 This block will appear to a user who has a configured DJ ID in the Airstaff section.  It simply serves as a reminder to the DJ what their DJ ID is if their request flag is turned on.
 
 There are no options for this block.
 
-#--[ DJ List ]--
+### [ DJ List ]
 
 This block will list all the DJs associated with the website, and provide a hyperlink to their DJ Profile.
 
@@ -363,7 +371,7 @@ Block options:
 * Font Size
   The size of the font will be largely determined by the theme your site uses.  However, this field can override the theme setting to make the font bigger or smaller, depending on your desires.
   
-#--[ On-Air ]--
+### [ On-Air ]
 
 This block presents the photo of the DJ profile on air for a given station, along with the DJ name and show name.
 
@@ -372,17 +380,17 @@ Block options:
 * Select a channel
   Choose the channel which will be associated with this block.
   
-##==[ Module Pages ]==
+## [ Module Pages ]
 
 There are a couple of other pages which support module functions:
 
-#--[ djprofile.php ]--
+### [ djprofile.php ]
 
 This page will be contextually linked from either the DJ List or the On-Air module, and presents a DJ profile.
 
 A DJ can edit their own information, but they cannot change their DJ ID.
 
-#--[ ecu.php ]--
+### [ ecu.php ]
 
 This page triggers external cache updates, if enabled.  This function was originally written with mind to keep the website from continuously refreshing information from a streaming server.  If ECU is enabled, the cached information is never updated, except when explicitly requested.  ECU is a simple script and takes two arguments: update and updatepw.  THe update PW is the password specified in the module option.  The update type is either "pop" or "txt" which simply updates all caches that pertain to either listener counts, or song information.
 
@@ -396,7 +404,7 @@ http://your.xoops.site/modules/uhqradio/ecu.php?update=txt&updatepw=changeme
 
 ECU does not take any station-specific identifiers into account and will update caches for every unique server configured in the module.
 
-#--[ history.php ]--
+### [ history.php ]
 
 This script will process the XML cache and make a DB entry for song history or listener history data.  This option isn't turned on or off per-se in the module because things like historical recording are managed by triggers only.
 
@@ -404,7 +412,7 @@ If ECU is enabled, it is recommended that history be run shortly after the cache
 
 This page requires three parameters, chid, htype, and updatepw.
 
-#--[ xmlstatus.php ]--
+### [ xmlstatus.php ]
 
 This page will return an XML document with all the information which comprises the Radio Status block.  It does require the channel ID to be passed on the parameter line such as:
 
@@ -432,10 +440,14 @@ The information returned is as close to real time as the request is made.
 
 It is possible for an AJAX enabled web page to request this information and dynamically update its content on a regular interval with this information.  An example can be found in ajax_updates.txt in he extras folder.
 
-#==[ Requests / Bug Reports ]==
+#==[ Requests / Bug Reports ]
 
 You may drop me an email here: xoops@underwood-hq.org.
 
 If there is a specific feature or bug you are experiencing, the more information I have the better.
 
 ++I;
+
+Please visit us on https://xoops.org
+
+Current and upcoming "next generation" versions of XOOPS CMS are crafted on GitHub at: https://github.com/XOOPS

@@ -1,6 +1,6 @@
-<{if $error}>
+<{if $error|default:''}>
   <span style="color: red; "><{$smarty.const._MD_UHQRADIO_DJPROFILE_ERR}></span>: <{$error}>
-<{elseif $data}>
+<{elseif $data|default:''}>
 
 <{if $data.djcount}>
 <table class="djlist">

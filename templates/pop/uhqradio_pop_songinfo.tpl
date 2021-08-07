@@ -10,7 +10,7 @@
         win_request = window.open("pop_request.php?songid=" + songid, "songinfowin", "location=no,status=no,menubar=no,scrollbars=yes,resizeable=yes,height=300,width=650");
     }
     function uhq_nocover(source) {
-        source.src = "/modules/uhq_radio/images/nocover.png";
+        source.src = "/modules/uhqradio/images/nocover.png";
         // disable onerror to prevent endless loop
         source.onerror = "";
         return true;
@@ -115,7 +115,7 @@
                             <img src="<{$data.baseurl}>/<{$data.djid}>/<{$data.songinfo.picture}>"
                                  onError="uhq_nocover(this)" class=albumcover>
                         <{else}>
-                            <img src="/modules/uhq_radio/images/nocover.png" class=albumcover>
+                            <img src="/modules/uhqradio/images/nocover.png" class=albumcover>
                         <{/if}>
                     </td>
                 </tr>

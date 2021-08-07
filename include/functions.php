@@ -1,7 +1,14 @@
 <?php
 
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/rawdata.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/modoptions.php';
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/rawdata.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/modoptions.php';
 
 // Return minute:second display based on a duration in miliseconds.
 
@@ -85,7 +92,7 @@ function uhqradio_svrauth($type, $username = null, $password)
  */
 function uhqradio_fetchxml($ipfqdn, $port, $xmlpath, $auth, &$xmldata, $override = null)
 {
-    $cachefile = XOOPS_ROOT_PATH . '/modules/uhq_radio/cache/xml_' . $ipfqdn . '_' . $port . '.xml';
+    $cachefile = XOOPS_ROOT_PATH . '/modules/uhqradio/cache/xml_' . $ipfqdn . '_' . $port . '.xml';
 
     // Load Module Config
 
@@ -715,7 +722,7 @@ function uhqradio_updatesh($chid)
 
     false === $samdata;
     if (uhqradio_samint()) {
-        require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sambc.php';
+        require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/sambc.php';
         $info = uhqradio_dj_onair($chid);
         if (false !== $info) {
             if (0 != $info['djip']) {

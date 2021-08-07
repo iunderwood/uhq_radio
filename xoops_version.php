@@ -23,9 +23,9 @@ $moduleDirName = basename(__DIR__);
 
 // ------------------- Informations ------------------- //
 $modversion = [
-    'version'             => 0.20,
+    'version'             => 0.30,
     'module_status'       => 'Beta 1',
-    'release_date'        => '2015/06/17', //yyyy/mm/dd
+    'release_date'        => '2021/08/06', //yyyy/mm/dd
     'name'                => _MI_UHQRADIO_NAME,
     'description'         => _MI_UHQRADIO_DESC,
     'official'            => 1, //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
@@ -42,9 +42,9 @@ $modversion = [
     //
     'manual'              => 'link to manual file',
     'manual_file'         => XOOPS_URL . '/modules/{$moduleDirName}/docs/install.txt',
-    'min_php'             => '5.5',
-    'min_xoops'           => '2.5.9',
-    'min_admin'           => '1.1',
+    'min_php'             => '7.2',
+    'min_xoops'           => '2.5.10',
+    'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.5'],
     // images
     'image'               => 'assets/images/logoModule.png',
@@ -98,7 +98,7 @@ $modversion = [
 ];
 
 // ------------------- Mysql ------------------- //
-$modversion['sqlfile']['mysql'] = 'sql/' . $moduleDirName . '.sql';
+$modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 //$modversion['sqlfile']['mysql'] = 'sql/'.$moduleDirName.'_dev.sql';
 
 // Tables created by sql file (without prefix!)

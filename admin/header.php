@@ -1,5 +1,10 @@
 <?php
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+
 /**
  * @param int    $currentoption
  * @param string $breadcrumb
@@ -8,10 +13,10 @@ function adminMenu($currentoption = 0, $breadcrumb = '')
 {
     global $xoopsConfig;
     global $xoopsModule;
-    if (file_exists(XOOPS_ROOT_PATH . '/modules/uhq_radio/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
-        require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/language/' . $xoopsConfig['language'] . '/modinfo.php';
+    if (file_exists(XOOPS_ROOT_PATH . '/modules/uhqradio/language/' . $xoopsConfig['language'] . '/modinfo.php')) {
+        require_once XOOPS_ROOT_PATH . '/modules/uhqradio/language/' . $xoopsConfig['language'] . '/modinfo.php';
     } else {
-        require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/language/english/modinfo.php';
+        require_once XOOPS_ROOT_PATH . '/modules/uhqradio/language/english/modinfo.php';
     }
 
     include __DIR__ . '/menu.php';
@@ -55,7 +60,7 @@ function adminMenu($currentoption = 0, $breadcrumb = '')
             echo "<li>\n";
         }
 
-        echo '<a href="' . XOOPS_URL . '/modules/uhq_radio/' . $value['link'] . '"><span>' . $value['title'] . "</span></a>\n";
+        echo '<a href="' . XOOPS_URL . '/modules/uhqradio/' . $value['link'] . '"><span>' . $value['title'] . "</span></a>\n";
         echo "</li>\n";
     }
 

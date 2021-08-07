@@ -1,8 +1,8 @@
-<{if $error}>
+<{if $error|default:''}>
     <span style="color:red;"><{$smarty.const._MD_UHQRADIO_DJPROFILE_ERR}></span>
     : <{$error}>
 
-<{elseif $data}>
+<{elseif $data|default:''}>
 
     <{if $data.djname}>
         <{if $data.urlpic}>
@@ -47,7 +47,7 @@
         <{/if}>
         <{if $data.isuser}>
             <hr>
-            <a href="/modules/uhq_radio/sm-djprofile.php?djid=<{$data.djid}>&op=edit"><{$smarty.const._MD_UHQRADIO_DJPROFILE_EYI}></a>
+            <a href="/modules/uhqradio/sm-djprofile.php?djid=<{$data.djid}>&op=edit"><{$smarty.const._MD_UHQRADIO_DJPROFILE_EYI}></a>
         <{/if}>
     <{elseif $data.djcount}>
         <table class="djlist">
@@ -58,7 +58,7 @@
             <{foreach item=list from=$data.djs key=key}>
                 <tr>
                     <td><{$key+1}></td>
-                    <td><a href="/modules/uhq_radio/sm-djprofile.php?djid=<{$list.djid}>"><{$list.name}></a></td>
+                    <td><a href="/modules/uhqradio/sm-djprofile.php?djid=<{$list.djid}>"><{$list.name}></a></td>
                 </tr>
             <{/foreach}>
         </table>

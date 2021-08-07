@@ -97,7 +97,7 @@
                     <img src="<{$data.baseurl}>/<{$data.djid}>/<{$data.songinfo.picture}>" onError="uhq_nocover(this)"
                          class=albumcover>
                 <{else}>
-                    <img src="/modules/uhq_radio/images/nocover.png" class=albumcover>
+                    <img src="/modules/uhqradio/images/nocover.png" class=albumcover>
                 <{/if}>
             </td>
         </tr>

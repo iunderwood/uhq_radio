@@ -1,8 +1,8 @@
-<{if $error}>
+<{if $error|default:''}>
 
  <span style="color: red; "><{$smarty.const._AM_UHQRADIO_SQLERR}></span>: <{$error}>
 
-<{elseif $data}>
+<{elseif $data|default:''}>
 
 <hr>
 <table>

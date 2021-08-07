@@ -11,4 +11,4 @@ PAL.WaitForPlayCount(1);
 PAL.WaitForTime('+00:00:02');
 
 // Send out a cache update.
-WebToFile('c:\ecu-txt.txt','http://your.xoops.site/modules/uhq_radio/ecu.php?update=txt&updatepw=changeme&chid=1');
+WebToFile('c:\ecu-txt.txt','http://your.xoops.site/modules/uhqradio/ecu.php?update=txt&updatepw=changeme&chid=1');

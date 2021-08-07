@@ -7,7 +7,7 @@
   <table class="djlist">
     <{foreach item=list from=$block.djs key=key}>
       <{if ($key mod $block.cols) == 0}><tr><{/if}>
-      <td><a href="/modules/uhq_radio/djprofile.php?djid=<{$list.djid}>"><{$list.name}></a></td>
+      <td><a href="/modules/uhqradio/djprofile.php?djid=<{$list.djid}>"><{$list.name}></a></td>
       <{if ($key mod $block.cols) == 1}></tr><{/if}>
     <{/foreach}>
   </table>

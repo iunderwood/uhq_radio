@@ -6,7 +6,7 @@ include XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 include __DIR__ . '/include/sanity.php';
 include __DIR__ . '/include/functions.php';
 include __DIR__ . '/include/forms.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/rawdata.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/rawdata.php';
 
 $sane_REQUEST = uhqradio_dosanity();
 

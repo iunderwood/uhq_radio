@@ -1,5 +1,12 @@
 <?php
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
 /**
  * @param XoopsModule $module
  * @return bool

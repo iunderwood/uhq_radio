@@ -1,6 +1,6 @@
 <?php
 
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/functions.php';
 
 /**
  * @param $options

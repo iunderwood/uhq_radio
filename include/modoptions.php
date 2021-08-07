@@ -6,6 +6,13 @@ This file contains functions which return the state of any module-wide options.
 
 */
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
 // This function returns true if a submitted password matches the configured update PW.
 
 /**

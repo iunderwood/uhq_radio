@@ -6,6 +6,13 @@ This is an include file which contains all functions required to directly intera
 
 */
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
 // Connect to the DB given a remote DJ, given ID and IP.  Returns MySQL Resource.
 
 /**

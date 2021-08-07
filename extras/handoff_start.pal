@@ -10,7 +10,7 @@ var topliner : TSongInfo;
 
 PAL.WaitForEvent('test');
 
-WebToFile('','http://your.xoops.site/modules/uhq_radio/handoff.php?op=verify');
+WebToFile('','http://your.xoops.site/modules/uhqradio/handoff.php?op=verify');
 
 // Ensure we have some room in the queue.
 

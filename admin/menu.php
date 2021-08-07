@@ -1,15 +1,25 @@
 <?php
 
 use Xmf\Module\Admin;
-use Xmf\Module\Helper;
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 use Xoopsmodules\uhqradio;
 
-require_once __DIR__ . '/../class/Helper.php';
-//require_once __DIR__ . '/../include/common.php';
-$helper = uhqradio\Helper::getInstance();
+include dirname(__DIR__) . '/preloads/autoloader.php';
+
+$moduleDirName = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$helper = Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
 $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
@@ -44,6 +54,21 @@ $adminmenu[] = [
     'icon'  => $pathModIcon32 . '/menu_playlists.png'
 ];
 
+// Blocks Admin
+$adminmenu[] = [
+    'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'BLOCKS'),
+    'link' => 'admin/blocksadmin.php',
+    'icon' => $pathIcon32 . '/block.png',
+];
+
+if (is_object($helper->getModule()) && $helper->getConfig('displayDeveloperTools')) {
+    $adminmenu[] = [
+        'title' => constant('CO_' . $moduleDirNameUpper . '_' . 'ADMENU_MIGRATE'),
+        'link' => 'admin/migrate.php',
+        'icon' => $pathIcon32 . '/database_go.png',
+    ];
+}
+
 $adminmenu[] = [
     'title' => _MI_UHQRADIO_ADMENU_ABOUT,
     'link'  => 'admin/about.php',
@@ -58,7 +83,7 @@ preg_match_all('/\d+/', XOOPS_VERSION, $versioninfo);
 if (($versioninfo[0][0] >= 2) && ($versioninfo[0][1] >= 4)) {
     $menuiconpath = "/";
 } else {
-    $menuiconpath = "../../../../uhq_radio/";
+    $menuiconpath = "../../../../uhqradio/";
 }
 
 // Assign goodies for Admin Menu

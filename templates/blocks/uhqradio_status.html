@@ -11,7 +11,7 @@ function uhq_popup(linkurl, popw, poph) {
     return false;
 }
 function uhq_nocover(source) {
-    source.src = "/modules/uhq_radio/images/nocover.png";
+    source.src = "/modules/uhqradio/images/nocover.png";
     // disable onerror to prevent endless loop
     source.onerror = "";
     return true;
@@ -175,7 +175,7 @@ function uhqradioStatus() {
     }
 
     // Load XML Data
-    xmlhttp.open("GET","/modules/uhq_radio/xml_status.php?chid=<{$block.chid}>",true);
+    xmlhttp.open("GET","/modules/uhqradio/xml_status.php?chid=<{$block.chid}>",true);
     xmlhttp.send(null);
 }
 

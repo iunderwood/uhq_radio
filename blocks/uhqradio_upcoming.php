@@ -1,8 +1,8 @@
 <?php
 
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/modoptions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/functions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sambc.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/modoptions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/sambc.php';
 
 /**
  * @param $options

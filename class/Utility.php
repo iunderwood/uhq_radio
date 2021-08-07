@@ -1,9 +1,9 @@
-<?php
+<?php namespace Xoopsmodules\Uhqradio;
 
 /**
  * Class MyalbumUtil
  */
-class UhqRadioUtility extends XoopsObject
+class Utility
 {
     /**
      * Function responsible for checking if a directory exists, we can also write in and create an index.html file

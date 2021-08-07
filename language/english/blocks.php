@@ -14,13 +14,13 @@ define('_MB_UHQRADIO_ERROR_NOTXT', 'No Text Configured');
 define('_MB_UHQRADIO_ERROR_TXTNF', 'Text mount not found.');
 
 define('_MB_UHQRADIO_ONAIR', 'On-Air');
-define('_MB_UHQRADIO_ONAIR_IMG', '/modules/uhq_radio/language/english/onair.png');
+define('_MB_UHQRADIO_ONAIR_IMG', '/modules/uhqradio/language/english/onair.png');
 define('_MB_UHQRADIO_OFFAIR', 'Off-Air');
-define('_MB_UHQRADIO_OFFAIR_IMG', '/modules/uhq_radio/language/english/offair.png');
+define('_MB_UHQRADIO_OFFAIR_IMG', '/modules/uhqradio/language/english/offair.png');
 define('_MB_UHQRADIO_NOWPLAYING', 'Now Playing:');
 define('_MB_UHQRADIO_TUNEIN', 'Tune In: ');
 define('_MB_UHQRADIO_TUNELINK', 'Click Here');
-define('_MB_UHQRADIO_TUNEIMG', '/modules/uhq_radio/language/english/tunein.png');
+define('_MB_UHQRADIO_TUNEIMG', '/modules/uhqradio/language/english/tunein.png');
 
 define('_MB_UHQRADIO_YES', 'Yes');
 define('_MB_UHQRADIO_NO', 'No');
@@ -48,15 +48,15 @@ define('_MB_UHQRADIO_LISTENERS_MANY', 'Listeners: ');
 // Autoplayer Control Block
 
 define('_MB_UHQRADIO_STARTTXT', 'Start');
-define('_MB_UHQRADIO_STARTIMG', '/modules/uhq_radio/images/player_play.png');
+define('_MB_UHQRADIO_STARTIMG', '/modules/uhqradio/images/player_play.png');
 define('_MB_UHQRADIO_STOPTXT', 'Stop & Handoff After Track');
-define('_MB_UHQRADIO_STOPIMG', '/modules/uhq_radio/images/player_stop.png');
+define('_MB_UHQRADIO_STOPIMG', '/modules/uhqradio/images/player_stop.png');
 define('_MB_UHQRADIO_SKIPTXT', 'Skip Track');
-define('_MB_UHQRADIO_SKIPIMG', '/modules/uhq_radio/images/player_fwd.png');
+define('_MB_UHQRADIO_SKIPIMG', '/modules/uhqradio/images/player_fwd.png');
 define('_MB_UHQRADIO_REWTXT', 'Restart Track');
-define('_MB_UHQRADIO_REWIMG', '/modules/uhq_radio/images/player_rew.png');
+define('_MB_UHQRADIO_REWIMG', '/modules/uhqradio/images/player_rew.png');
 define('_MB_UHQRADIO_STOPNOWTXT', 'Stop Immediately w/o Handoff');
-define('_MB_UHQRADIO_STOPNOWIMG', '/modules/uhq_radio/images/player_eject.png');
+define('_MB_UHQRADIO_STOPNOWIMG', '/modules/uhqradio/images/player_eject.png');
 
 // DJ Panel Block
 
@@ -144,7 +144,7 @@ define('_MB_UHQRADIO_ONAIR_DJID', 'DJ ID <b>');
 define('_MB_UHQRADIO_ONAIR_DJHDR', 'Current DJ: ');
 define('_MB_UHQRADIO_ONAIR_SHOWHDR', 'Current Show: ');
 define('_MB_UHQRADIO_ONAIR_DJDBERR', '</b> cannot be located in the database.');
-define('_MB_UHQRADIO_ONAIR_NODJPIC', '/modules/uhq_radio/images/nodjpic.png');
+define('_MB_UHQRADIO_ONAIR_NODJPIC', '/modules/uhqradio/images/nodjpic.png');
 define('_MB_UHQRADIO_ONAIR_NODJPIC_TXT', 'DJ picture not found!');
 
 // Status v2

@@ -12,7 +12,7 @@
         </div>
         <hr>
         <{$smarty.const._MB_UHQRADIO_ONAIR_DJHDR}><a
-        href="/modules/uhq_radio/djprofile.php?djid=<{$block.dj.djid}>"><{$block.dj.name}></a>
+        href="/modules/uhqradio/djprofile.php?djid=<{$block.dj.djid}>"><{$block.dj.name}></a>
         <{if $block.showname}><br><{$smarty.const._MB_UHQRADIO_ONAIR_SHOWHDR}><{$block.showname}><{/if}>
     <{elseif $block.djid}>
         <{$smarty.const._MB_UHQRADIO_ONAIR_DJID}><{$block.djid}><{$smarty.const._MB_UHQRADIO_ONAIR_DJDBERR}>

@@ -4,14 +4,21 @@
   This file stores form functions, and supporing SQL inserts/updates based on the form information.  This way, things don't get overlooked so easily.
 */
 
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/modoptions.php';
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/modoptions.php';
 
 // Load up the form language if it hasn't already been done.
 
-if (file_exists(XOOPS_ROOT_PATH . '/modules/uhq_radio/language/' . $xoopsConfig['language'] . '/form.php')) {
-    require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/language/' . $xoopsConfig['language'] . '/form.php';
+if (file_exists(XOOPS_ROOT_PATH . '/modules/uhqradio/language/' . $xoopsConfig['language'] . '/form.php')) {
+    require_once XOOPS_ROOT_PATH . '/modules/uhqradio/language/' . $xoopsConfig['language'] . '/form.php';
 } else {
-    require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/language/english/form.php';
+    require_once XOOPS_ROOT_PATH . '/modules/uhqradio/language/english/form.php';
 }
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
@@ -120,12 +127,12 @@ function uhqradio_airform_insertquery($sane_REQUEST)
 
     // If the upload is good, save the file and save link info.
     $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
-    $uploader          = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/modules/uhq_radio/images/profile', $allowed_mimetypes, 512000);
+    $uploader          = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/modules/uhqradio/images/profile', $allowed_mimetypes, 512000);
     if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
         $uploader->setPrefix('djpic-' . $sane_REQUEST['djid'] . '-');
         if ($uploader->upload()) {
             // Set Variable
-            $urlpic = '/modules/uhq_radio/images/profile/' . $uploader->getSavedFileName();
+            $urlpic = '/modules/uhqradio/images/profile/' . $uploader->getSavedFileName();
         } else {
             $urlpic = null;
         }
@@ -167,12 +174,12 @@ function uhqradio_airform_updatequery($sane_REQUEST)
 
     // If the upload is good, save the file and save link info.
     $allowed_mimetypes = ['image/gif', 'image/jpeg', 'image/pjpeg', 'image/x-png', 'image/png'];
-    $uploader          = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/modules/uhq_radio/images/profile', $allowed_mimetypes, 512000);
+    $uploader          = new XoopsMediaUploader(XOOPS_ROOT_PATH . '/modules/uhqradio/images/profile', $allowed_mimetypes, 512000);
     if ($uploader->fetchMedia($_POST['xoops_upload_file'][0])) {
         $uploader->setPrefix('djpic-' . $sane_REQUEST['djid'] . '-');
         if ($uploader->upload()) {
             // Set Variable
-            $urlpic = '/modules/uhq_radio/images/profile/' . $uploader->getSavedFileName();
+            $urlpic = '/modules/uhqradio/images/profile/' . $uploader->getSavedFileName();
             // Delete previous file, if it exists.
             if (file_exists(XOOPS_ROOT_PATH . $sane_REQUEST['urlpic']) && (null != $sane_REQUEST['urlpic'])) {
                 $err = unlink(XOOPS_ROOT_PATH . $sane_REQUEST['urlpic']);

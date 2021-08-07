@@ -5,7 +5,7 @@
     }
 
     function uhq_nocover(source) {
-        source.src = "/modules/uhq_radio/images/nocover.png";
+        source.src = "/modules/uhqradio/images/nocover.png";
         // disable onerror to prevent endless loop
         source.onerror = "";
         return true;

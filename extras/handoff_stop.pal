@@ -28,6 +28,6 @@ Encoders[0].Stop;
 
 // Send out handoff URL!
 
-WebToFile('','http://your.xoops.site/modules/uhq_radio/handoff.php?op=go');
+WebToFile('','http://your.xoops.site/modules/uhqradio/handoff.php?op=go');
 
 activeDeck.Free;

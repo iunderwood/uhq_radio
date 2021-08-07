@@ -24,7 +24,7 @@ function uhqradioStatus() {
 
             blk_status = xmldoc.getElementsByTagName("status")[0].childNodes[0].nodeValue;
             if (blk_status == 1) {
-                blk_status_div = "<img src='/modules/uhq_radio/language/english/onair.png' alt='On-Air'>";
+                blk_status_div = "<img src='/modules/uhqradio/language/english/onair.png' alt='On-Air'>";
                 document.getElementById("uhqradio_status").innerHTML = blk_status_div;
 
                 if (xmldoc.getElementsByTagName("showname")[0]) {
@@ -67,14 +67,14 @@ function uhqradioStatus() {
                 }
 
             } else {
-                document.getElementById("uhqradio_status").innerHTML="<img src='/modules/uhq_radio/language/english/offair.png' alt='Off-Air'>";
+                document.getElementById("uhqradio_status").innerHTML="<img src='/modules/uhqradio/language/english/offair.png' alt='Off-Air'>";
                 document.getElementById("uhqradio_nowplaying").innerHTML = null;
                 document.getElementByID("uhqradio_listeners").innerHTML = null;
             }
         }
     }
 
-    xmlhttp.open("GET","/modules/uhq_radio/xml_status.php?chid=1",true);
+    xmlhttp.open("GET","/modules/uhqradio/xml_status.php?chid=1",true);
     xmlhttp.send(null);
 }
 

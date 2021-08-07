@@ -10,6 +10,13 @@ support.
 
 */
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
 /**
  * @param $chid
  * @return array

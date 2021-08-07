@@ -17,24 +17,35 @@
  * @author       XOOPS Development Team
  */
 
-require_once __DIR__ . '/../../../include/cp_header.php';
+use Xmf\Module\Admin;
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+require dirname(__DIR__) . '/preloads/autoloader.php';
+
+require dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once $GLOBALS['xoops']->path('www/class/xoopsformloader.php');
 
-//require_once __DIR__ . '/../class/utility.php';
-//require_once __DIR__ . '/../include/common.php';
+$moduleDirName = \basename(\dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+$helper = Helper::getInstance();
 
-$moduleDirName = basename(dirname(__DIR__));
-$helper = \Xmf\Module\Helper::getHelper($moduleDirName);
-$adminObject = \Xmf\Module\Admin::getInstance();
-
-$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
-$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
+$adminObject = Admin::getInstance();
 
 // Load language files
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
+$helper->loadLanguage('common');
 $helper->loadLanguage('main');
+$helper->loadLanguage('blocks');
+
+$pathIcon16    = \Xmf\Module\Admin::iconUrl('', 16);
+$pathIcon32    = \Xmf\Module\Admin::iconUrl('', 32);
+$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 $myts = MyTextSanitizer::getInstance();
 

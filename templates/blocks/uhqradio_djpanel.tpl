@@ -1,7 +1,7 @@
 <script type="text/javascript">
     <!--
     function uhq_djtest(djid, host) {
-        window.open("/modules/uhq_radio/pop_djtest.php?djid=" + djid + "&host=" + host, "djtest", "location=no,status=no,menubar=no,scrollbars=yes,resizeable=no,height=150,width=400");
+        window.open("/modules/uhqradio/pop_djtest.php?djid=" + djid + "&host=" + host, "djtest", "location=no,status=no,menubar=no,scrollbars=yes,resizeable=no,height=150,width=400");
 
         return true;
     }
@@ -9,7 +9,7 @@
 </script>
 
 <{$smarty.const._MB_UHQRADIO_DJP_ID}> <b><a
-            href="/modules/uhq_radio/djprofile.php?djid=<{$block.djid}>"><{$block.djid}></a></b>
+            href="/modules/uhqradio/djprofile.php?djid=<{$block.djid}>"><{$block.djid}></a></b>
 <hr>
 <{if $block.samint == 1}>
     <table>

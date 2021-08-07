@@ -1,12 +1,18 @@
 <?php
 
-include __DIR__ . '/../../mainfile.php';
 
 // Need to load up a hell of a lot of goodies here.
 
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sanity.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/functions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sambc.php';
+use XoopsModules\Uhqradio;
+
+
+//$GLOBALS['xoopsOption']['template_main'] = 'xxxxx_index.tpl';
+require __DIR__ . '/header.php';
+
+
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/sanity.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/sambc.php';
 
 $sane_REQUEST = uhqradio_dosanity();
 
@@ -206,4 +212,4 @@ function uhqradio_index()
 
 $xoopsTpl->assign('data', uhqradio_index());
 
-include XOOPS_ROOT_PATH . '/footer.php';
+require XOOPS_ROOT_PATH.'/header.php';

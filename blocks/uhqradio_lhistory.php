@@ -4,9 +4,9 @@
     This file contains any block information which is used to show any listener history.
 */
 
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/functions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/modoptions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/rawdata.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/modoptions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/rawdata.php';
 
 /**
  * @param $options

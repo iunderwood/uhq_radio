@@ -19,10 +19,14 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 */
 
-require_once __DIR__ . '/admin_header.php';
-include XOOPS_ROOT_PATH . '/include/cp_header.php';
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
 
-require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
+require_once __DIR__ . '/admin_header.php';
 
 include __DIR__ . '/../include/functions.php';
 include __DIR__ . '/../include/forms.php';

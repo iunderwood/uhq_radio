@@ -1,4 +1,4 @@
-<{if $error}><error><{$error}>
+<{if $error|default:''}><error><{$error}>
 </error>
 <uhqradio>
 <status>0</status>

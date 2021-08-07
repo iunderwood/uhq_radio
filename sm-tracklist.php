@@ -22,9 +22,9 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 include __DIR__ . '/../../mainfile.php';
 include __DIR__ . '/include/sanity.php';
 include __DIR__ . '/include/functions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/rawdata.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/modoptions.php';
-require_once XOOPS_ROOT_PATH . '/modules/uhq_radio/include/sambc.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/rawdata.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/modoptions.php';
+require_once XOOPS_ROOT_PATH . '/modules/uhqradio/include/sambc.php';
 
 $sane_REQUEST = uhqradio_dosanity();
 

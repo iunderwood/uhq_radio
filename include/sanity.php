@@ -2,6 +2,13 @@
 
 // Sanitize variables we expect for this module in $_REQUEST, that are put into queries.
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
 /**
  * @return array
  */

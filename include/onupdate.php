@@ -1,5 +1,12 @@
 <?php
 
+use XoopsModules\Uhqradio\{
+    Helper,
+    Utility
+};
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
 /**
  * @param XoopsModule $module
  * @param null        $oldversion
@@ -287,15 +294,15 @@ function xoops_module_update_uhq_radio(XoopsModule $module, $oldversion = null)
 
     if ($oldversion < 12) {
         // Remove unused template file.
-        unlink(XOOPS_ROOT_PATH . '/modules/uhq_radio/templates/uhqradio_ecu.tpl');
+        unlink(XOOPS_ROOT_PATH . '/modules/uhqradio/templates/uhqradio_ecu.tpl');
 
         $oldversion = 12;
     }
 
     if ($oldversion < 13) {
         // Remove depreciated PHP files, if we can.
-        unlink(XOOPS_ROOT_PATH . '/modules/uhq_radio/playlist.php');
-        unlink(XOOPS_ROOT_PATH . '/modules/uhq_radio/djprofile.php');
+        unlink(XOOPS_ROOT_PATH . '/modules/uhqradio/playlist.php');
+        unlink(XOOPS_ROOT_PATH . '/modules/uhqradio/djprofile.php');
 
         // Add requester name to the song history table.
 

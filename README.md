@@ -331,7 +331,7 @@ When a DJ requests a handoff, the website will try and execute a URL consisting 
 
 The next step is for the DJ to verify their player is all set.  This can be accomplished by the player software sending off the following URL:
 
-http://your.xoops.site/modules/uhq_radio/handoff.php?op=verify
+http://your.xoops.site/modules/uhqradio/handoff.php?op=verify
 
 It is recommended that any remote player utilize a script to automatically verify when the test event is sent, but that is not a strict requirement.
 
@@ -339,7 +339,7 @@ A verification command will only be processed if the requesting IP matches the o
 
 A currently-broadcasting system needs to send the following URL after disconnecting from the stream host:
 
-http://your.xoops.site/modules/uhq_radio/handoff.php?op=go
+http://your.xoops.site/modules/uhqradio/handoff.php?op=go
 
 Handoff permission is enforced based upon who can see the handoff block and is not cloneable.
 
@@ -388,11 +388,11 @@ This page triggers external cache updates, if enabled.  This function was origin
 
 For example, to update the listener count on a per-minute basis, a Cron or a SAM PAL Script can call ECU every minute:
 
-http://your.xoops.site/modules/uhq_radio/ecu.php?update=pop&updatepw=changeme
+http://your.xoops.site/modules/uhqradio/ecu.php?update=pop&updatepw=changeme
 
 Additionally, text information can also be refreshed every time a song changes.  This needs to be triggered from whatever streaming application you use.
 
-http://your.xoops.site/modules/uhq_radio/ecu.php?update=txt&updatepw=changeme
+http://your.xoops.site/modules/uhqradio/ecu.php?update=txt&updatepw=changeme
 
 ECU does not take any station-specific identifiers into account and will update caches for every unique server configured in the module.
 

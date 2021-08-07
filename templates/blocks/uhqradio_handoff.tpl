@@ -9,14 +9,14 @@
     <{/if}>
     <{if $block.surrender}>
         <hr>
-        <a href="/modules/uhq_radio/handoff.php?op=surrender">Surrender</a>
+        <a href="/modules/uhqradio/handoff.php?op=surrender">Surrender</a>
         Handoff.
     <{else}>
 
         <{if $block.status}>
         <{else}>
             <hr>
-            <a href="/modules/uhq_radio/handoff.php?op=request">Request</a>
+            <a href="/modules/uhqradio/handoff.php?op=request">Request</a>
             Handoff.
         <{/if}>
 

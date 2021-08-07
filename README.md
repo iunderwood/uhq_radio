@@ -440,13 +440,13 @@ The information returned is as close to real time as the request is made.
 
 It is possible for an AJAX enabled web page to request this information and dynamically update its content on a regular interval with this information.  An example can be found in ajax_updates.txt in he extras folder.
 
-#==[ Requests / Bug Reports ]
+## [ Requests / Bug Reports ]
 
 You may drop me an email here: xoops@underwood-hq.org.
 
 If there is a specific feature or bug you are experiencing, the more information I have the better.
 
-++I;
+---  
 
 Please visit us on https://xoops.org
 
